@@ -4,28 +4,45 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.5</version>
+        <relativePath/>
+    </parent>
+
+    <name>Trading</name>
+
     <groupId>io.github.ijlijapol</groupId>
-    <artifactId>Trading</artifactId>
+    <artifactId>trading</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>Core</module>
-        <module>Interaction</module>
-        <module>Analyzer</module>
+        <module>interaction</module>
+        <module>analyzer</module>
+        <module>app</module>
+        <module>common</module>
+        <module>market-data</module>
+        <module>core</module>
+        <module>exchange-connector</module>
     </modules>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bybit-java-api.version>1.4.0</bybit-java-api.version>
+        <analyzer.version>${project.version}</analyzer.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.github.johnnywic</groupId>
-            <artifactId>bybit-java-api</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.johnnywic</groupId>
+                <artifactId>bybit-java-api</artifactId>
+                <version>${bybit-java-api.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

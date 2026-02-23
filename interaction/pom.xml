@@ -5,11 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.ijlijapol</groupId>
-        <artifactId>Interaction</artifactId>
+        <artifactId>trading</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>UI</artifactId>
+    <artifactId>interaction</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>console-ui</module>
+        <module>external-ui</module>
+        <module>ui-api</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>

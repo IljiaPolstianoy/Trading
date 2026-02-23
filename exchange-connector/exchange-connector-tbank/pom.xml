@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.ijlijapol</groupId>
-        <artifactId>Interaction</artifactId>
+        <artifactId>exchange-connector</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>Console</artifactId>
+    <artifactId>exchange-connector-tbank</artifactId>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>

@@ -5,15 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.ijlijapol</groupId>
-        <artifactId>Trading</artifactId>
+        <artifactId>trading</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>Core</artifactId>
+    <artifactId>exchange-connector</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>Trader</module>
-        <module>TestTrader</module>
+        <module>exchange-connector-bybit</module>
+        <module>exchange-connector-tbank</module>
     </modules>
 
     <properties>
