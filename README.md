@@ -218,5 +218,3 @@ mvn package
 Email: iljiafenix@yandex.ru
 
 Telegram: @IjljiaPol
-
-text
