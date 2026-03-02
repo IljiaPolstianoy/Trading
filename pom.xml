@@ -28,11 +28,13 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
+        <maven.compiler.release>25</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bybit-java-api.version>1.4.0</bybit-java-api.version>
         <analyzer.version>${project.version}</analyzer.version>
+        <lombok.version>1.18.42</lombok.version>
+        <jackson-databind.version>2.15.2</jackson-databind.version>
+        <market-data-bybit.version>${project.version}</market-data-bybit.version>
     </properties>
 
     <dependencyManagement>
@@ -42,7 +44,31 @@
                 <artifactId>bybit-java-api</artifactId>
                 <version>${bybit-java-api.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ijlijapol</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ijlijapol</groupId>
+                <artifactId>market-data-bybit</artifactId>
+                <version>${market-data-bybit.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>

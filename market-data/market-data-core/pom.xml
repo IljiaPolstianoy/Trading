@@ -5,17 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.ijlijapol</groupId>
-        <artifactId>trading</artifactId>
+        <artifactId>market-data</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>market-data</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>market-data-bybit</module>
-        <module>market-data-tbank</module>
-        <module>market-data-core</module>
-    </modules>
+    <artifactId>market-data-core</artifactId>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
@@ -26,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.ijlijapol</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>market-data-bybit</artifactId>
         </dependency>
     </dependencies>
 
