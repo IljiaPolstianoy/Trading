@@ -207,8 +207,9 @@ java -jar app/target/trading-app.jar --spring.profiles.active=console
 
 # Режим с REST API (для внешнего GUI)
 java -jar app/target/trading-app.jar --spring.profiles.active=external
-После запуска в режиме external REST API будет доступно по адресу http://localhost:8080/api/... (порт настраивается).
 ```
+
+После запуска в режиме external REST API будет доступно по адресу http://localhost:8080/api/... (порт настраивается).
 
 ## 💾 База данных
 
