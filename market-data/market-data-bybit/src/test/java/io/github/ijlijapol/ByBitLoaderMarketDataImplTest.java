@@ -467,7 +467,7 @@ class ByBitLoaderMarketDataImplTest {
             CandleDTO dto = CandleDTO.builder()
                     .openPrice(BigDecimal.valueOf(50000 + i))
                     .closePrice(BigDecimal.valueOf(50100 + i))
-                    .startTime(LocalDateTime.ofEpochSecond(startTime / 1000 + i * 900, 0, UTC_OFFSET))
+                    .startTime(LocalDateTime.ofEpochSecond(startTime / 1000 + i * 900L, 0, UTC_OFFSET))
                     .build();
             dtos.add(dto);
         }
