@@ -12,6 +12,7 @@ import io.github.ijlijapol.data.market.model.request.MarketDataRequest;
 import io.github.ijlijapol.data.market.model.request.RecentMarketData;
 import io.github.ijlijapol.data.market.model.responce.CandleDTO;
 import io.github.ijlijapol.data.market.model.responce.CandlesDTO;
+import io.github.ijlijapol.exception.ByBitException;
 import io.github.ijlijapol.mapper.MapperByBitData;
 import io.github.ijlijapol.mapper.MapperTimeFrame;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +52,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
                 .build();
 
         log.debug("Первый запрос ByBit: start={}, end={}, limit=1000", startPeriod, endDate);
-        final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest));
+        final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         log.debug("Получено {} записей от ByBit", marketKlineEntries.size());
         final List<CandleDTO> candleDTOList = new ArrayList<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
 
@@ -64,7 +65,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             log.debug("Получено 1000 записей, запрашиваем следующую порцию начиная с newStartTime={}", newStartTime);
             byBitRequest.setStartTime(newStartTime);
 
-            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest)));
+            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(sendRequest(byBitRequest)));
             candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
             log.debug("Добавлено еще {} записей всего сейчас {}", marketKlineEntries.size(), candleDTOList.size());
         }
@@ -100,7 +101,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
                 .build();
 
         log.debug("Первый запрос ByBit: start={}, end={}, limit=1000", startPeriod, endDate);
-        final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest));
+        final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         log.debug("Получено {} записей от ByBit", marketKlineEntries.size());
         final List<CandleDTO> candleDTOList = new java.util.ArrayList<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
 
@@ -113,7 +114,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             log.debug("Получено 1000 записей, запрашиваем следующую порцию начиная с newStartTime={}", newStartTime);
             byBitRequest.setStartTime(newStartTime);
 
-            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest)));
+            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(sendRequest(byBitRequest)));
             candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
             log.debug("Добавлено еще {} записей всего сейчас {}", marketKlineEntries.size(), candleDTOList.size());
         }
@@ -147,7 +148,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
                 .build();
 
         log.debug("Запрос последней свечи: start={}, end={}, limit=1", startTime, endDate);
-        final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest));
+        final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         List<CandleDTO> candleDTOList = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry);
         final CandleDTO candleDTO = candleDTOList.getFirst();
         log.debug("Получена свеча: open={}, close={}", candleDTO.getOpenPrice(), candleDTO.getClosePrice());
@@ -189,5 +190,13 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
         log.trace("Расчет timmeInMillis из marketInterval={}, результат={}", marketInterval, timeInMillis);
         return timeInMillis;
+    }
+
+    private Object sendRequest(final com.bybit.api.client.domain.market.request.MarketDataRequest request) {
+        try {
+            return client.getMarketLinesData(request);
+        } catch (Exception e) {
+            throw new ByBitException("Ошибка отправки запросы к серверу BYBit.", e);
+        }
     }
 }
