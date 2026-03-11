@@ -62,17 +62,9 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             final Long markerInteralLong = getTimeInMillisFromMarketInterval(marketInterval);
             final Long newStartTime = candleDTOList.getLast().getStartTime().toInstant(ZoneOffset.UTC).toEpochMilli() + markerInteralLong;
             log.debug("Получено 1000 записей, запрашиваем следующую порцию начиная с newStartTime={}", newStartTime);
-            final com.bybit.api.client.domain.market.request.MarketDataRequest newByBitRequest
-                    = com.bybit.api.client.domain.market.request.MarketDataRequest.builder()
-                    .category(CategoryType.SPOT)
-                    .symbol(recentMarketData.getSymbol().toString())
-                    .marketInterval(marketInterval)
-                    .start(newStartTime)
-                    .end(endDate)
-                    .limit(1000)
-                    .build();
+            byBitRequest.setStartTime(newStartTime);
 
-            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(client.getMarketLinesData(newByBitRequest)));
+            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest)));
             candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
             log.debug("Добавлено еще {} записей всего сейчас {}", marketKlineEntries.size(), candleDTOList.size());
         }
@@ -119,17 +111,9 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             final Long markerInteralLong = getTimeInMillisFromMarketInterval(marketInterval);
             final Long newStartTime = candleDTOList.getLast().getStartTime().toInstant(ZoneOffset.UTC).toEpochMilli() + markerInteralLong;
             log.debug("Получено 1000 записей, запрашиваем следующую порцию начиная с newStartTime={}", newStartTime);
-            final com.bybit.api.client.domain.market.request.MarketDataRequest newByBitRequest
-                    = com.bybit.api.client.domain.market.request.MarketDataRequest.builder()
-                    .category(CategoryType.SPOT)
-                    .symbol(marketDataForPeriodBetween.getSymbol().toString())
-                    .marketInterval(marketInterval)
-                    .start(newStartTime)
-                    .end(endDate)
-                    .limit(1000)
-                    .build();
+            byBitRequest.setStartTime(newStartTime);
 
-            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(client.getMarketLinesData(newByBitRequest)));
+            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest)));
             candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
             log.debug("Добавлено еще {} записей всего сейчас {}", marketKlineEntries.size(), candleDTOList.size());
         }
