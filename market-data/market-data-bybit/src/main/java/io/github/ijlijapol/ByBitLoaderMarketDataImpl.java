@@ -13,6 +13,7 @@ import io.github.ijlijapol.data.market.model.request.RecentMarketData;
 import io.github.ijlijapol.data.market.model.responce.CandleDTO;
 import io.github.ijlijapol.data.market.model.responce.CandlesDTO;
 import io.github.ijlijapol.exception.ByBitException;
+import io.github.ijlijapol.exception.UncorrectedRequestByBit;
 import io.github.ijlijapol.mapper.MapperByBitData;
 import io.github.ijlijapol.mapper.MapperTimeFrame;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,23 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
     @Override
     public CandlesDTO loadRecentMarketData(final RecentMarketData recentMarketData) {
+        if (recentMarketData == null) {
+            log.error("recentMarketData is null");
+            throw new UncorrectedRequestByBit("Объект RecentMarketData равен null");
+        }
+        if (recentMarketData.getSymbol() == null) {
+            log.error("recentMarketData.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol в recentMarketData не может быть null");
+        }
+        if (recentMarketData.getLastTime() == null) {
+            log.error("recentMarketData.lastTime is null");
+            throw new UncorrectedRequestByBit("LastTime в recentMarketData не может быть null");
+        }
+        if (recentMarketData.getTimeFrame() == null) {
+            log.error("recentMarketData.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame В recentMarketData не может быть null");
+        }
+
         log.info("Загрузка последних рыночных свеч: symbol-{}, timeFrame={}, lastTime={}",
                 recentMarketData.getSymbol(), recentMarketData.getTimeFrame(), recentMarketData.getLastTime());
 
@@ -80,6 +98,27 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
     @Override
     public CandlesDTO loadMarketDateForPeriodBetween(final MarketDataForPeriodBetween marketDataForPeriodBetween) {
+        if (marketDataForPeriodBetween == null) {
+            log.error("marketDataForPeriodBetween is null");
+            throw new UncorrectedRequestByBit("Объект marketDataForPeriodBetween равен null");
+        }
+        if (marketDataForPeriodBetween.getSymbol() == null) {
+            log.error("marketDataForPeriodBetween.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol в MarketDataForPeriodBetween не может быть null");
+        }
+        if (marketDataForPeriodBetween.getTimeFrame() == null) {
+            log.error("marketDataForPeriodBetween.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame in marketDataForPeriodBetween не может быть null");
+        }
+        if (marketDataForPeriodBetween.getStartTime() == null) {
+            log.error("marketDataForPeriodBetween.startTime is null");
+            throw new UncorrectedRequestByBit("StartTime in marketDataForPeriodBetween не может быть null");
+        }
+        if(marketDataForPeriodBetween.getEndTime() == null) {
+            log.error("marketDataForPeriodBetween.endTime is null");
+            throw new UncorrectedRequestByBit("EndTime in marketDataForPeriodBetween не может быть null");
+        }
+
         log.info("Загрузка р=рыночных свечей за период: symbol={}, timeFrame={}, start={}, end={}",
                 marketDataForPeriodBetween.getSymbol(),
                 marketDataForPeriodBetween.getTimeFrame(),
@@ -129,6 +168,19 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
     @Override
     public CandleDTO loadLatestCandle(final MarketDataRequest marketDataRequest) {
+        if (marketDataRequest  == null) {
+            log.error("marketDataRequest is null");
+            throw new UncorrectedRequestByBit("Объект marketDataRequest равен Null");
+        }
+        if (marketDataRequest.getTimeFrame() == null) {
+            log.error("marketDataRequest.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame in marketDataRequest не может быть null");
+        }
+        if (marketDataRequest.getSymbol() == null) {
+            log.error("marketDataRequest.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol in marketDataRequest не может быть null");
+        }
+
         log.info("Загрузка последней свечи: symbol={}, timeFrame={}",
                 marketDataRequest.getSymbol(),
                 marketDataRequest.getTimeFrame()
