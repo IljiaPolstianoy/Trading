@@ -35,6 +35,9 @@
         <lombok.version>1.18.42</lombok.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
         <market-data-bybit.version>${project.version}</market-data-bybit.version>
+        <slf4j-api.version>2.0.17</slf4j-api.version>
+        <log4j-core.version>2.25.3</log4j-core.version>
+        <log4j-slf4j2-impl.version>2.25.3</log4j-slf4j2-impl.version>
     </properties>
 
     <dependencyManagement>
@@ -68,6 +71,24 @@
                 <groupId>io.github.ijlijapol</groupId>
                 <artifactId>market-data-bybit</artifactId>
                 <version>${market-data-bybit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j2-impl</artifactId>
+                <version>${log4j-slf4j2-impl.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
