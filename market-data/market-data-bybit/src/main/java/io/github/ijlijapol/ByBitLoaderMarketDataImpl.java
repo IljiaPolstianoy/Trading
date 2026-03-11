@@ -12,6 +12,8 @@ import io.github.ijlijapol.data.market.model.request.MarketDataRequest;
 import io.github.ijlijapol.data.market.model.request.RecentMarketData;
 import io.github.ijlijapol.data.market.model.responce.CandleDTO;
 import io.github.ijlijapol.data.market.model.responce.CandlesDTO;
+import io.github.ijlijapol.exception.ByBitException;
+import io.github.ijlijapol.exception.UncorrectedRequestByBit;
 import io.github.ijlijapol.mapper.MapperByBitData;
 import io.github.ijlijapol.mapper.MapperTimeFrame;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +36,23 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
     @Override
     public CandlesDTO loadRecentMarketData(final RecentMarketData recentMarketData) {
+        if (recentMarketData == null) {
+            log.error("recentMarketData is null");
+            throw new UncorrectedRequestByBit("Объект RecentMarketData равен null");
+        }
+        if (recentMarketData.getSymbol() == null) {
+            log.error("recentMarketData.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol в recentMarketData не может быть null");
+        }
+        if (recentMarketData.getLastTime() == null) {
+            log.error("recentMarketData.lastTime is null");
+            throw new UncorrectedRequestByBit("LastTime в recentMarketData не может быть null");
+        }
+        if (recentMarketData.getTimeFrame() == null) {
+            log.error("recentMarketData.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame В recentMarketData не может быть null");
+        }
+
         log.info("Загрузка последних рыночных свеч: symbol-{}, timeFrame={}, lastTime={}",
                 recentMarketData.getSymbol(), recentMarketData.getTimeFrame(), recentMarketData.getLastTime());
 
@@ -51,7 +70,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
                 .build();
 
         log.debug("Первый запрос ByBit: start={}, end={}, limit=1000", startPeriod, endDate);
-        final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest));
+        final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         log.debug("Получено {} записей от ByBit", marketKlineEntries.size());
         final List<CandleDTO> candleDTOList = new ArrayList<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
 
@@ -62,17 +81,9 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             final Long markerInteralLong = getTimeInMillisFromMarketInterval(marketInterval);
             final Long newStartTime = candleDTOList.getLast().getStartTime().toInstant(ZoneOffset.UTC).toEpochMilli() + markerInteralLong;
             log.debug("Получено 1000 записей, запрашиваем следующую порцию начиная с newStartTime={}", newStartTime);
-            final com.bybit.api.client.domain.market.request.MarketDataRequest newByBitRequest
-                    = com.bybit.api.client.domain.market.request.MarketDataRequest.builder()
-                    .category(CategoryType.SPOT)
-                    .symbol(recentMarketData.getSymbol().toString())
-                    .marketInterval(marketInterval)
-                    .start(newStartTime)
-                    .end(endDate)
-                    .limit(1000)
-                    .build();
+            byBitRequest.setStartTime(newStartTime);
 
-            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(client.getMarketLinesData(newByBitRequest)));
+            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(sendRequest(byBitRequest)));
             candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
             log.debug("Добавлено еще {} записей всего сейчас {}", marketKlineEntries.size(), candleDTOList.size());
         }
@@ -87,6 +98,27 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
     @Override
     public CandlesDTO loadMarketDateForPeriodBetween(final MarketDataForPeriodBetween marketDataForPeriodBetween) {
+        if (marketDataForPeriodBetween == null) {
+            log.error("marketDataForPeriodBetween is null");
+            throw new UncorrectedRequestByBit("Объект marketDataForPeriodBetween равен null");
+        }
+        if (marketDataForPeriodBetween.getSymbol() == null) {
+            log.error("marketDataForPeriodBetween.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol в MarketDataForPeriodBetween не может быть null");
+        }
+        if (marketDataForPeriodBetween.getTimeFrame() == null) {
+            log.error("marketDataForPeriodBetween.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame in marketDataForPeriodBetween не может быть null");
+        }
+        if (marketDataForPeriodBetween.getStartTime() == null) {
+            log.error("marketDataForPeriodBetween.startTime is null");
+            throw new UncorrectedRequestByBit("StartTime in marketDataForPeriodBetween не может быть null");
+        }
+        if(marketDataForPeriodBetween.getEndTime() == null) {
+            log.error("marketDataForPeriodBetween.endTime is null");
+            throw new UncorrectedRequestByBit("EndTime in marketDataForPeriodBetween не может быть null");
+        }
+
         log.info("Загрузка р=рыночных свечей за период: symbol={}, timeFrame={}, start={}, end={}",
                 marketDataForPeriodBetween.getSymbol(),
                 marketDataForPeriodBetween.getTimeFrame(),
@@ -108,7 +140,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
                 .build();
 
         log.debug("Первый запрос ByBit: start={}, end={}, limit=1000", startPeriod, endDate);
-        final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest));
+        final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         log.debug("Получено {} записей от ByBit", marketKlineEntries.size());
         final List<CandleDTO> candleDTOList = new java.util.ArrayList<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
 
@@ -119,17 +151,9 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             final Long markerInteralLong = getTimeInMillisFromMarketInterval(marketInterval);
             final Long newStartTime = candleDTOList.getLast().getStartTime().toInstant(ZoneOffset.UTC).toEpochMilli() + markerInteralLong;
             log.debug("Получено 1000 записей, запрашиваем следующую порцию начиная с newStartTime={}", newStartTime);
-            final com.bybit.api.client.domain.market.request.MarketDataRequest newByBitRequest
-                    = com.bybit.api.client.domain.market.request.MarketDataRequest.builder()
-                    .category(CategoryType.SPOT)
-                    .symbol(marketDataForPeriodBetween.getSymbol().toString())
-                    .marketInterval(marketInterval)
-                    .start(newStartTime)
-                    .end(endDate)
-                    .limit(1000)
-                    .build();
+            byBitRequest.setStartTime(newStartTime);
 
-            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(client.getMarketLinesData(newByBitRequest)));
+            marketKlineEntries.addAll(MapperByBitData.convertFromResponse(sendRequest(byBitRequest)));
             candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
             log.debug("Добавлено еще {} записей всего сейчас {}", marketKlineEntries.size(), candleDTOList.size());
         }
@@ -144,6 +168,19 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
     @Override
     public CandleDTO loadLatestCandle(final MarketDataRequest marketDataRequest) {
+        if (marketDataRequest  == null) {
+            log.error("marketDataRequest is null");
+            throw new UncorrectedRequestByBit("Объект marketDataRequest равен Null");
+        }
+        if (marketDataRequest.getTimeFrame() == null) {
+            log.error("marketDataRequest.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame in marketDataRequest не может быть null");
+        }
+        if (marketDataRequest.getSymbol() == null) {
+            log.error("marketDataRequest.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol in marketDataRequest не может быть null");
+        }
+
         log.info("Загрузка последней свечи: symbol={}, timeFrame={}",
                 marketDataRequest.getSymbol(),
                 marketDataRequest.getTimeFrame()
@@ -163,7 +200,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
                 .build();
 
         log.debug("Запрос последней свечи: start={}, end={}, limit=1", startTime, endDate);
-        final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(client.getMarketLinesData(byBitRequest));
+        final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         List<CandleDTO> candleDTOList = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry);
         final CandleDTO candleDTO = candleDTOList.getFirst();
         log.debug("Получена свеча: open={}, close={}", candleDTO.getOpenPrice(), candleDTO.getClosePrice());
@@ -205,5 +242,13 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
         log.trace("Расчет timmeInMillis из marketInterval={}, результат={}", marketInterval, timeInMillis);
         return timeInMillis;
+    }
+
+    private Object sendRequest(final com.bybit.api.client.domain.market.request.MarketDataRequest request) {
+        try {
+            return client.getMarketLinesData(request);
+        } catch (Exception e) {
+            throw new ByBitException("Ошибка отправки запросы к серверу BYBit.", e);
+        }
     }
 }
