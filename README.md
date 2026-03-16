@@ -43,16 +43,16 @@ trading/
 ├── core/ # Ядро торговой логики
 │ ├── trader-common/ # Общая логика для реальной и тестовой торговли
 │ ├── trader/ # Реальная торговля
-│ │ └── src/main/java/io.github.iljiapol
+│ │ └── src/main/java/io.github.ijlijapol
 │ │ ├── bybit/ # Реализация для ByBit
 │ │ ├── tbank/ # Реализация для Т-банка
 │ │ └── factory/ # Фабрики торговых исполнителей
 │ └── test-trader/ # Тестовая (бумажная) торговля
-│ └── src/main/java/io.github.iljiapol
+│ └── src/main/java/io.github.ijlijapol
 │ ├── bybit/ # Симуляция торговли на ByBit
 │ ├── tbank/ # Симуляция торговли в Т-банке
 ├── analyzer/ # Аналитика и поиск паттернов
-│ └── src/main/java/io.github.iljiapol
+│ └── src/main/java/io.github.ijlijapol
 │ ├── common/ # Общие алгоритмы анализа
 │ ├── bybit/ # Специфика для ByBit 
 │ └── tbank/ # Специфика для Т-банка
@@ -61,7 +61,7 @@ trading/
 │ ├── console-ui/ # Консольный интерфейс
 │ └── external-ui/ # REST API для внешнего графического интерфейса
 └── app/ # Сборочный модуль (точка запуска)
-  └── src/main/java/io.github.iljiapol/TradingApplication.java
+  └── src/main/java/io.github.ijlijapol/TradingApplication.java
   └── resources/
   ├── application.yml
   ├── application-console.yml
