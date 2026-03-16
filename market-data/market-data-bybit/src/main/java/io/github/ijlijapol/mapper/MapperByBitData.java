@@ -6,7 +6,7 @@ import com.bybit.api.client.domain.market.response.kline.MarketKlineResult;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import io.github.ijlijapol.data.market.model.responce.CandleDTO;
+import io.github.ijlijapol.model.responce.CandleDTO;
 
 import java.math.BigDecimal;
 import java.time.Instant;

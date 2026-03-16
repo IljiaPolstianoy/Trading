@@ -1,5 +1,6 @@
-package io.github.ijlijapol.data.market.model.request;
+package io.github.ijlijapol.model.request;
 
+import io.github.ijlijapol.model.Symbol;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

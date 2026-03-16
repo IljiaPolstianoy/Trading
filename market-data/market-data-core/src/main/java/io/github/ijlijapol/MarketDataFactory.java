@@ -1,6 +1,6 @@
 package io.github.ijlijapol;
 
-import io.github.ijlijapol.data.market.LoaderMarketData;
+import io.github.ijlijapol.contract.LoaderMarketData;
 
 public class MarketDataFactory {
 

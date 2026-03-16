@@ -1,4 +1,4 @@
-package io.github.ijlijapol.data.market.model.responce;
+package io.github.ijlijapol.model.responce;
 
 import lombok.Builder;
 import lombok.Data;

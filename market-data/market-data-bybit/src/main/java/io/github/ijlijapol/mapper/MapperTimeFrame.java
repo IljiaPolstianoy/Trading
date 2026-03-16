@@ -1,7 +1,7 @@
 package io.github.ijlijapol.mapper;
 
 import com.bybit.api.client.domain.market.MarketInterval;
-import io.github.ijlijapol.data.market.model.request.TimeFrame;
+import io.github.ijlijapol.model.request.TimeFrame;
 
 public class MapperTimeFrame {
 

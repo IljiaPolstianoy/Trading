@@ -1,4 +1,4 @@
-package io.github.ijlijapol.data.market.model.request;
+package io.github.ijlijapol.model.request;
 
 public enum LastTime {
     DAY,
