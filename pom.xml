@@ -34,13 +34,15 @@
         <analyzer.version>${project.version}</analyzer.version>
         <lombok.version>1.18.42</lombok.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
-        <market-data-bybit.version>${project.version}</market-data-bybit.version>
+        <market-data-core.version>${project.version}</market-data-core.version>
         <slf4j-api.version>2.0.17</slf4j-api.version>
         <log4j-core.version>2.25.3</log4j-core.version>
         <log4j-slf4j2-impl.version>2.25.3</log4j-slf4j2-impl.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <mockito-core.version>5.3.1</mockito-core.version>
         <mockito-junit-jupiter.version>5.3.1</mockito-junit-jupiter.version>
+        <exchange-connector-core.version>${project.version}</exchange-connector-core.version>
+        <spring-boot.version>3.5.5</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -71,12 +73,6 @@
             </dependency>
 
             <dependency>
-                <groupId>io.github.ijlijapol</groupId>
-                <artifactId>market-data-bybit</artifactId>
-                <version>${market-data-bybit.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j-api.version}</version>
@@ -100,18 +96,88 @@
                 <version>${junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
                 <version>${mockito-core.version}</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito-junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.ijlijapol</groupId>
+                <artifactId>market-data-core</artifactId>
+                <version>${market-data-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ijlijapol</groupId>
+                <artifactId>exchange-connector-core</artifactId>
+                <version>${exchange-connector-core.version}</version>
+            </dependency>
+            <!-- Spring Boot starters with logging excluded -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.5.6</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>1.5.6</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
 </project>

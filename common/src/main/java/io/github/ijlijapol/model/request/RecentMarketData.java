@@ -1,4 +1,4 @@
-package io.github.ijlijapol.data.market.model.request;
+package io.github.ijlijapol.model.request;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

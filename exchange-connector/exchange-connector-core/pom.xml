@@ -5,52 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.ijlijapol</groupId>
-        <artifactId>core</artifactId>
+        <artifactId>exchange-connector</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>test-trader</artifactId>
+    <artifactId>exchange-connector-core</artifactId>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <exchange-connector-bybit.version>${project.version}</exchange-connector-bybit.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.github.ijlijapol</groupId>
-            <artifactId>exchange-connector-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.ijlijapol</groupId>
-            <artifactId>common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j2-impl</artifactId>
+            <artifactId>exchange-connector-bybit</artifactId>
+            <version>${exchange-connector-bybit.version}</version>
         </dependency>
 
         <dependency>
@@ -76,4 +48,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

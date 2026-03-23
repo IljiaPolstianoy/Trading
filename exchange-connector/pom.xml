@@ -14,6 +14,7 @@
     <modules>
         <module>exchange-connector-bybit</module>
         <module>exchange-connector-tbank</module>
+        <module>exchange-connector-core</module>
     </modules>
 
     <properties>
