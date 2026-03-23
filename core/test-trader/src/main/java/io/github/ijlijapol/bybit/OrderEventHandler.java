@@ -1,6 +1,8 @@
-package io.github.ijlijapol.response;
+package io.github.ijlijapol.bybit;
 
 import io.github.ijlijapol.exception.ByBitOrderSendingException;
+import io.github.ijlijapol.response.OrderCreatedEvent;
+import io.github.ijlijapol.response.OrderFailedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -11,12 +13,11 @@ public class OrderEventHandler {
 
     @EventListener
     public void handlerOrderCreatedEvent(final OrderCreatedEvent event) {
-        log.info("📦 Обработка успешного ордера: orderId={}, symbol={}, side={}, qty={}, price={}",
+        log.info("📦 Обработка успешного ордера: orderId={}, symbol={}, side={}, qty={}",
                 event.getOrderId(),
                 event.getOriginalOrder().getSymbol(),
                 event.getOriginalOrder().getSide(),
-                event.getOriginalOrder().getAmount(),
-                event.getOriginalOrder().getPrice()
+                event.getOriginalOrder().getAmount()
         );
 
         try {
@@ -38,15 +39,7 @@ public class OrderEventHandler {
         String errorType = event.getErrorCode() != null ? "API ошибка" : "Сетевая ошибка";
 
         if (event.getErrorCode() != null) {
-            log.error("❌ {}: code={}, message={}, order={}, side={}, qty={}, price={}",
-                    errorType,
-                    event.getErrorCode(),
-                    event.getErrorMessage(),
-                    event.getOriginalOrder().getSymbol(),
-                    event.getOriginalOrder().getSide(),
-                    event.getOriginalOrder().getAmount(),
-                    event.getOriginalOrder().getPrice()
-            );
+            log.trace("Начало обработки API-ошибки от Bybit");
         } else {
             log.error("❌ {}: message={}, order={}, side={}, qty={}, price={}",
                     errorType,

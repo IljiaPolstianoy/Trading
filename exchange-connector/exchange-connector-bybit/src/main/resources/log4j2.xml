@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="APP_NAME">exchange-connector-bybit-module</Property>
+        <Property name="ENV">${env:ENVIRONMENT:-dev}</Property>
+        <Property name="APP_LOG_LEVEL">${sys:log.level.app:-INFO}</Property>
+        <Property name="ROOT_LOG_LEVEL">${sys:log.level.root:-INFO}</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Консольный аппендер с цветами -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n"/>
+            <ThresholdFilter level="TRACE"/>
+        </Console>
+
+        <RollingFile name="JsonFile"
+                     fileName="logs/${APP_NAME}.json"
+                     filePattern="logs/${APP_NAME}-%d{yyyy-MM-dd}-%i.json.gz">
+            <JsonLayout compact="true" eventEol="true" properties="true">
+                <KeyValuePair key="application" value="${APP_NAME}"/>
+                <KeyValuePair key="environment" value="${ENV}"/>
+            </JsonLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <RollingFile name="ErrorFile"
+                     fileName="logs/error.json"
+                     filePattern="logs/error-%d{yyyy-MM-dd}-%i.json.gz">
+            <JsonLayout compact="true" eventEol="true">
+                <KeyValuePair key="type" value="error"/>
+            </JsonLayout>
+            <ThresholdFilter level="ERROR"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <Async name="AsyncJson">
+            <AppenderRef ref="JsonFile"/>
+            <AppenderRef ref="ErrorFile"/>
+        </Async>
+
+        <Routing name="RoutingAppender">
+            <Routes pattern="$${env:ENVIRONMENT:-dev}">
+                <Route key="dev" ref="Console"/>
+                <Route key="prod" ref="AsyncJson"/>
+                <Route ref="Console"/>
+            </Routes>
+        </Routing>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="io.github.ijlijapol" level="${APP_LOG_LEVEL}" additivity="false">
+            <AppenderRef ref="RoutingAppender"/>
+        </Logger>
+
+        <Root level="${ROOT_LOG_LEVEL}">
+            <AppenderRef ref="RoutingAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

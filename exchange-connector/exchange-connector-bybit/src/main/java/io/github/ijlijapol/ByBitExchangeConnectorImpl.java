@@ -2,7 +2,6 @@ package io.github.ijlijapol;
 
 import com.bybit.api.client.config.BybitApiConfig;
 import com.bybit.api.client.domain.CategoryType;
-import com.bybit.api.client.domain.trade.PositionIdx;
 import com.bybit.api.client.domain.trade.Side;
 import com.bybit.api.client.domain.trade.request.TradeOrderRequest;
 import com.bybit.api.client.restApi.BybitApiAsyncTradeRestClient;
@@ -25,21 +24,20 @@ public class ByBitExchangeConnectorImpl implements ExchangeConnector {
     public ByBitExchangeConnectorImpl(
             final String apiKey,
             final String apiSecret,
-            ApplicationEventPublisher eventPublisher
+            final ApplicationEventPublisher eventPublisher
     ) {
         this.client = BybitApiClientFactory
-                .newInstance(apiKey, apiSecret, BybitApiConfig.MAINNET_DOMAIN)
+                .newInstance(apiKey, apiSecret, BybitApiConfig.DEMO_TRADING_DOMAIN, true)
                 .newAsyncTradeRestClient();
         this.eventPublisher = eventPublisher;
     }
 
     @Override
     public boolean createNewOrder(final Order order) {
-        log.info("🚀 Отправка ордера на Bybit: symbol={}, side={}, qty={}, price={}",
+        log.info("🚀 Отправка ордера на Bybit: symbol={}, side={}, qty={}",
                 order.getSymbol(),
                 order.getSide(),
-                order.getAmount(),
-                order.getPrice()
+                order.getAmount()
         );
 
         final TradeOrderRequest byBitOrder = TradeOrderRequest.builder()
@@ -47,9 +45,8 @@ public class ByBitExchangeConnectorImpl implements ExchangeConnector {
                 .symbol(order.getSymbol().toString())
                 .orderType(getOrderType(order.getOrderType()))
                 .qty(order.getAmount().toString())
-                .price(order.getPrice().toString())
-                .positionIdx(PositionIdx.ONE_WAY_MODE)
                 .side(getSide(order.getSide()))
+                .marketUnit("baseCoin")
                 .build();
 
 
