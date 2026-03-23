@@ -3,6 +3,7 @@ package io.github.ijlijapol.model.order;
 import io.github.ijlijapol.model.Symbol;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
+@ToString(callSuper = true)
 public class Order {
 
     private Symbol symbol;
