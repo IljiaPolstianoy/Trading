@@ -19,7 +19,6 @@ public class CreateOrderCallback implements BybitApiCallback<Object> {
     private final Order originalOrder;
 
     @Override
-    @SuppressWarnings("unchecked")
     public void onResponse(Object response) {
 
 
@@ -33,8 +32,10 @@ public class CreateOrderCallback implements BybitApiCallback<Object> {
                             "Неожиданный формат ответа: " + responseType
                     )
             );
+            return;
         }
 
+        @SuppressWarnings("unchecked")
         final GenericResponse<OrderResponse> genericResponse = (GenericResponse<OrderResponse>) response;
 
         log.debug("Получен ответ от Bybit: retCode={}, retMsg={}, time={}",

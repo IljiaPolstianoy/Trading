@@ -36,11 +36,11 @@ public class OrderFailedEvent extends TradingEvent {
     /**
      * Конструктор для API-ошибок
      *
-     * @param source
-     * @param originalOrder
-     * @param eventTimestamp
-     * @param errorMessage
-     * @param errorCode
+     * @param source         источник события
+     * @param originalOrder  оригинальный ордер
+     * @param eventTimestamp временная метка события
+     * @param errorMessage   сообщение об ошибке
+     * @param errorCode      код ошибки
      */
     public OrderFailedEvent(
             final Object source,
@@ -63,9 +63,9 @@ public class OrderFailedEvent extends TradingEvent {
     /**
      * Конструктор для сетевых ошибок
      *
-     * @param source
-     * @param originalOrder
-     * @param cause
+     * @param source        источник события
+     * @param originalOrder оригинальный ордер
+     * @param cause         ошибка
      */
     public OrderFailedEvent(
             final Object source,
@@ -78,16 +78,16 @@ public class OrderFailedEvent extends TradingEvent {
                 LocalDateTime.now(),
                 cause.getMessage(),
                 null,
-                null
+                cause
         );
     }
 
     /**
      * Конструктор для ошибки формата "Неизвестный формат ответа"
      *
-     * @param source
-     * @param originalOrder
-     * @param errorMessage
+     * @param source        источник события
+     * @param originalOrder оригинальный ордер
+     * @param errorMessage  сообщение об ошибке
      */
     public OrderFailedEvent(
             final Object source,
