@@ -15,10 +15,8 @@ import io.github.ijlijapol.model.order.TradeOrderType;
 import io.github.ijlijapol.response.CreateOrderCallback;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
 public class ByBitExchangeConnectorImpl implements ExchangeConnector {
 
     private final BybitApiAsyncTradeRestClient client;
