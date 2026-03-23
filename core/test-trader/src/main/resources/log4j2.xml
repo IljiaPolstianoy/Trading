@@ -10,8 +10,7 @@
     <Appenders>
         <!-- Консольный аппендер с цветами -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n"/>
-            <ThresholdFilter level="TRACE"/>
+            <PatternLayout pattern="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{dim} %highlight{%5p}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=cyan, TRACE=blue} %style{---}{dim} %style{[%15.15t]}{dim} %style{%-40.40c{1.}}{cyan} %style{:}{dim} %m%n"/>            <ThresholdFilter level="TRACE"/>
         </Console>
 
         <RollingFile name="JsonFile"
