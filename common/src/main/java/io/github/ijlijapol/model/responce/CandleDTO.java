@@ -15,4 +15,6 @@ public class CandleDTO {
     private BigDecimal closePrice;
 
     private LocalDateTime startTime;
+
+    private boolean growing;
 }
