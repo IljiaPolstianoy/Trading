@@ -28,6 +28,7 @@ public class BybitTestTradeExecutor {
 
     // TODO: при добавление нового метода в LoaderMarketData изменить запрос
     private CandlesDTO getCandles() {
+        log.debug("Получения последних трех свечей");
         final RecentMarketData request = RecentMarketData.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
@@ -38,6 +39,7 @@ public class BybitTestTradeExecutor {
     }
 
     private void createTestOrder() {
+        log.info("Создания тестового ордера.");
         final BigDecimal lastPrice = candles.getCandles().getLast().getClosePrice();
         final TestOrder testOrder = TestOrder.builder()
                 .symbol(Symbol.BTCUSDT)
@@ -51,6 +53,7 @@ public class BybitTestTradeExecutor {
     }
 
     private void save(final TestOrder testOrder) {
+        log.debug("Сохранения тестового ордера в базу данных");
         try {
             repository.save(testOrder);
         } catch (Exception ex) {
