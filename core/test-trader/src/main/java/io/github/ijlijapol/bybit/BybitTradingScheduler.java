@@ -1,5 +1,6 @@
 package io.github.ijlijapol.bybit;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -7,7 +8,8 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Component
-public class Trader {
+@Slf4j
+public class BybitTradingScheduler {
 
     private final ExecutorService taskExecutor = new ThreadPoolExecutor(
             1,
@@ -19,9 +21,9 @@ public class Trader {
     private final AtomicBoolean schedulerEnabled = new AtomicBoolean(false);
 
     @Scheduled(cron = "0 */15 * * * *")
-    public void task() {
+    public void executeTradingJob() {
         if (schedulerEnabled.get()) {
-            startTask();
+            submitTradingTaskAsync();
         }
     }
 
@@ -43,11 +45,13 @@ public class Trader {
         };
     }
 
-    private void startTask() {
+    private void submitTradingTaskAsync() {
         try {
             taskExecutor.execute(() -> {
                 try {
-                    performLongRunningProcess();
+                    // бизнес логика торговли
+                    final BybitTestTradeExecutor executor = new BybitTestTradeExecutor();
+                    executor.start();
                 } catch (InterruptedException e) {
                     // Ошибка
                 }
@@ -55,10 +59,6 @@ public class Trader {
         } catch (RejectedExecutionException e) {
             // логика обработки
         }
-    }
-
-    private void performLongRunningProcess() throws InterruptedException {
-        // Бизнес-логика
     }
 
     public void shutdown() {
