@@ -13,6 +13,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class MapperByBitData {
 
@@ -27,7 +29,7 @@ public class MapperByBitData {
         return genericResponse.getResult().getMarketKlineEntries();
     }
 
-    public static List<CandleDTO> convertFromMarketKlineEntry(final List<MarketKlineEntry> marketKlineEntryList) {
+    public static TreeSet<CandleDTO> convertFromMarketKlineEntry(final List<MarketKlineEntry> marketKlineEntryList) {
         return marketKlineEntryList.stream()
                 .map(marketKlineEntry -> {
                     final LocalDateTime startTime = LocalDateTime.ofInstant(
@@ -40,6 +42,6 @@ public class MapperByBitData {
                             .startTime(startTime)
                             .build();
                 })
-                .toList();
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }

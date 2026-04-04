@@ -6,24 +6,24 @@ import com.bybit.api.client.domain.market.response.kline.MarketKlineEntry;
 import com.bybit.api.client.restApi.BybitApiMarketRestClient;
 import com.bybit.api.client.service.BybitApiClientFactory;
 import io.github.ijlijapol.contract.LoaderMarketData;
+import io.github.ijlijapol.exception.ByBitException;
+import io.github.ijlijapol.exception.UncorrectedRequestByBit;
+import io.github.ijlijapol.mapper.MapperByBitData;
+import io.github.ijlijapol.mapper.MapperTimeFrame;
 import io.github.ijlijapol.model.request.LastTime;
 import io.github.ijlijapol.model.request.MarketDataForPeriodBetween;
 import io.github.ijlijapol.model.request.MarketDataRequest;
 import io.github.ijlijapol.model.request.RecentMarketData;
 import io.github.ijlijapol.model.responce.CandleDTO;
 import io.github.ijlijapol.model.responce.CandlesDTO;
-import io.github.ijlijapol.exception.ByBitException;
-import io.github.ijlijapol.exception.UncorrectedRequestByBit;
-import io.github.ijlijapol.mapper.MapperByBitData;
-import io.github.ijlijapol.mapper.MapperTimeFrame;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 @Slf4j
 public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
@@ -72,7 +72,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
         log.debug("Первый запрос ByBit: start={}, end={}, limit=1000", startPeriod, endDate);
         final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         log.debug("Получено {} записей от ByBit", marketKlineEntries.size());
-        final List<CandleDTO> candleDTOList = new ArrayList<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
+        final TreeSet<CandleDTO> candleDTOList = new TreeSet<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
 
         while (marketKlineEntries.size() == 1000) {
 
@@ -142,7 +142,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
         log.debug("Первый запрос ByBit: start={}, end={}, limit=1000", startPeriod, endDate);
         final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         log.debug("Получено {} записей от ByBit", marketKlineEntries.size());
-        final List<CandleDTO> candleDTOList = new java.util.ArrayList<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
+        final TreeSet<CandleDTO> candleDTOList = new TreeSet<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
 
         while (marketKlineEntries.size() == 1000) {
 
@@ -201,7 +201,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
         log.debug("Запрос последней свечи: start={}, end={}, limit=1", startTime, endDate);
         final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
-        List<CandleDTO> candleDTOList = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry);
+        TreeSet<CandleDTO> candleDTOList = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry);
         final CandleDTO candleDTO = candleDTOList.getFirst();
         log.debug("Получена свеча: open={}, close={}", candleDTO.getOpenPrice(), candleDTO.getClosePrice());
         return candleDTO;

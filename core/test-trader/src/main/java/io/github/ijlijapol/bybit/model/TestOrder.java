@@ -1,0 +1,40 @@
+package io.github.ijlijapol.bybit.model;
+
+import io.github.ijlijapol.model.Symbol;
+import io.github.ijlijapol.model.order.Side;
+import io.github.ijlijapol.model.order.TradeOrderType;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
+
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name = "test_orders")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class TestOrder {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "symbol", nullable = false)
+    private Symbol symbol;
+
+    @Column(name = "side", nullable = false)
+    private Side side;
+
+    @Column(name = "order_type", nullable = false)
+    private TradeOrderType orderType;
+
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
+
+    @Column(name = "amount", nullable = false)
+    private BigDecimal amount;
+
+}

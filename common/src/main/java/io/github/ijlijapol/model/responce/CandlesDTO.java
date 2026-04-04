@@ -4,7 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Data
 @Builder(toBuilder = true)
@@ -14,5 +15,5 @@ public class CandlesDTO {
 
     private LocalDateTime endPeriodTime;
 
-    private List<CandleDTO> candles;
+    private TreeSet<CandleDTO> candles;
 }
