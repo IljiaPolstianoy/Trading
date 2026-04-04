@@ -3,6 +3,7 @@ package io.github.ijlijapol.contract;
 import io.github.ijlijapol.model.request.LastCandleRequest;
 import io.github.ijlijapol.model.request.MarketDataForPeriodBetweenRequest;
 import io.github.ijlijapol.model.request.RecentMarketDataRequest;
+import io.github.ijlijapol.model.request.SelectQuantityCandleRequest;
 import io.github.ijlijapol.model.responce.CandleDTO;
 import io.github.ijlijapol.model.responce.CandlesDTO;
 
@@ -35,4 +36,12 @@ public interface LoaderMarketData {
      * @return объект {@link CandleDTO} с данными последней свечи
      */
     CandleDTO loadLatestCandle(LastCandleRequest marketDataRequest);
+
+    /**
+     * Загружает выбранное количчество последних свечей
+     *
+     * @param marketDataRequest запрос, содержащий символ, таймфрен свечи и количество свечей
+     * @return объект {@link CandlesDTO} с данным последних свечей
+     */
+    CandlesDTO loadSelectQuantityCandle(SelectQuantityCandleRequest marketDataRequest);
 }

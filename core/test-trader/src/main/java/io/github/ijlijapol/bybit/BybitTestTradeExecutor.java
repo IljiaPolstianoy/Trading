@@ -12,8 +12,7 @@ import io.github.ijlijapol.contract.LoaderMarketData;
 import io.github.ijlijapol.model.Symbol;
 import io.github.ijlijapol.model.order.Side;
 import io.github.ijlijapol.model.order.TradeOrderType;
-import io.github.ijlijapol.model.request.LastTime;
-import io.github.ijlijapol.model.request.RecentMarketDataRequest;
+import io.github.ijlijapol.model.request.SelectQuantityCandleRequest;
 import io.github.ijlijapol.model.request.TimeFrame;
 import io.github.ijlijapol.model.responce.CandleDTO;
 import io.github.ijlijapol.model.responce.CandlesDTO;
@@ -125,26 +124,21 @@ public class BybitTestTradeExecutor {
 
     /**
      * Получает последние рыночные данные с биржи Bybit.
+     *
      * <p>
-     * Загружает данные для символа BTCUSDT с 15-минутным таймфреймом за последний день.
-     * </p>
-     * <p>
-     * <b>TODO:</b> При добавлении нового метода в интерфейс {@link LoaderMarketData}
-     * необходимо изменить реализацию данного метода.
-     * </p>
+     * Загружает выбранное количество последних свечей для символа BTCUSDT с 15-минутным таймфреймом.
      *
      * @return объект {@link CandlesDTO}, содержащий данные о свечах
      */
-    // TODO: при добавление нового метода в LoaderMarketData изменить запрос
     private CandlesDTO getCandles() {
         log.debug("Получения последних трех свечей");
-        final RecentMarketDataRequest request = RecentMarketDataRequest.builder()
+        final SelectQuantityCandleRequest request = SelectQuantityCandleRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
-                .lastTime(LastTime.DAY)
+                .quantity(3)
                 .build();
 
-        return loaderMarketData.loadRecentMarketData(request);
+        return loaderMarketData.loadSelectQuantityCandle(request);
     }
 
     /**
