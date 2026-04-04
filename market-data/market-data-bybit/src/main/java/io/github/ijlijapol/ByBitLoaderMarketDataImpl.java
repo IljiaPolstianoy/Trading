@@ -10,10 +10,7 @@ import io.github.ijlijapol.exception.ByBitException;
 import io.github.ijlijapol.exception.UncorrectedRequestByBit;
 import io.github.ijlijapol.mapper.MapperByBitData;
 import io.github.ijlijapol.mapper.MapperTimeFrame;
-import io.github.ijlijapol.model.request.LastCandleRequest;
-import io.github.ijlijapol.model.request.LastTime;
-import io.github.ijlijapol.model.request.MarketDataForPeriodBetweenRequest;
-import io.github.ijlijapol.model.request.RecentMarketDataRequest;
+import io.github.ijlijapol.model.request.*;
 import io.github.ijlijapol.model.responce.CandleDTO;
 import io.github.ijlijapol.model.responce.CandlesDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -35,34 +32,34 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
     }
 
     @Override
-    public CandlesDTO loadRecentMarketData(final RecentMarketDataRequest recentMarketData) {
-        if (recentMarketData == null) {
-            log.error("recentMarketData is null");
-            throw new UncorrectedRequestByBit("Объект RecentMarketData равен null");
+    public CandlesDTO loadRecentMarketData(final RecentMarketDataRequest recentMarketDataRequest) {
+        if (recentMarketDataRequest == null) {
+            log.error("recentMarketDataRequest is null");
+            throw new UncorrectedRequestByBit("Объект recentMarketDataRequest равен null");
         }
-        if (recentMarketData.getSymbol() == null) {
-            log.error("recentMarketData.symbol is null");
-            throw new UncorrectedRequestByBit("Symbol в recentMarketData не может быть null");
+        if (recentMarketDataRequest.getSymbol() == null) {
+            log.error("recentMarketDataRequest.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol в recentMarketDataRequest не может быть null");
         }
-        if (recentMarketData.getLastTime() == null) {
-            log.error("recentMarketData.lastTime is null");
-            throw new UncorrectedRequestByBit("LastTime в recentMarketData не может быть null");
+        if (recentMarketDataRequest.getLastTime() == null) {
+            log.error("recentMarketDataRequest.lastTime is null");
+            throw new UncorrectedRequestByBit("LastTime в recentMarketDataRequest не может быть null");
         }
-        if (recentMarketData.getTimeFrame() == null) {
-            log.error("recentMarketData.timeFrame is null");
-            throw new UncorrectedRequestByBit("TimeFrame В recentMarketData не может быть null");
+        if (recentMarketDataRequest.getTimeFrame() == null) {
+            log.error("recentMarketDataRequest.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame В recentMarketDataRequest не может быть null");
         }
 
         log.info("Загрузка последних рыночных свеч: symbol-{}, timeFrame={}, lastTime={}",
-                recentMarketData.getSymbol(), recentMarketData.getTimeFrame(), recentMarketData.getLastTime());
+                recentMarketDataRequest.getSymbol(), recentMarketDataRequest.getTimeFrame(), recentMarketDataRequest.getLastTime());
 
-        final Long startPeriod = getStartTimeFromLastTime(recentMarketData.getLastTime());
+        final Long startPeriod = getStartTimeFromLastTime(recentMarketDataRequest.getLastTime());
         final Long endDate = LocalDateTime.now(ZoneId.of("UTC")).toInstant(ZoneOffset.UTC).toEpochMilli();
-        final MarketInterval marketInterval = MapperTimeFrame.toMarketInterval(recentMarketData.getTimeFrame());
+        final MarketInterval marketInterval = MapperTimeFrame.toMarketInterval(recentMarketDataRequest.getTimeFrame());
         final com.bybit.api.client.domain.market.request.MarketDataRequest byBitRequest
                 = com.bybit.api.client.domain.market.request.MarketDataRequest.builder()
                 .category(CategoryType.SPOT)
-                .symbol(recentMarketData.getSymbol().toString())
+                .symbol(recentMarketDataRequest.getSymbol().toString())
                 .marketInterval(marketInterval)
                 .start(startPeriod)
                 .end(endDate)
@@ -97,42 +94,42 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
     }
 
     @Override
-    public CandlesDTO loadMarketDateForPeriodBetween(final MarketDataForPeriodBetweenRequest marketDataForPeriodBetween) {
-        if (marketDataForPeriodBetween == null) {
-            log.error("marketDataForPeriodBetween is null");
-            throw new UncorrectedRequestByBit("Объект marketDataForPeriodBetween равен null");
+    public CandlesDTO loadMarketDateForPeriodBetween(final MarketDataForPeriodBetweenRequest marketDataForPeriodBetweenRequest) {
+        if (marketDataForPeriodBetweenRequest == null) {
+            log.error("marketDataForPeriodBetweenRequest is null");
+            throw new UncorrectedRequestByBit("Объект marketDataForPeriodBetweenRequest равен null");
         }
-        if (marketDataForPeriodBetween.getSymbol() == null) {
-            log.error("marketDataForPeriodBetween.symbol is null");
-            throw new UncorrectedRequestByBit("Symbol в MarketDataForPeriodBetween не может быть null");
+        if (marketDataForPeriodBetweenRequest.getSymbol() == null) {
+            log.error("marketDataForPeriodBetweenRequest.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol в marketDataForPeriodBetweenRequest не может быть null");
         }
-        if (marketDataForPeriodBetween.getTimeFrame() == null) {
-            log.error("marketDataForPeriodBetween.timeFrame is null");
-            throw new UncorrectedRequestByBit("TimeFrame in marketDataForPeriodBetween не может быть null");
+        if (marketDataForPeriodBetweenRequest.getTimeFrame() == null) {
+            log.error("marketDataForPeriodBetweenRequest.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame in marketDataForPeriodBetweenRequest не может быть null");
         }
-        if (marketDataForPeriodBetween.getStartTime() == null) {
-            log.error("marketDataForPeriodBetween.startTime is null");
-            throw new UncorrectedRequestByBit("StartTime in marketDataForPeriodBetween не может быть null");
+        if (marketDataForPeriodBetweenRequest.getStartTime() == null) {
+            log.error("marketDataForPeriodBetweenRequest.startTime is null");
+            throw new UncorrectedRequestByBit("StartTime in marketDataForPeriodBetweenRequest не может быть null");
         }
-        if(marketDataForPeriodBetween.getEndTime() == null) {
-            log.error("marketDataForPeriodBetween.endTime is null");
-            throw new UncorrectedRequestByBit("EndTime in marketDataForPeriodBetween не может быть null");
+        if (marketDataForPeriodBetweenRequest.getEndTime() == null) {
+            log.error("marketDataForPeriodBetweenRequest.endTime is null");
+            throw new UncorrectedRequestByBit("EndTime in marketDataForPeriodBetweenRequest не может быть null");
         }
 
         log.info("Загрузка р=рыночных свечей за период: symbol={}, timeFrame={}, start={}, end={}",
-                marketDataForPeriodBetween.getSymbol(),
-                marketDataForPeriodBetween.getTimeFrame(),
-                marketDataForPeriodBetween.getStartTime(),
-                marketDataForPeriodBetween.getEndTime()
+                marketDataForPeriodBetweenRequest.getSymbol(),
+                marketDataForPeriodBetweenRequest.getTimeFrame(),
+                marketDataForPeriodBetweenRequest.getStartTime(),
+                marketDataForPeriodBetweenRequest.getEndTime()
         );
 
-        final Long startPeriod = marketDataForPeriodBetween.getStartTime().toInstant(ZoneOffset.UTC).toEpochMilli();
-        final Long endDate = marketDataForPeriodBetween.getEndTime().toInstant(ZoneOffset.UTC).toEpochMilli();
-        final MarketInterval marketInterval = MapperTimeFrame.toMarketInterval(marketDataForPeriodBetween.getTimeFrame());
+        final Long startPeriod = marketDataForPeriodBetweenRequest.getStartTime().toInstant(ZoneOffset.UTC).toEpochMilli();
+        final Long endDate = marketDataForPeriodBetweenRequest.getEndTime().toInstant(ZoneOffset.UTC).toEpochMilli();
+        final MarketInterval marketInterval = MapperTimeFrame.toMarketInterval(marketDataForPeriodBetweenRequest.getTimeFrame());
         final com.bybit.api.client.domain.market.request.MarketDataRequest byBitRequest
                 = com.bybit.api.client.domain.market.request.MarketDataRequest.builder()
                 .category(CategoryType.SPOT)
-                .symbol(marketDataForPeriodBetween.getSymbol().toString())
+                .symbol(marketDataForPeriodBetweenRequest.getSymbol().toString())
                 .marketInterval(marketInterval)
                 .start(startPeriod)
                 .end(endDate)
@@ -160,39 +157,39 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
         log.info("Загружено всего {} свечей за период с {} по {}", candleDTOList.size(), startPeriod, endDate);
         return CandlesDTO.builder()
-                .startPeriodTime(marketDataForPeriodBetween.getStartTime())
-                .endPeriodTime(marketDataForPeriodBetween.getEndTime())
+                .startPeriodTime(marketDataForPeriodBetweenRequest.getStartTime())
+                .endPeriodTime(marketDataForPeriodBetweenRequest.getEndTime())
                 .candles(candleDTOList)
                 .build();
     }
 
     @Override
-    public CandleDTO loadLatestCandle(final LastCandleRequest marketDataRequest) {
-        if (marketDataRequest  == null) {
-            log.error("marketDataRequest is null");
-            throw new UncorrectedRequestByBit("Объект marketDataRequest равен Null");
+    public CandleDTO loadLatestCandle(final LastCandleRequest lastDataRequest) {
+        if (lastDataRequest == null) {
+            log.error("lastDataRequest is null");
+            throw new UncorrectedRequestByBit("Объект lastDataRequest равен Null");
         }
-        if (marketDataRequest.getTimeFrame() == null) {
-            log.error("marketDataRequest.timeFrame is null");
-            throw new UncorrectedRequestByBit("TimeFrame in marketDataRequest не может быть null");
+        if (lastDataRequest.getTimeFrame() == null) {
+            log.error("lastDataRequest.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame in lastDataRequest не может быть null");
         }
-        if (marketDataRequest.getSymbol() == null) {
-            log.error("marketDataRequest.symbol is null");
-            throw new UncorrectedRequestByBit("Symbol in marketDataRequest не может быть null");
+        if (lastDataRequest.getSymbol() == null) {
+            log.error("lastDataRequest.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol in lastDataRequest не может быть null");
         }
 
         log.info("Загрузка последней свечи: symbol={}, timeFrame={}",
-                marketDataRequest.getSymbol(),
-                marketDataRequest.getTimeFrame()
+                lastDataRequest.getSymbol(),
+                lastDataRequest.getTimeFrame()
         );
 
-        final MarketInterval marketInterval = MapperTimeFrame.toMarketInterval(marketDataRequest.getTimeFrame());
+        final MarketInterval marketInterval = MapperTimeFrame.toMarketInterval(lastDataRequest.getTimeFrame());
         final Long endDate = LocalDateTime.now(ZoneOffset.UTC).toInstant(ZoneOffset.UTC).toEpochMilli();
         final Long startTime = endDate - (getTimeInMillisFromMarketInterval(marketInterval));
         final com.bybit.api.client.domain.market.request.MarketDataRequest byBitRequest
                 = com.bybit.api.client.domain.market.request.MarketDataRequest.builder()
                 .category(CategoryType.SPOT)
-                .symbol(marketDataRequest.getSymbol().toString())
+                .symbol(lastDataRequest.getSymbol().toString())
                 .marketInterval(marketInterval)
                 .start(startTime)
                 .end(endDate)
@@ -205,6 +202,47 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
         final CandleDTO candleDTO = candleDTOList.getFirst();
         log.debug("Получена свеча: open={}, close={}", candleDTO.getOpenPrice(), candleDTO.getClosePrice());
         return candleDTO;
+    }
+
+    @Override
+    public CandlesDTO loadSelectQuantityCandle(final SelectQuantityCandleRequest selectQuantityCandleRequest) {
+        if (selectQuantityCandleRequest.getTimeFrame() == null) {
+            log.error("selectQuantityCandleRequest.timeFrame is null");
+            throw new UncorrectedRequestByBit("TimeFrame in selectQuantityCandleRequest не может быть null");
+        }
+        if (selectQuantityCandleRequest.getSymbol() == null) {
+            log.error("selectQuantityCandleRequest.symbol is null");
+            throw new UncorrectedRequestByBit("Symbol in selectQuantityCandleRequest не может быть null");
+        }
+        if (selectQuantityCandleRequest.getQuantity() < 2 || selectQuantityCandleRequest.getQuantity() > 1000) {
+            log.error("selectQuantityCandleRequest.quantity is less than 2 or more than 1000");
+            throw new UncorrectedRequestByBit("Quantity in selectQuantityCandleRequest не может быть меньше 2 или больше 1000");
+        }
+
+        log.info("Загрузка последний свечей в количестве {}.", selectQuantityCandleRequest.getQuantity());
+
+        final MarketInterval marketInterval = MapperTimeFrame.toMarketInterval(selectQuantityCandleRequest.getTimeFrame());
+        final long endDate = LocalDateTime.now(ZoneOffset.UTC).toInstant(ZoneOffset.UTC).toEpochMilli();
+        final Long startTime = endDate - (getTimeInMillisFromMarketInterval(marketInterval) * selectQuantityCandleRequest.getQuantity());
+
+        final com.bybit.api.client.domain.market.request.MarketDataRequest byBitRequest
+                = com.bybit.api.client.domain.market.request.MarketDataRequest.builder()
+                .category(CategoryType.SPOT)
+                .symbol(selectQuantityCandleRequest.getSymbol().toString())
+                .marketInterval(marketInterval)
+                .start(startTime)
+                .end(endDate)
+                .limit(selectQuantityCandleRequest.getQuantity())
+                .build();
+
+        log.debug("Запрос последних свечей: limit={}", selectQuantityCandleRequest.getQuantity());
+        final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
+        TreeSet<CandleDTO> candleDTOSet = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry);
+        log.debug("Получены всего свечей {}.", candleDTOSet.size());
+
+        return CandlesDTO.builder()
+                .candles(candleDTOSet)
+                .build();
     }
 
     private Long getStartTimeFromLastTime(final LastTime lastTime) {
