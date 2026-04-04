@@ -10,10 +10,10 @@ import io.github.ijlijapol.exception.ByBitException;
 import io.github.ijlijapol.exception.UncorrectedRequestByBit;
 import io.github.ijlijapol.mapper.MapperByBitData;
 import io.github.ijlijapol.mapper.MapperTimeFrame;
+import io.github.ijlijapol.model.request.LastCandleRequest;
 import io.github.ijlijapol.model.request.LastTime;
-import io.github.ijlijapol.model.request.MarketDataForPeriodBetween;
-import io.github.ijlijapol.model.request.MarketDataRequest;
-import io.github.ijlijapol.model.request.RecentMarketData;
+import io.github.ijlijapol.model.request.MarketDataForPeriodBetweenRequest;
+import io.github.ijlijapol.model.request.RecentMarketDataRequest;
 import io.github.ijlijapol.model.responce.CandleDTO;
 import io.github.ijlijapol.model.responce.CandlesDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
     }
 
     @Override
-    public CandlesDTO loadRecentMarketData(final RecentMarketData recentMarketData) {
+    public CandlesDTO loadRecentMarketData(final RecentMarketDataRequest recentMarketData) {
         if (recentMarketData == null) {
             log.error("recentMarketData is null");
             throw new UncorrectedRequestByBit("Объект RecentMarketData равен null");
@@ -97,7 +97,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
     }
 
     @Override
-    public CandlesDTO loadMarketDateForPeriodBetween(final MarketDataForPeriodBetween marketDataForPeriodBetween) {
+    public CandlesDTO loadMarketDateForPeriodBetween(final MarketDataForPeriodBetweenRequest marketDataForPeriodBetween) {
         if (marketDataForPeriodBetween == null) {
             log.error("marketDataForPeriodBetween is null");
             throw new UncorrectedRequestByBit("Объект marketDataForPeriodBetween равен null");
@@ -167,7 +167,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
     }
 
     @Override
-    public CandleDTO loadLatestCandle(final MarketDataRequest marketDataRequest) {
+    public CandleDTO loadLatestCandle(final LastCandleRequest marketDataRequest) {
         if (marketDataRequest  == null) {
             log.error("marketDataRequest is null");
             throw new UncorrectedRequestByBit("Объект marketDataRequest равен Null");

@@ -1,15 +1,19 @@
 package io.github.ijlijapol.model.request;
 
+import io.github.ijlijapol.model.Symbol;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @SuperBuilder(toBuilder = true)
 @Getter
 @ToString
-public class RecentMarketData extends MarketDataRequest {
+public class BaseDataRequest {
 
-    private final LastTime lastTime;
+    protected Symbol symbol;
+
+    protected TimeFrame timeFrame;
+
 }

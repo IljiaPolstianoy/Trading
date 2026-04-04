@@ -1,6 +1,8 @@
 package io.github.ijlijapol.model.request;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
@@ -9,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 @SuperBuilder(toBuilder = true)
-public class MarketDataForPeriodBetween extends MarketDataRequest {
+public class MarketDataForPeriodBetweenRequest extends BaseDataRequest {
 
     private LocalDateTime startTime;
 
