@@ -1,5 +1,6 @@
 package io.github.ijlijapol.bybit;
 
+
 import io.github.ijlijapol.MarketDataFactory;
 import io.github.ijlijapol.bybit.exception.NotFoundPatternsException;
 import io.github.ijlijapol.bybit.exception.TestOrderPersistenceException;
@@ -16,6 +17,7 @@ import io.github.ijlijapol.model.request.RecentMarketData;
 import io.github.ijlijapol.model.request.TimeFrame;
 import io.github.ijlijapol.model.responce.CandleDTO;
 import io.github.ijlijapol.model.responce.CandlesDTO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -55,6 +57,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BybitTestTradeExecutor {
 
