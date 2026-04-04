@@ -13,7 +13,7 @@ import io.github.ijlijapol.model.Symbol;
 import io.github.ijlijapol.model.order.Side;
 import io.github.ijlijapol.model.order.TradeOrderType;
 import io.github.ijlijapol.model.request.LastTime;
-import io.github.ijlijapol.model.request.RecentMarketData;
+import io.github.ijlijapol.model.request.RecentMarketDataRequest;
 import io.github.ijlijapol.model.request.TimeFrame;
 import io.github.ijlijapol.model.responce.CandleDTO;
 import io.github.ijlijapol.model.responce.CandlesDTO;
@@ -138,7 +138,7 @@ public class BybitTestTradeExecutor {
     // TODO: при добавление нового метода в LoaderMarketData изменить запрос
     private CandlesDTO getCandles() {
         log.debug("Получения последних трех свечей");
-        final RecentMarketData request = RecentMarketData.builder()
+        final RecentMarketDataRequest request = RecentMarketDataRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
                 .lastTime(LastTime.DAY)

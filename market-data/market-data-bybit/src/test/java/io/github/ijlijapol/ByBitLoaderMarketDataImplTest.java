@@ -4,21 +4,26 @@ import com.bybit.api.client.domain.CategoryType;
 import com.bybit.api.client.domain.market.MarketInterval;
 import com.bybit.api.client.domain.market.response.kline.MarketKlineEntry;
 import com.bybit.api.client.restApi.BybitApiMarketRestClient;
+import io.github.ijlijapol.mapper.MapperByBitData;
+import io.github.ijlijapol.mapper.MapperTimeFrame;
 import io.github.ijlijapol.model.Symbol;
 import io.github.ijlijapol.model.request.*;
 import io.github.ijlijapol.model.responce.CandleDTO;
 import io.github.ijlijapol.model.responce.CandlesDTO;
-import io.github.ijlijapol.mapper.MapperByBitData;
-import io.github.ijlijapol.mapper.MapperTimeFrame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.time.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +54,7 @@ class ByBitLoaderMarketDataImplTest {
     @Test
     void loadRecentMarketData_ShouldReturnCandlesDTO_WhenCalledWithValidData() {
         // Given
-        RecentMarketData request = RecentMarketData.builder()
+        RecentMarketDataRequest request = RecentMarketDataRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
                 .lastTime(LastTime.DAY)
@@ -108,7 +113,7 @@ class ByBitLoaderMarketDataImplTest {
     @Test
     void loadRecentMarketData_ShouldHandlePagination_WhenMoreThan1000Records() {
         // Given
-        RecentMarketData request = RecentMarketData.builder()
+        RecentMarketDataRequest request = RecentMarketDataRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
                 .lastTime(LastTime.DAY)
@@ -161,7 +166,7 @@ class ByBitLoaderMarketDataImplTest {
         LocalDateTime startTime = LocalDateTime.of(2024, 1, 1, 0, 0);
         LocalDateTime endTime = LocalDateTime.of(2024, 1, 2, 0, 0);
 
-        MarketDataForPeriodBetween request = MarketDataForPeriodBetween.builder()
+        MarketDataForPeriodBetweenRequest request = MarketDataForPeriodBetweenRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
                 .startTime(startTime)
@@ -213,7 +218,7 @@ class ByBitLoaderMarketDataImplTest {
         LocalDateTime startTime = LocalDateTime.of(2024, 1, 1, 0, 0);
         LocalDateTime endTime = LocalDateTime.of(2024, 1, 10, 0, 0);
 
-        MarketDataForPeriodBetween request = MarketDataForPeriodBetween.builder()
+        MarketDataForPeriodBetweenRequest request = MarketDataForPeriodBetweenRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
                 .startTime(startTime)
@@ -257,7 +262,7 @@ class ByBitLoaderMarketDataImplTest {
     @Test
     void loadLatestCandle_ShouldReturnCandleDTO_WhenCalledWithValidData() {
         // Given
-        MarketDataRequest request = MarketDataRequest.builder()
+        LastCandleRequest request = LastCandleRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
                 .build();
@@ -318,7 +323,7 @@ class ByBitLoaderMarketDataImplTest {
         // Сбрасываем mock перед каждым вызовом
         reset(mockClient);
 
-        RecentMarketData request = RecentMarketData.builder()
+        RecentMarketDataRequest request = RecentMarketDataRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
                 .lastTime(lastTime)
@@ -365,7 +370,7 @@ class ByBitLoaderMarketDataImplTest {
     private void testTimeInterval(TimeFrame timeFrame, MarketInterval marketInterval) {
         reset(mockClient);
 
-        RecentMarketData request = RecentMarketData.builder()
+        RecentMarketDataRequest request = RecentMarketDataRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(timeFrame)
                 .lastTime(LastTime.DAY)
@@ -396,7 +401,7 @@ class ByBitLoaderMarketDataImplTest {
     @Test
     void loadRecentMarketData_ShouldHandleEmptyResponse_WhenNoDataAvailable() {
         // Given
-        RecentMarketData request = RecentMarketData.builder()
+        RecentMarketDataRequest request = RecentMarketDataRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
                 .lastTime(LastTime.DAY)
