@@ -1,4 +1,4 @@
-package io.github.ijlijapol.bybit;
+package io.github.ijlijapol.bybit.model;
 
 import io.github.ijlijapol.model.Symbol;
 import io.github.ijlijapol.model.order.Side;
