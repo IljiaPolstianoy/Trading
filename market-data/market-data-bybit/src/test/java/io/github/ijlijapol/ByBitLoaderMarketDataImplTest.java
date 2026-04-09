@@ -26,6 +26,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -53,7 +54,6 @@ class ByBitLoaderMarketDataImplTest {
 
     @Test
     void loadRecentMarketData_ShouldReturnCandlesDTO_WhenCalledWithValidData() {
-        // Given
         RecentMarketDataRequest request = RecentMarketDataRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
@@ -78,7 +78,7 @@ class ByBitLoaderMarketDataImplTest {
                     .thenReturn(MarketInterval.FIFTEEN_MINUTES);
 
             List<MarketKlineEntry> mockKlineEntries = createMockKlineEntries(5);
-            List<CandleDTO> mockCandleDTOs = createMockCandleDTOs(5);
+            TreeSet<CandleDTO> mockCandleDTOs = createMockCandleDTOs(5);
 
             when(mockClient.getMarketLinesData(any())).thenReturn("mockResponse");
 
@@ -134,8 +134,8 @@ class ByBitLoaderMarketDataImplTest {
             List<MarketKlineEntry> firstBatchKlines = createMockKlineEntries(1000);
             List<MarketKlineEntry> secondBatchKlines = createMockKlineEntries(500);
 
-            List<CandleDTO> firstBatchCandles = createMockCandleDTOs(1000);
-            List<CandleDTO> secondBatchCandles = createMockCandleDTOs(500);
+            TreeSet<CandleDTO> firstBatchCandles = createMockCandleDTOs(1000);
+            TreeSet<CandleDTO> secondBatchCandles = createMockCandleDTOs(500);
 
             // Для пагинации нам нужно, чтобы первый ответ содержал 1000 записей
             when(mockClient.getMarketLinesData(any())).thenReturn("mockResponse1", "mockResponse2");
@@ -183,7 +183,7 @@ class ByBitLoaderMarketDataImplTest {
                     .thenReturn(MarketInterval.FIFTEEN_MINUTES);
 
             List<MarketKlineEntry> mockKlineEntries = createMockKlineEntries(5);
-            List<CandleDTO> mockCandleDTOs = createMockCandleDTOs(5);
+            TreeSet<CandleDTO> mockCandleDTOs = createMockCandleDTOs(5);
 
             when(mockClient.getMarketLinesData(any())).thenReturn("mockResponse");
 
@@ -234,8 +234,8 @@ class ByBitLoaderMarketDataImplTest {
             List<MarketKlineEntry> firstBatchKlines = createMockKlineEntries(1000);
             List<MarketKlineEntry> secondBatchKlines = createMockKlineEntries(800);
 
-            List<CandleDTO> firstBatchCandles = createMockCandleDTOs(1000);
-            List<CandleDTO> secondBatchCandles = createMockCandleDTOs(800);
+            TreeSet<CandleDTO> firstBatchCandles = createMockCandleDTOs(1000);
+            TreeSet<CandleDTO> secondBatchCandles = createMockCandleDTOs(800);
 
             when(mockClient.getMarketLinesData(any())).thenReturn("mockResponse1", "mockResponse2");
 
@@ -278,7 +278,7 @@ class ByBitLoaderMarketDataImplTest {
                     .thenReturn(MarketInterval.FIFTEEN_MINUTES);
 
             List<MarketKlineEntry> mockKlineEntries = createMockKlineEntries(1);
-            List<CandleDTO> mockCandleDTOs = createMockCandleDTOs(1);
+            TreeSet<CandleDTO> mockCandleDTOs = createMockCandleDTOs(1);
 
             when(mockClient.getMarketLinesData(any())).thenReturn("mockResponse");
 
@@ -384,9 +384,9 @@ class ByBitLoaderMarketDataImplTest {
 
             when(mockClient.getMarketLinesData(any())).thenReturn("mockResponse");
             mockedByBitData.when(() -> MapperByBitData.convertFromResponse("mockResponse"))
-                    .thenReturn(new ArrayList<>());
+                    .thenReturn(new TreeSet<>());
             mockedByBitData.when(() -> MapperByBitData.convertFromMarketKlineEntry(any()))
-                    .thenReturn(new ArrayList<>());
+                    .thenReturn(new TreeSet<>());
 
             loader.loadRecentMarketData(request);
 
@@ -466,8 +466,8 @@ class ByBitLoaderMarketDataImplTest {
         return entries;
     }
 
-    private List<CandleDTO> createMockCandleDTOs(int count) {
-        List<CandleDTO> dtos = new ArrayList<>();
+    private TreeSet<CandleDTO> createMockCandleDTOs(int count) {
+        TreeSet<CandleDTO> dtos = new TreeSet<>();
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < count; i++) {
             CandleDTO dto = CandleDTO.builder()
