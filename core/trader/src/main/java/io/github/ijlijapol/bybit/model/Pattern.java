@@ -23,6 +23,11 @@ public class Pattern {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = "position")
+    @CollectionTable(
+            name = "pattern_candle_directions",  // явно указываем имя таблицы
+            joinColumns = @JoinColumn(name = "pattern_id")
+    )
+    @Column(name = "candle_directions")
     private List<Boolean> candleDirections;
 
     @Override

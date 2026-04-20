@@ -1,22 +1,20 @@
-package io.github.ijlijapol.bybit.bybit;
+package io.github.ijlijapol.bybit;
 
 
-import io.github.ijlijapol.bybit.MarketDataFactory;
-import io.github.ijlijapol.bybit.bybit.exception.NotFoundPatternsException;
-import io.github.ijlijapol.bybit.bybit.exception.TestOrderPersistenceException;
-import io.github.ijlijapol.bybit.bybit.model.PatternDto;
-import io.github.ijlijapol.bybit.bybit.model.TestOrder;
-import io.github.ijlijapol.bybit.bybit.repository.PatternRepository;
-import io.github.ijlijapol.bybit.bybit.repository.TestOrderRepository;
+import io.github.ijlijapol.bybit.exception.NotFoundPatternsException;
+import io.github.ijlijapol.bybit.exception.TestOrderPersistenceException;
+import io.github.ijlijapol.bybit.model.PatternDto;
 import io.github.ijlijapol.bybit.model.Symbol;
+import io.github.ijlijapol.bybit.model.TestOrder;
 import io.github.ijlijapol.bybit.model.order.Side;
 import io.github.ijlijapol.bybit.model.order.TradeOrderType;
 import io.github.ijlijapol.bybit.model.request.SelectQuantityCandleRequest;
 import io.github.ijlijapol.bybit.model.request.TimeFrame;
 import io.github.ijlijapol.bybit.model.responce.CandleDTO;
 import io.github.ijlijapol.bybit.model.responce.CandlesDTO;
+import io.github.ijlijapol.bybit.repository.PatternTestRepository;
+import io.github.ijlijapol.bybit.repository.TestOrderRepository;
 import io.github.ijlijapol.contract.LoaderMarketData;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -49,20 +47,19 @@ import java.util.List;
  * @author ijlijapol
  * @version 1.0
  * @see TestOrderRepository
- * @see PatternRepository
+ * @see PatternTestRepository
  * @see LoaderMarketData
  * @see NotFoundPatternsException
  * @see TestOrderPersistenceException
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BybitTestTradeExecutor {
 
     private final LoaderMarketData loaderMarketData;
     private final TestOrderRepository testOrderRepository;
-    private final PatternRepository patternRepository;
+    private final PatternTestRepository patternTestRepository;
 
     /**
      * Конструктор исполнителя тестовых торгов.
@@ -76,15 +73,15 @@ public class BybitTestTradeExecutor {
      * </p>
      *
      * @param testOrderRepository репозиторий для сохранения тестовых ордеров
-     * @param patternRepository   репозиторий для получения паттернов торговли
+     * @param patternTestRepository   репозиторий для получения паттернов торговли
      */
     public BybitTestTradeExecutor(
             final TestOrderRepository testOrderRepository,
-            final PatternRepository patternRepository
+            final PatternTestRepository patternTestRepository
     ) {
         this.loaderMarketData = MarketDataFactory.getByBitStockMarket();
         this.testOrderRepository = testOrderRepository;
-        this.patternRepository = patternRepository;
+        this.patternTestRepository = patternTestRepository;
         log.info("Created new BybitTestTradeExecutor instance: {}", this.hashCode());
     }
 
@@ -198,10 +195,10 @@ public class BybitTestTradeExecutor {
      */
     private List<PatternDto> getPattern() {
         log.debug("Получения всех паттернов из БД");
-        return patternRepository.findAll().stream()
-                .map(pattern ->
+        return patternTestRepository.findAll().stream()
+                .map(testPattern ->
                         PatternDto.builder()
-                                .candleDirections(pattern.getCandleDirections())
+                                .candleDirections(testPattern.getCandleDirections())
                                 .build()
                 )
                 .toList();

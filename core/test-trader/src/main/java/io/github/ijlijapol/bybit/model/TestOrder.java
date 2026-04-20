@@ -1,6 +1,5 @@
-package io.github.ijlijapol.bybit.bybit.model;
+package io.github.ijlijapol.bybit.model;
 
-import io.github.ijlijapol.bybit.model.Symbol;
 import io.github.ijlijapol.bybit.model.order.Side;
 import io.github.ijlijapol.bybit.model.order.TradeOrderType;
 import jakarta.persistence.*;

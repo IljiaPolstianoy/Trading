@@ -7,6 +7,9 @@
           <package value="io.github.ijlijapol.bybit" />
         </packages>
       </persistence-unit>
+        <persistence-unit moduleName="console-ui" name="Default"/>
+        <persistence-unit moduleName="test-trader" name="Default"/>
+        <persistence-unit moduleName="trader" name="Default"/>
     </persistence-units>
   </component>
 </project>

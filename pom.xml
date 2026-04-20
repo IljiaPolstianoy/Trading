@@ -43,6 +43,8 @@
         <mockito-junit-jupiter.version>5.3.1</mockito-junit-jupiter.version>
         <exchange-connector-core.version>${project.version}</exchange-connector-core.version>
         <spring-boot.version>3.5.5</spring-boot.version>
+        <test-trader.version>${project.version}</test-trader.version>
+        <trader.version>${project.version}</trader.version>
     </properties>
 
     <dependencyManagement>
@@ -184,6 +186,24 @@
                 <artifactId>postgresql</artifactId>
                 <version>42.7.7</version>
                 <scope>runtime</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ijlijapol</groupId>
+                <artifactId>analyzer</artifactId>
+                <version>${analyzer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ijlijapol</groupId>
+                <artifactId>test-trader</artifactId>
+                <version>${test-trader.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ijlijapol</groupId>
+                <artifactId>trader</artifactId>
+                <version>${trader.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,6 +1,5 @@
-package io.github.ijlijapol.bybit.bybit;
+package io.github.ijlijapol.bybit;
 
-import io.github.ijlijapol.bybit.MarketDataFactory;
 import io.github.ijlijapol.bybit.model.Symbol;
 import io.github.ijlijapol.bybit.model.request.LastTime;
 import io.github.ijlijapol.bybit.model.request.RecentMarketDataRequest;
@@ -20,7 +19,7 @@ import java.util.*;
 public class MarketPatternAnalyzer {
 
     private final LoaderMarketData loaderMarketData = MarketDataFactory.getByBitStockMarket();
-    private final PatternRepository patternRepository;
+    private final MarketPatternRepository patternRepository;
 
     public boolean analyzeMarketdata() {
         log.info("Начало анализа рыночных данных за последние пять лет");
@@ -28,7 +27,7 @@ public class MarketPatternAnalyzer {
         final CandlesDTO candlesDTO = getCandlesDTO();
         final List<List<Boolean>> potentialPatterns = getPotentialPatterns(candlesDTO.getCandles());
         final Map<List<Boolean>, Integer> sortedPotentialPatterns = sortPatterns(potentialPatterns);
-        final Pattern pattern = getActualPattern(sortedPotentialPatterns);
+        final MarketPattern pattern = getActualPattern(sortedPotentialPatterns);
 
         patternRepository.save(pattern);
         return true;
@@ -98,7 +97,7 @@ public class MarketPatternAnalyzer {
         return sortedPotentialPatterns;
     }
 
-    private Pattern getActualPattern(final Map<List<Boolean>, Integer> sortedPotentialPatterns) {
+    private MarketPattern getActualPattern(final Map<List<Boolean>, Integer> sortedPotentialPatterns) {
         log.debug("Получение актуального паттерна.");
 
         List<Boolean> actualPattern = new ArrayList<>();
@@ -114,6 +113,6 @@ public class MarketPatternAnalyzer {
         }
 
         log.info("Найден актуальный паттерн: {}", actualPattern);
-        return Pattern.builder().candleDirections(actualPattern).build();
+        return MarketPattern.builder().candleDirections(actualPattern).build();
     }
 }

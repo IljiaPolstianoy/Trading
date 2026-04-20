@@ -1,6 +1,6 @@
-package io.github.ijlijapol.bybit.bybit;
+package io.github.ijlijapol.bybit;
 
-import io.github.ijlijapol.bybit.bybit.exception.SchedulerStateException;
+import io.github.ijlijapol.bybit.exception.SchedulerStateException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -40,19 +40,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 @Component
 @Slf4j
-public class BybitTradingScheduler {
+public class BybitTestTradingScheduler {
 
     private final ExecutorService taskExecutor = new ThreadPoolExecutor(
             1,
             2,
             60, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<>(0),
+            new LinkedBlockingQueue<>(1),
             new ThreadPoolExecutor.AbortPolicy()
     );
     private final AtomicBoolean schedulerEnabled = new AtomicBoolean(false);
     private final ObjectProvider<BybitTestTradeExecutor> executorProvider;
 
-    public BybitTradingScheduler(ObjectProvider<BybitTestTradeExecutor> executorProvider) {
+    public BybitTestTradingScheduler(ObjectProvider<BybitTestTradeExecutor> executorProvider) {
         this.executorProvider = executorProvider;
     }
 
