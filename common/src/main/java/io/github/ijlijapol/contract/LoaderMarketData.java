@@ -1,11 +1,11 @@
 package io.github.ijlijapol.contract;
 
-import io.github.ijlijapol.model.request.LastCandleRequest;
-import io.github.ijlijapol.model.request.MarketDataForPeriodBetweenRequest;
-import io.github.ijlijapol.model.request.RecentMarketDataRequest;
-import io.github.ijlijapol.model.request.SelectQuantityCandleRequest;
-import io.github.ijlijapol.model.responce.CandleDTO;
-import io.github.ijlijapol.model.responce.CandlesDTO;
+import io.github.ijlijapol.bybit.model.request.LastCandleRequest;
+import io.github.ijlijapol.bybit.model.request.MarketDataForPeriodBetweenRequest;
+import io.github.ijlijapol.bybit.model.request.RecentMarketDataRequest;
+import io.github.ijlijapol.bybit.model.request.SelectQuantityCandleRequest;
+import io.github.ijlijapol.bybit.model.responce.CandleDTO;
+import io.github.ijlijapol.bybit.model.responce.CandlesDTO;
 
 /**
  * Контракт для загрузки рыночных данных (свечей) из источника данных.

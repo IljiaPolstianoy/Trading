@@ -1,12 +1,12 @@
 package io.github.ijlijapol.contract;
 
-import io.github.ijlijapol.model.Symbol;
-import io.github.ijlijapol.model.order.ModifiedOrder;
-import io.github.ijlijapol.model.order.Order;
-import io.github.ijlijapol.model.order.TradeOrderType;
-import io.github.ijlijapol.model.order.Side;
-import io.github.ijlijapol.exception.InsufficientFundsException;
-import io.github.ijlijapol.exception.NotFoundOrderException;
+import io.github.ijlijapol.bybit.exception.InsufficientFundsException;
+import io.github.ijlijapol.bybit.exception.NotFoundOrderException;
+import io.github.ijlijapol.bybit.model.Symbol;
+import io.github.ijlijapol.bybit.model.order.ModifiedOrder;
+import io.github.ijlijapol.bybit.model.order.Order;
+import io.github.ijlijapol.bybit.model.order.Side;
+import io.github.ijlijapol.bybit.model.order.TradeOrderType;
 
 import java.math.BigDecimal;
 
@@ -33,7 +33,7 @@ public interface ExchangeConnector {
      * @throws InsufficientFundsException если недостаточно средств для покупки
      */
 
-    boolean createNewOrder(Order order);
+    void createNewOrder(Order order);
 
     /**
      * Изменяет существующий ордер на бирже.
