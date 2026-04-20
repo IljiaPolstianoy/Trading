@@ -11,6 +11,27 @@
 
     <artifactId>console-ui</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.github.ijlijapol</groupId>
+            <artifactId>test-trader</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.ijlijapol</groupId>
+            <artifactId>trader</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.ijlijapol</groupId>
+            <artifactId>analyzer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>

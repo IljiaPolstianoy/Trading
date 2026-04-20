@@ -1,4 +1,4 @@
-package io.github.ijlijapol.bybit.bybit.model;
+package io.github.ijlijapol.bybit.model;
 
 import lombok.Builder;
 import lombok.Getter;

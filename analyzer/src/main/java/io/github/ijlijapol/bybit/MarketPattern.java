@@ -1,4 +1,4 @@
-package io.github.ijlijapol.bybit.bybit;
+package io.github.ijlijapol.bybit;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +15,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "pattern")
-public class Pattern {
+public class MarketPattern {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,11 @@ public class Pattern {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = "position")
+    @CollectionTable(
+            name = "pattern_candle_directions",  // явно указываем имя таблицы
+            joinColumns = @JoinColumn(name = "pattern_id")
+    )
+    @Column(name = "candle_directions")
     private List<Boolean> candleDirections;
 
     @Override
@@ -38,7 +43,7 @@ public class Pattern {
         if (thisEffectiveClass != objectEffectiveClass) {
             return false;
         }
-        Pattern pattern = (Pattern) o;
+        MarketPattern pattern = (MarketPattern) o;
         return getId() != null && Objects.equals(getId(), pattern.getId());
     }
 

@@ -46,7 +46,7 @@ public class BybitTradingScheduler {
             1,
             2,
             60, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<>(0),
+            new LinkedBlockingQueue<>(1),
             new ThreadPoolExecutor.AbortPolicy()
     );
     private final AtomicBoolean schedulerEnabled = new AtomicBoolean(false);
