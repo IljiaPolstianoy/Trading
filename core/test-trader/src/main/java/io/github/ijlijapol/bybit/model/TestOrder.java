@@ -22,12 +22,15 @@ public class TestOrder {
     private Integer id;
 
     @Column(name = "symbol", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Symbol symbol;
 
     @Column(name = "side", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Side side;
 
     @Column(name = "order_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private TradeOrderType orderType;
 
     @Column(name = "price", nullable = false)

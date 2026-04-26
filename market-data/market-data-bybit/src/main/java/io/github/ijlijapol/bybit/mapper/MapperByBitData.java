@@ -36,10 +36,13 @@ public class MapperByBitData {
                             Instant.ofEpochMilli(marketKlineEntry.getStartTime()),
                             ZoneId.of("UTC")
                     );
+                    final BigDecimal openPrice = new BigDecimal(marketKlineEntry.getOpenPrice());
+                    final BigDecimal closePrice = new BigDecimal(marketKlineEntry.getClosePrice());
                     return CandleDTO.builder()
-                            .openPrice(new BigDecimal(marketKlineEntry.getOpenPrice()))
-                            .closePrice(new BigDecimal(marketKlineEntry.getClosePrice()))
+                            .openPrice(openPrice)
+                            .closePrice(closePrice)
                             .startTime(startTime)
+                            .growing(openPrice.compareTo(closePrice) < 0)
                             .build();
                 })
                 .collect(Collectors.toCollection(TreeSet::new));

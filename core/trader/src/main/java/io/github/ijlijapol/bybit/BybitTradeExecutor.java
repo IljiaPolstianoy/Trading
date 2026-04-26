@@ -10,6 +10,7 @@ import io.github.ijlijapol.bybit.model.Symbol;
 import io.github.ijlijapol.bybit.model.order.Order;
 import io.github.ijlijapol.bybit.model.order.Side;
 import io.github.ijlijapol.bybit.model.order.TradeOrderType;
+import io.github.ijlijapol.bybit.model.request.LastCandleRequest;
 import io.github.ijlijapol.bybit.model.request.SelectQuantityCandleRequest;
 import io.github.ijlijapol.bybit.model.request.TimeFrame;
 import io.github.ijlijapol.bybit.model.responce.CandleDTO;
@@ -19,13 +20,15 @@ import io.github.ijlijapol.bybit.repostiory.PatternRepository;
 import io.github.ijlijapol.contract.ApiClientConnector;
 import io.github.ijlijapol.contract.ExchangeConnector;
 import io.github.ijlijapol.contract.LoaderMarketData;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -59,7 +62,6 @@ import java.util.List;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BybitTradeExecutor {
 
@@ -68,6 +70,7 @@ public class BybitTradeExecutor {
     private final PatternRepository patternRepository;
     private final ExchangeConnector tradeClient;
     private final ApiClientConnector walletClient;
+    private final TaskScheduler taskScheduler;
 
     /**
      * Конструктор исполнителя торгов.
@@ -94,6 +97,9 @@ public class BybitTradeExecutor {
         this.patternRepository = patternRepository;
         this.tradeClient = exchangeConnectorFactory.getExchangeConnectorByBit(Constant.API_KEY, Constant.API_SECRET);
         this.walletClient = exchangeConnectorFactory.getApiClientConnectorByBit(Constant.API_KEY, Constant.API_SECRET);
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.initialize();
+        this.taskScheduler = scheduler;
         log.info("Created new BybitTestTradeExecutor instance: {}", this.hashCode());
     }
 
@@ -152,7 +158,8 @@ public class BybitTradeExecutor {
      * Создает и сохраняет ордер на покупку.
      * <p>
      * Создает MARKET ордер на покупку BTCUSDT по последней цене закрытия свечи
-     * объемом 1 BTC. Цена ордера берется из последней свечи полученных рыночных данных.
+     * объемом равным количеству моенты длоя оплаты на кошельке.
+     * Цена ордера берется из последней свечи полученных рыночных данных.
      * </p>
      *
      * @param candlesDTO объект с данными свечей, из которого берется последняя цена закрытия
@@ -178,6 +185,11 @@ public class BybitTradeExecutor {
                 .price(order.getPrice())
                 .amount(order.getAmount())
                 .build());
+
+        taskScheduler.schedule(
+                this::createOrderSell,
+                Instant.now().plusSeconds(60 * 15) // Ждем 15 минут
+        );
     }
 
     /**
@@ -260,5 +272,35 @@ public class BybitTradeExecutor {
         }
 
         return balance;
+    }
+
+    /**
+     * Создает ордер на продажу, отправляет на биржу и сохраняет в базу данных. Вызывается только после ордера на покупку.
+     */
+    private void createOrderSell() {
+        log.info("Создание ордера на продажу");
+
+        final LastCandleRequest request = LastCandleRequest.builder()
+                .symbol(Symbol.BTCUSDT)
+                .timeFrame(TimeFrame.ONE_MINUTE)
+                .build();
+        final CandleDTO candleDTO = loaderMarketData.loadLatestCandle(request);
+        final Order orderSell = Order.builder()
+                .symbol(Symbol.BTCUSDT)
+                .side(Side.SELL)
+                .orderType(TradeOrderType.MARKET)
+                .price(candleDTO.getClosePrice())
+                .amount(BigDecimal.ONE)
+                .build();
+
+        tradeClient.createNewOrder(orderSell);
+
+        save(io.github.ijlijapol.bybit.model.Order.builder()
+                .symbol(orderSell.getSymbol())
+                .side(orderSell.getSide())
+                .orderType(orderSell.getOrderType())
+                .price(orderSell.getPrice())
+                .amount(orderSell.getAmount())
+                .build());
     }
 }
