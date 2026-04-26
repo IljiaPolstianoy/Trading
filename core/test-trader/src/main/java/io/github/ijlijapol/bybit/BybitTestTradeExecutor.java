@@ -8,6 +8,7 @@ import io.github.ijlijapol.bybit.model.Symbol;
 import io.github.ijlijapol.bybit.model.TestOrder;
 import io.github.ijlijapol.bybit.model.order.Side;
 import io.github.ijlijapol.bybit.model.order.TradeOrderType;
+import io.github.ijlijapol.bybit.model.request.LastCandleRequest;
 import io.github.ijlijapol.bybit.model.request.SelectQuantityCandleRequest;
 import io.github.ijlijapol.bybit.model.request.TimeFrame;
 import io.github.ijlijapol.bybit.model.responce.CandleDTO;
@@ -18,9 +19,12 @@ import io.github.ijlijapol.contract.LoaderMarketData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -60,6 +64,7 @@ public class BybitTestTradeExecutor {
     private final LoaderMarketData loaderMarketData;
     private final TestOrderRepository testOrderRepository;
     private final PatternTestRepository patternTestRepository;
+    private final TaskScheduler taskScheduler;
 
     /**
      * Конструктор исполнителя тестовых торгов.
@@ -82,6 +87,9 @@ public class BybitTestTradeExecutor {
         this.loaderMarketData = MarketDataFactory.getByBitStockMarket();
         this.testOrderRepository = testOrderRepository;
         this.patternTestRepository = patternTestRepository;
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.initialize();
+        this.taskScheduler = scheduler;
         log.info("Created new BybitTestTradeExecutor instance: {}", this.hashCode());
     }
 
@@ -105,7 +113,7 @@ public class BybitTestTradeExecutor {
     public void start() {
         log.info("Start trading task");
         final List<PatternDto> patternDtos = getPattern();
-        final CandlesDTO candlesDTO = getCandles();
+        final CandlesDTO candlesDTO = getCandles(3);
 
         if (patternDtos.isEmpty()) {
             log.error("Pattern is empty");
@@ -114,7 +122,7 @@ public class BybitTestTradeExecutor {
 
         for (PatternDto patternDto : patternDtos) {
             if (isMatchWithPattern(patternDto, candlesDTO)) {
-                createTestOrder(candlesDTO);
+                createTestOrderBuy(candlesDTO);
             }
         }
     }
@@ -127,12 +135,12 @@ public class BybitTestTradeExecutor {
      *
      * @return объект {@link CandlesDTO}, содержащий данные о свечах
      */
-    private CandlesDTO getCandles() {
-        log.debug("Получения последних трех свечей");
+    private CandlesDTO getCandles(final int quantity) {
+        log.debug("Получения последних свечей в количестве: {}", quantity);
         final SelectQuantityCandleRequest request = SelectQuantityCandleRequest.builder()
                 .symbol(Symbol.BTCUSDT)
                 .timeFrame(TimeFrame.FIFTEEN_MINUTES)
-                .quantity(3)
+                .quantity(quantity)
                 .build();
 
         return loaderMarketData.loadSelectQuantityCandle(request);
@@ -148,10 +156,10 @@ public class BybitTestTradeExecutor {
      * @param candlesDTO объект с данными свечей, из которого берется последняя цена закрытия
      * @throws TestOrderPersistenceException если не удалось сохранить ордер в базу данных
      */
-    private void createTestOrder(final CandlesDTO candlesDTO) {
-        log.info("Создания тестового ордера.");
+    private void createTestOrderBuy(final CandlesDTO candlesDTO) {
+        log.info("Создание тестового ордера.");
         final BigDecimal lastPrice = candlesDTO.getCandles().getLast().getClosePrice();
-        final TestOrder testOrder = TestOrder.builder()
+        final TestOrder testOrderBuy = TestOrder.builder()
                 .symbol(Symbol.BTCUSDT)
                 .side(Side.BUY)
                 .orderType(TradeOrderType.MARKET)
@@ -159,7 +167,12 @@ public class BybitTestTradeExecutor {
                 .amount(BigDecimal.ONE)
                 .build();
 
-        save(testOrder);
+        save(testOrderBuy);
+
+        taskScheduler.schedule(
+                this::createTestOrderSell,
+                Instant.now().plusSeconds(60)
+        );
     }
 
     /**
@@ -223,5 +236,27 @@ public class BybitTestTradeExecutor {
                 .toList();
 
         return patternDto.getCandleDirections().equals(candleDirections);
+    }
+
+    /**
+     * Создает тестовый ордер на продажу и сохраняет в базу данных. Вызывается только после ордера на покупку.
+     */
+    private void createTestOrderSell() {
+        log.info("Создание тестового ордера на продажу");
+
+        final LastCandleRequest request = LastCandleRequest.builder()
+                .symbol(Symbol.BTCUSDT)
+                .timeFrame(TimeFrame.ONE_MINUTE)
+                .build();
+        final CandleDTO candleDTO = loaderMarketData.loadLatestCandle(request);
+        final TestOrder testOrderSell = TestOrder.builder()
+                .symbol(Symbol.BTCUSDT)
+                .side(Side.SELL)
+                .orderType(TradeOrderType.MARKET)
+                .price(candleDTO.getClosePrice())
+                .amount(BigDecimal.ONE)
+                .build();
+
+        save(testOrderSell);
     }
 }

@@ -219,10 +219,11 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             throw new UncorrectedRequestByBit("Quantity in selectQuantityCandleRequest не может быть меньше 2 или больше 1000");
         }
 
-        log.info("Загрузка последний свечей в количестве {}.", selectQuantityCandleRequest.getQuantity());
+        log.info("Загрузка последних свечей в количестве {}.", selectQuantityCandleRequest.getQuantity());
 
         final MarketInterval marketInterval = MapperTimeFrame.toMarketInterval(selectQuantityCandleRequest.getTimeFrame());
-        final long endDate = LocalDateTime.now(ZoneOffset.UTC).toInstant(ZoneOffset.UTC).toEpochMilli();
+        // Вычитаем 1 секунду, чтобы исключить текущую незавершённую свечу (работаем только с подтверждёнными данными)
+        final long endDate = LocalDateTime.now(ZoneOffset.UTC).toInstant(ZoneOffset.UTC).toEpochMilli() - 1000;
         final Long startTime = endDate - (getTimeInMillisFromMarketInterval(marketInterval) * selectQuantityCandleRequest.getQuantity());
 
         final com.bybit.api.client.domain.market.request.MarketDataRequest byBitRequest
@@ -238,7 +239,8 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
         log.debug("Запрос последних свечей: limit={}", selectQuantityCandleRequest.getQuantity());
         final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         TreeSet<CandleDTO> candleDTOSet = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry);
-        log.debug("Получены всего свечей {}.", candleDTOSet.size());
+        log.info("Получено всего свечей {}.", candleDTOSet.size());
+        log.debug("Полученные свечи: {}", candleDTOSet);
 
         return CandlesDTO.builder()
                 .candles(candleDTOSet)
