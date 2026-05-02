@@ -1,4 +1,4 @@
-package io.github.ijlijapol.bybit.model;
+package io.github.ijlijapol.model;
 
 import jakarta.persistence.*;
 import lombok.*;

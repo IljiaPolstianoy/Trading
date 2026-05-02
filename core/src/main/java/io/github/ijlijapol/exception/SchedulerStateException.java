@@ -1,4 +1,4 @@
-package io.github.ijlijapol.bybit.exception;
+package io.github.ijlijapol.exception;
 
 public class SchedulerStateException extends RuntimeException {
     public SchedulerStateException(String message) {

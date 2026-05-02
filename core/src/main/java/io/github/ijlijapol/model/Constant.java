@@ -1,4 +1,4 @@
-package io.github.ijlijapol.bybit.model;
+package io.github.ijlijapol.model;
 
 public class Constant {
     public static String API_KEY;

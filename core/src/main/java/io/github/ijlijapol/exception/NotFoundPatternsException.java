@@ -1,4 +1,4 @@
-package io.github.ijlijapol.bybit.exception;
+package io.github.ijlijapol.exception;
 
 public class NotFoundPatternsException extends RuntimeException {
     public NotFoundPatternsException(String message) {
