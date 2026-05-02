@@ -1,6 +1,6 @@
-package io.github.ijlijapol.bybit;
+package io.github.ijlijapol;
 
-import io.github.ijlijapol.bybit.exception.SchedulerStateException;
+import io.github.ijlijapol.exception.SchedulerStateException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *   <li>Ручное управление планировщиком через методы {@link #enableScheduler()} и {@link #disableScheduler()}</li>
  *   <li>Асинхронное выполнение торговых задач в пуле потоков</li>
  *   <li>При переполнении очереди задач используется политика {@link ThreadPoolExecutor.AbortPolicy}</li>
- *   <li>Для каждой торговой задачи создается новый экземпляр {@link BybitTradeExecutor}</li>
+ *   <li>Для каждой торговой задачи создается новый экземпляр {@link BybitRealTradingExecutor}</li>
  * </ul>
  * </p>
  * <p>
@@ -34,7 +34,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author ijlijapol
  * @version 1.0
- * @see BybitTradeExecutor
+ * @see BybitRealTradingExecutor
  * @see SchedulerStateException
  * @see Scheduled
  */
@@ -50,9 +50,9 @@ public class BybitTradingScheduler {
             new ThreadPoolExecutor.AbortPolicy()
     );
     private final AtomicBoolean schedulerEnabled = new AtomicBoolean(false);
-    private final ObjectProvider<BybitTradeExecutor> executorProvider;
+    private final ObjectProvider<BybitRealTradingExecutor> executorProvider;
 
-    public BybitTradingScheduler(ObjectProvider<BybitTradeExecutor> executorProvider) {
+    public BybitTradingScheduler(ObjectProvider<BybitRealTradingExecutor> executorProvider) {
         this.executorProvider = executorProvider;
     }
 
@@ -91,7 +91,7 @@ public class BybitTradingScheduler {
         try {
             taskExecutor.execute(() -> {
                 try {
-                    final BybitTradeExecutor executor = executorProvider.getObject();
+                    final BybitRealTradingExecutor executor = executorProvider.getObject();
                     executor.start();
                 } catch (Exception e) {
                     log.error("Trading task execution failed", e);
