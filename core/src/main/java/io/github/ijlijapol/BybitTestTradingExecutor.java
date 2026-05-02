@@ -1,11 +1,7 @@
-package io.github.ijlijapol.bybit;
+package io.github.ijlijapol;
 
-
-import io.github.ijlijapol.bybit.exception.NotFoundPatternsException;
-import io.github.ijlijapol.bybit.exception.TestOrderPersistenceException;
-import io.github.ijlijapol.bybit.model.PatternDto;
+import io.github.ijlijapol.bybit.MarketDataFactory;
 import io.github.ijlijapol.bybit.model.Symbol;
-import io.github.ijlijapol.bybit.model.TestOrder;
 import io.github.ijlijapol.bybit.model.order.Side;
 import io.github.ijlijapol.bybit.model.order.TradeOrderType;
 import io.github.ijlijapol.bybit.model.request.LastCandleRequest;
@@ -13,9 +9,13 @@ import io.github.ijlijapol.bybit.model.request.SelectQuantityCandleRequest;
 import io.github.ijlijapol.bybit.model.request.TimeFrame;
 import io.github.ijlijapol.bybit.model.responce.CandleDTO;
 import io.github.ijlijapol.bybit.model.responce.CandlesDTO;
-import io.github.ijlijapol.bybit.repository.PatternTestRepository;
-import io.github.ijlijapol.bybit.repository.TestOrderRepository;
 import io.github.ijlijapol.contract.LoaderMarketData;
+import io.github.ijlijapol.exception.NotFoundPatternsException;
+import io.github.ijlijapol.exception.TestOrderPersistenceException;
+import io.github.ijlijapol.model.PatternDto;
+import io.github.ijlijapol.model.TestOrder;
+import io.github.ijlijapol.repostiory.PatternRepository;
+import io.github.ijlijapol.repostiory.TestOrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -51,7 +51,7 @@ import java.util.List;
  * @author ijlijapol
  * @version 1.0
  * @see TestOrderRepository
- * @see PatternTestRepository
+ * @see PatternRepository
  * @see LoaderMarketData
  * @see NotFoundPatternsException
  * @see TestOrderPersistenceException
@@ -59,11 +59,11 @@ import java.util.List;
 @Slf4j
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class BybitTestTradeExecutor {
+public class BybitTestTradingExecutor implements TradingExecutor {
 
     private final LoaderMarketData loaderMarketData;
     private final TestOrderRepository testOrderRepository;
-    private final PatternTestRepository patternTestRepository;
+    private final PatternRepository patternTestRepository;
     private final TaskScheduler taskScheduler;
 
     /**
@@ -80,9 +80,9 @@ public class BybitTestTradeExecutor {
      * @param testOrderRepository   репозиторий для сохранения тестовых ордеров
      * @param patternTestRepository репозиторий для получения паттернов торговли
      */
-    public BybitTestTradeExecutor(
+    public BybitTestTradingExecutor(
             final TestOrderRepository testOrderRepository,
-            final PatternTestRepository patternTestRepository
+            final PatternRepository patternTestRepository
     ) {
         this.loaderMarketData = MarketDataFactory.getByBitStockMarket();
         this.testOrderRepository = testOrderRepository;
@@ -112,16 +112,16 @@ public class BybitTestTradeExecutor {
      */
     public void start() {
         log.info("Start trading task");
-        final List<PatternDto> patternDtos = getPattern();
+        final List<PatternDto> patterns = getPattern();
         final CandlesDTO candlesDTO = getCandles(3);
 
-        if (patternDtos.isEmpty()) {
+        if (patterns.isEmpty()) {
             log.error("Pattern is empty");
             throw new NotFoundPatternsException("Patterns not found");
         }
 
-        for (PatternDto patternDto : patternDtos) {
-            if (isMatchWithPattern(patternDto, candlesDTO)) {
+        for (PatternDto pattern : patterns) {
+            if (isMatchWithPattern(pattern, candlesDTO)) {
                 createTestOrderBuy(candlesDTO);
             }
         }
@@ -225,17 +225,17 @@ public class BybitTestTradeExecutor {
      * последовательности полностью идентичны.
      * </p>
      *
-     * @param patternDto объект паттерна с ожидаемыми направлениями свечей
+     * @param patternDTO объект паттерна с ожидаемыми направлениями свечей
      * @param candlesDTO объект с данными свечей для проверки
      * @return {@code true} если направления свечей совпадают с паттерном, иначе {@code false}
      */
-    private boolean isMatchWithPattern(final PatternDto patternDto, final CandlesDTO candlesDTO) {
+    private boolean isMatchWithPattern(final PatternDto patternDTO, final CandlesDTO candlesDTO) {
         log.debug("Проверка полученных свечей с всеми паттернами");
         final List<Boolean> candleDirections = candlesDTO.getCandles().stream()
                 .map(CandleDTO::isGrowing)
                 .toList();
 
-        return patternDto.getCandleDirections().equals(candleDirections);
+        return patternDTO.getCandleDirections().equals(candleDirections);
     }
 
     /**

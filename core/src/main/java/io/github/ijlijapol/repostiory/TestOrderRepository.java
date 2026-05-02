@@ -1,6 +1,6 @@
-package io.github.ijlijapol.bybit.repository;
+package io.github.ijlijapol.repostiory;
 
-import io.github.ijlijapol.bybit.model.TestOrder;
+import io.github.ijlijapol.model.TestOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TestOrderRepository extends JpaRepository<TestOrder, Integer> {
