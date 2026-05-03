@@ -10,7 +10,9 @@
     <Appenders>
         <!-- Консольный аппендер с цветами -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{dim} %highlight{%5p}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=cyan, TRACE=blue} %style{---}{dim} %style{[%15.15t]}{dim} %style{%-40.40c{1.}}{cyan} %style{:}{dim} %m%n"/>            <ThresholdFilter level="TRACE"/>
+            <PatternLayout
+                    pattern="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{dim} %highlight{%5p}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=cyan, TRACE=blue} %style{---}{dim} %style{[%15.15t]}{dim} %style{%-40.40c{1.}}{cyan} %style{:}{dim} %m%n"/>
+            <ThresholdFilter level="TRACE"/>
         </Console>
 
         <RollingFile name="JsonFile"
@@ -21,7 +23,7 @@
                 <KeyValuePair key="environment" value="${ENV}"/>
             </JsonLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy />
+                <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
             <DefaultRolloverStrategy max="30"/>
@@ -35,7 +37,7 @@
             </JsonLayout>
             <ThresholdFilter level="ERROR"/>
             <Policies>
-                <TimeBasedTriggeringPolicy />
+                <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>

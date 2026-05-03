@@ -50,9 +50,9 @@ public class CreateOrderCallback implements BybitApiCallback<Object> {
             );
 
             eventPublisher.publishEvent(new OrderCreatedEvent(
-                    this,
-                    originalOrder,
-                    orderResponse,
+                            this,
+                            originalOrder,
+                            orderResponse,
                             Instant.ofEpochMilli(genericResponse.getTime()).atOffset(ZoneOffset.UTC).toLocalDateTime()
                     )
             );

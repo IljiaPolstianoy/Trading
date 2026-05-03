@@ -48,14 +48,14 @@ import java.util.stream.Collectors;
  */
 @Component
 @Slf4j
-public class BybitTradingScheduler {
+public class TradingScheduler {
 
     private final ExecutorService taskExecutor;
     private final AtomicBoolean schedulerEnabled;
     private final Set<TradeExecutor> tradeExecutors;
     private final Map<TradeExecutor, ObjectProvider<TradingExecutor>> provider;
 
-    public BybitTradingScheduler(List<ObjectProvider<TradingExecutor>> executorProviders) {
+    public TradingScheduler(List<ObjectProvider<TradingExecutor>> executorProviders) {
         this.taskExecutor = new ThreadPoolExecutor(
                 1,
                 2,

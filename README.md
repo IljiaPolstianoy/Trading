@@ -221,22 +221,22 @@ java -jar app/target/trading-app.jar --spring.profiles.active=external
 | `test_trades` | Тестовые (симулированные) сделки       | `core/test-trader`        |
 | `patterns`    | Обнаруженные торговые паттерны         | `analyzer`                |
 | `quotes`      | Исторические и текущие котировки (кэш) | `market-data`, `analyzer` |
-| `settings`    | Настройки приложения                    | все модули                |
+| `settings`    | Настройки приложения                   | все модули                |
 
 ## 🛠 Технологический стек
 
-| Компонент                 | Технология                                          |
-|---------------------------|-----------------------------------------------------|
-| Язык                      | Java 17                                             |
-| Фреймворк                 | Spring Boot 3.x                                     |
-| Сборщик                   | Maven                                               |
-| База данных               | PostgreSQL 15                                       |
-| Биржевой API              | Bybit Java SDK, Tbank API (REST)                    |
-| Многопоточность           | Spring `@Async`, виртуальные потоки (Java 21+)      |
-| Тестирование              | JUnit 5, Mockito, Testcontainers                    |
-| Консольный интерфейс      | Spring Shell / Scanner                               |
-| REST API (для внешнего UI)| Spring Web, WebSocket, встроенный Tomcat            |
-| Взаимодействие с внешним UI| HTTP + JSON / WebSocket (любой язык)               |
+| Компонент                   | Технология                                     |
+|-----------------------------|------------------------------------------------|
+| Язык                        | Java 17                                        |
+| Фреймворк                   | Spring Boot 3.x                                |
+| Сборщик                     | Maven                                          |
+| База данных                 | PostgreSQL 15                                  |
+| Биржевой API                | Bybit Java SDK, Tbank API (REST)               |
+| Многопоточность             | Spring `@Async`, виртуальные потоки (Java 21+) |
+| Тестирование                | JUnit 5, Mockito, Testcontainers               |
+| Консольный интерфейс        | Spring Shell / Scanner                         |
+| REST API (для внешнего UI)  | Spring Web, WebSocket, встроенный Tomcat       |
+| Взаимодействие с внешним UI | HTTP + JSON / WebSocket (любой язык)           |
 
 ## ⚙️ Установка и запуск
 
@@ -245,7 +245,7 @@ java -jar app/target/trading-app.jar --spring.profiles.active=external
 - Java 17 или новее
 - PostgreSQL 15
 - Maven (для сборки)
-PostgreSQL 15
+  PostgreSQL 15
 
 Maven (для сборки)
 
@@ -272,6 +272,7 @@ mvn clean package
 ```
 
 Запуск
+
 ```bash
 # Консольный режим
 java -jar app/target/trading-app.jar --spring.profiles.active=console
@@ -304,9 +305,11 @@ mvn package
 Добавить конфигурацию в application.yml
 
 ## 📄 Лицензия
+
 Этот проект распространяется под лицензией MIT. Подробнее см. файл LICENSE.
 
 ## 📞 Контакты и поддержка
+
 По всем вопросам обращайтесь к разработчику:
 
 Илья Польстьяной
