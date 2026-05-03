@@ -10,12 +10,6 @@
     </parent>
 
     <artifactId>core</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>trader</module>
-        <module>test-trader</module>
-        <module>trading-common</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>

@@ -14,18 +14,14 @@
     <dependencies>
         <dependency>
             <groupId>io.github.ijlijapol</groupId>
-            <artifactId>test-trader</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.ijlijapol</groupId>
-            <artifactId>trader</artifactId>
+            <artifactId>core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.ijlijapol</groupId>
             <artifactId>analyzer</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

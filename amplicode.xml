@@ -8,8 +8,7 @@
         </packages>
       </persistence-unit>
       <persistence-unit moduleName="analyzer" name="Default" />
-      <persistence-unit moduleName="test-trader" name="Default" />
-      <persistence-unit moduleName="trader" name="Default" />
+      <persistence-unit moduleName="core" name="Default" />
     </persistence-units>
   </component>
 </project>

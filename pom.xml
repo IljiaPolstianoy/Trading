@@ -43,8 +43,7 @@
         <mockito-junit-jupiter.version>5.3.1</mockito-junit-jupiter.version>
         <exchange-connector-core.version>${project.version}</exchange-connector-core.version>
         <spring-boot.version>3.5.5</spring-boot.version>
-        <test-trader.version>${project.version}</test-trader.version>
-        <trader.version>${project.version}</trader.version>
+        <core.version>${project.version}</core.version>
     </properties>
 
     <dependencyManagement>
@@ -196,14 +195,8 @@
 
             <dependency>
                 <groupId>io.github.ijlijapol</groupId>
-                <artifactId>test-trader</artifactId>
-                <version>${test-trader.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.ijlijapol</groupId>
-                <artifactId>trader</artifactId>
-                <version>${trader.version}</version>
+                <artifactId>core</artifactId>
+                <version>${core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

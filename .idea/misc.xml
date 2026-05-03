@@ -10,8 +10,11 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/analyzer/analyzer-bybit/pom.xml" />
+        <option value="$PROJECT_DIR$/core/test-trader/pom.xml" />
         <option value="$PROJECT_DIR$/core/test-trader/test-trader-bybit/pom.xml" />
+        <option value="$PROJECT_DIR$/core/trader/pom.xml" />
         <option value="$PROJECT_DIR$/core/trader/trader-bybit/pom.xml" />
+        <option value="$PROJECT_DIR$/core/trading-common/pom.xml" />
         <option value="$PROJECT_DIR$/exchange-connector/exchangr-connector-common/pom.xml" />
       </set>
     </option>
@@ -19,38 +22,38 @@
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
     <option name="myDefaultNotNull" value="org.jetbrains.annotations.NotNull" />
-    <option name="myOrdered" value="false" />
+    <option name="myOrdered" value="true" />
     <option name="myNullables">
       <value>
         <list size="11">
-          <item index="0" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
-          <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
-          <item index="2" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
-          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
-          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
-          <item index="5" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
-          <item index="6" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
-          <item index="7" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
-          <item index="8" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
-          <item index="9" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
-          <item index="10" class="java.lang.String" itemvalue="org.springframework.lang.Nullable" />
+          <item index="0" class="java.lang.String" itemvalue="org.springframework.lang.Nullable" />
+          <item index="1" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
+          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
+          <item index="5" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
+          <item index="6" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
+          <item index="7" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+          <item index="8" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
+          <item index="9" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="10" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
         </list>
       </value>
     </option>
     <option name="myNotNulls">
       <value>
         <list size="11">
-          <item index="0" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
-          <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
-          <item index="2" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
-          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
-          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
-          <item index="5" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
-          <item index="6" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
-          <item index="7" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
-          <item index="8" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
-          <item index="9" class="java.lang.String" itemvalue="lombok.NonNull" />
-          <item index="10" class="java.lang.String" itemvalue="org.springframework.lang.NonNull" />
+          <item index="0" class="java.lang.String" itemvalue="org.springframework.lang.NonNull" />
+          <item index="1" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
+          <item index="2" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
+          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
+          <item index="5" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
+          <item index="6" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
+          <item index="7" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+          <item index="8" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
+          <item index="9" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="10" class="java.lang.String" itemvalue="lombok.NonNull" />
         </list>
       </value>
     </option>
