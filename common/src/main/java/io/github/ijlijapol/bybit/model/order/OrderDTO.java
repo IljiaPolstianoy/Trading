@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Setter
 @SuperBuilder(toBuilder = true)
 @ToString(callSuper = true)
-public class Order {
+public class OrderDTO {
 
     private Symbol symbol;
 

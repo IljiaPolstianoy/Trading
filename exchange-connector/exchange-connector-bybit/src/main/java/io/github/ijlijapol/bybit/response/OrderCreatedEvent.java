@@ -1,7 +1,7 @@
 package io.github.ijlijapol.bybit.response;
 
 import com.bybit.api.client.domain.trade.response.OrderResponse;
-import io.github.ijlijapol.bybit.model.order.Order;
+import io.github.ijlijapol.bybit.model.order.OrderDTO;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -17,10 +17,10 @@ public class OrderCreatedEvent extends TradingEvent {
 
     public OrderCreatedEvent(
             final Object source,
-            final Order originalOrder,
+            final OrderDTO originalOrderDTO,
             final OrderResponse orderResponse,
             final LocalDateTime eventTimestamp) {
-        super(source, originalOrder, EventType.ORDER_CREATED, eventTimestamp
+        super(source, originalOrderDTO, EventType.ORDER_CREATED, eventTimestamp
         );
         this.orderResponse = orderResponse;
         this.orderId = orderResponse.getOrderId();

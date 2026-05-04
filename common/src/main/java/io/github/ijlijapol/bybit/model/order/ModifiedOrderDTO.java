@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
-public class ModifiedOrder extends Order {
+public class ModifiedOrderDTO extends OrderDTO {
 
     private String orderID;
 }
