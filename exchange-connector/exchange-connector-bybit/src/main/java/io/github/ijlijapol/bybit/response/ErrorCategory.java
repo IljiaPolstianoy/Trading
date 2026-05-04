@@ -15,7 +15,7 @@ public enum ErrorCategory {
             case 10006, 30073 -> API_LIMIT;
             case 10001, 10002, 10017, 10021, 10022, 100400, 100401,
                  11041, 11043, 11044, 30063 -> API_BUSINESS;
-            default -> API_BUSINESS;
+            default -> UNKNOWN;
         };
     }
 }

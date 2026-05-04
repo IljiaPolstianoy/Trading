@@ -34,17 +34,3 @@ CREATE TABLE IF NOT EXISTS test_orders
     price      DECIMAL(10, 2)  NOT NULL,
     amount     DECIMAL(30, 20) NOT NULL
 );
-
-CREATE TABLE IF NOT EXISTS pattern
-(
-    id SERIAL PRIMARY KEY
-);
-
-CREATE TABLE IF NOT EXISTS pattern_candle_directions
-(
-    pattern_id        INTEGER NOT NULL,
-    position          INTEGER NOT NULL,
-    candle_directions BOOLEAN NOT NULL,
-    FOREIGN KEY (pattern_id) REFERENCES pattern (id),
-    PRIMARY KEY (pattern_id, position)
-);

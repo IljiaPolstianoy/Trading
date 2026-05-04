@@ -3,7 +3,10 @@ package io.github.ijlijapol.contract;
 import io.github.ijlijapol.bybit.exception.InsufficientFundsException;
 import io.github.ijlijapol.bybit.exception.NotFoundOrderException;
 import io.github.ijlijapol.bybit.model.Symbol;
-import io.github.ijlijapol.bybit.model.order.*;
+import io.github.ijlijapol.bybit.model.order.ModifiedOrderDTO;
+import io.github.ijlijapol.bybit.model.order.OrderDTO;
+import io.github.ijlijapol.bybit.model.order.Side;
+import io.github.ijlijapol.bybit.model.order.TradeOrderType;
 
 import java.math.BigDecimal;
 
@@ -14,18 +17,18 @@ public interface ExchangeConnector {
      * Создает и отправляет новый ордер на биржу.
      *
      * @param orderDTO ордер для исполнения с параметрами:
-     *              <ul>
-     *                  <li><b>symbol</b>: {@link Symbol} торгуемая пара</li>
-     *                  <li><b>side</b>: {@link Side#BUY BUY} (покупка) или {@link Side#SELL SELL} (продажа)</li>
-     *                  <li><b>orderType</b>:
-     *                      {@link TradeOrderType#MARKET MARKET} (рыночный) или
-     *                      {@link TradeOrderType#LIMIT LIMIT} (лимитный)</li>
-     *                  <li><b>price</b>:
-     *                          <br>&mdash; для LIMIT ордеров: обязателен, должен быть > 0
-     *                          <br>&mdash; для MARKET ордеров: не используется (можно null)</li>
-     *                  <li><b>amount</b>: {@link BigDecimal} количество торгуемого актива</li>
-     *                  <li><b>Сам объект</b>: не может быть null</li>
-     *              </ul>
+     *                 <ul>
+     *                     <li><b>symbol</b>: {@link Symbol} торгуемая пара</li>
+     *                     <li><b>side</b>: {@link Side#BUY BUY} (покупка) или {@link Side#SELL SELL} (продажа)</li>
+     *                     <li><b>orderType</b>:
+     *                         {@link TradeOrderType#MARKET MARKET} (рыночный) или
+     *                         {@link TradeOrderType#LIMIT LIMIT} (лимитный)</li>
+     *                     <li><b>price</b>:
+     *                             <br>&mdash; для LIMIT ордеров: обязателен, должен быть > 0
+     *                             <br>&mdash; для MARKET ордеров: не используется (можно null)</li>
+     *                     <li><b>amount</b>: {@link BigDecimal} количество торгуемого актива</li>
+     *                     <li><b>Сам объект</b>: не может быть null</li>
+     *                 </ul>
      * @throws InsufficientFundsException если недостаточно средств для покупки
      */
 

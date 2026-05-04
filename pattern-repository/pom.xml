@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--suppress ALL -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.ijlijapol</groupId>
-        <artifactId>exchange-connector</artifactId>
+        <artifactId>trading</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>exchange-connector-core</artifactId>
+    <artifactId>pattern-repository</artifactId>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <exchange-connector-bybit.version>${project.version}</exchange-connector-bybit.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>io.github.ijlijapol</groupId>
-            <artifactId>exchange-connector-bybit</artifactId>
-            <version>${exchange-connector-bybit.version}</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
         <dependency>
@@ -49,5 +51,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

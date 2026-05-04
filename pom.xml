@@ -25,6 +25,7 @@
         <module>market-data</module>
         <module>core</module>
         <module>exchange-connector</module>
+        <module>pattern-repository</module>
     </modules>
 
     <properties>
@@ -44,6 +45,7 @@
         <exchange-connector-core.version>${project.version}</exchange-connector-core.version>
         <spring-boot.version>3.5.5</spring-boot.version>
         <core.version>${project.version}</core.version>
+        <pattern-repository.version>${project.version}</pattern-repository.version>
     </properties>
 
     <dependencyManagement>
@@ -197,6 +199,12 @@
                 <groupId>io.github.ijlijapol</groupId>
                 <artifactId>core</artifactId>
                 <version>${core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ijlijapol</groupId>
+                <artifactId>pattern-repository</artifactId>
+                <version>${pattern-repository.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

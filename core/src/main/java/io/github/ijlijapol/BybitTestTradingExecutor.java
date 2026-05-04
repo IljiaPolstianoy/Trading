@@ -14,7 +14,6 @@ import io.github.ijlijapol.exception.NotFoundPatternsException;
 import io.github.ijlijapol.exception.TestOrderPersistenceException;
 import io.github.ijlijapol.model.PatternDto;
 import io.github.ijlijapol.model.TestOrder;
-import io.github.ijlijapol.repostiory.PatternRepository;
 import io.github.ijlijapol.repostiory.TestOrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -116,7 +115,7 @@ public class BybitTestTradingExecutor implements TradingExecutor {
         final CandlesDTO candlesDTO = getCandles(3);
 
         if (patterns.isEmpty()) {
-            log.error("Pattern is empty");
+            log.error("io.github.ijlijapol.Pattern is empty");
             throw new NotFoundPatternsException("Patterns not found");
         }
 
