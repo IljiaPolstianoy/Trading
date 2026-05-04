@@ -7,8 +7,8 @@ import com.bybit.api.client.domain.trade.request.TradeOrderRequest;
 import com.bybit.api.client.restApi.BybitApiAsyncTradeRestClient;
 import com.bybit.api.client.service.BybitApiClientFactory;
 import io.github.ijlijapol.bybit.model.Symbol;
-import io.github.ijlijapol.bybit.model.order.ModifiedOrder;
-import io.github.ijlijapol.bybit.model.order.Order;
+import io.github.ijlijapol.bybit.model.order.ModifiedOrderDTO;
+import io.github.ijlijapol.bybit.model.order.OrderDTO;
 import io.github.ijlijapol.bybit.model.order.TradeOrderType;
 import io.github.ijlijapol.bybit.response.CreateOrderCallback;
 import io.github.ijlijapol.contract.ExchangeConnector;
@@ -33,30 +33,30 @@ public class ByBitExchangeConnectorImpl implements ExchangeConnector {
     }
 
     @Override
-    public void createNewOrder(final Order order) {
+    public void createNewOrder(final OrderDTO orderDTO) {
         log.info("🚀 Отправка ордера на Bybit: symbol={}, side={}, qty={}",
-                order.getSymbol(),
-                order.getSide(),
-                order.getAmount()
+                orderDTO.getSymbol(),
+                orderDTO.getSide(),
+                orderDTO.getAmount()
         );
 
         final TradeOrderRequest byBitOrder = TradeOrderRequest.builder()
                 .category(CategoryType.SPOT)
-                .symbol(order.getSymbol().toString())
-                .orderType(getOrderType(order.getOrderType()))
-                .qty(order.getAmount().toString())
-                .side(getSide(order.getSide()))
+                .symbol(orderDTO.getSymbol().toString())
+                .orderType(getOrderType(orderDTO.getOrderType()))
+                .qty(orderDTO.getAmount().toString())
+                .side(getSide(orderDTO.getSide()))
                 .marketUnit("quoteCoin")
                 .build();
 
 
-        client.createOrder(byBitOrder, new CreateOrderCallback(eventPublisher, order));
+        client.createOrder(byBitOrder, new CreateOrderCallback(eventPublisher, orderDTO));
 
         log.debug("Запрос отправлен: {}", byBitOrder);
     }
 
     @Override
-    public boolean changeOldOrder(final ModifiedOrder modifiedOrder) {
+    public boolean changeOldOrder(final ModifiedOrderDTO modifiedOrder) {
         return false;
     }
 

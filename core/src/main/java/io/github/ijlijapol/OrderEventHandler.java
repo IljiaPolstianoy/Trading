@@ -14,9 +14,9 @@ public class OrderEventHandler {
     public void handlerOrderCreatedEvent(final OrderCreatedEvent event) {
         log.info("📦 Обработка успешного ордера: orderId={}, symbol={}, side={}, qty={}",
                 event.getOrderId(),
-                event.getOriginalOrder().getSymbol(),
-                event.getOriginalOrder().getSide(),
-                event.getOriginalOrder().getAmount()
+                event.getOriginalOrderDTO().getSymbol(),
+                event.getOriginalOrderDTO().getSide(),
+                event.getOriginalOrderDTO().getAmount()
         );
 
         try {
@@ -43,10 +43,10 @@ public class OrderEventHandler {
             log.error("❌ {}: message={}, order={}, side={}, qty={}, price={}",
                     errorType,
                     event.getErrorMessage(),
-                    event.getOriginalOrder().getSymbol(),
-                    event.getOriginalOrder().getSide(),
-                    event.getOriginalOrder().getAmount(),
-                    event.getOriginalOrder().getPrice()
+                    event.getOriginalOrderDTO().getSymbol(),
+                    event.getOriginalOrderDTO().getSide(),
+                    event.getOriginalOrderDTO().getAmount(),
+                    event.getOriginalOrderDTO().getPrice()
             );
         }
 

@@ -3,10 +3,7 @@ package io.github.ijlijapol.contract;
 import io.github.ijlijapol.bybit.exception.InsufficientFundsException;
 import io.github.ijlijapol.bybit.exception.NotFoundOrderException;
 import io.github.ijlijapol.bybit.model.Symbol;
-import io.github.ijlijapol.bybit.model.order.ModifiedOrder;
-import io.github.ijlijapol.bybit.model.order.Order;
-import io.github.ijlijapol.bybit.model.order.Side;
-import io.github.ijlijapol.bybit.model.order.TradeOrderType;
+import io.github.ijlijapol.bybit.model.order.*;
 
 import java.math.BigDecimal;
 
@@ -16,7 +13,7 @@ public interface ExchangeConnector {
     /**
      * Создает и отправляет новый ордер на биржу.
      *
-     * @param order ордер для исполнения с параметрами:
+     * @param orderDTO ордер для исполнения с параметрами:
      *              <ul>
      *                  <li><b>symbol</b>: {@link Symbol} торгуемая пара</li>
      *                  <li><b>side</b>: {@link Side#BUY BUY} (покупка) или {@link Side#SELL SELL} (продажа)</li>
@@ -29,11 +26,10 @@ public interface ExchangeConnector {
      *                  <li><b>amount</b>: {@link BigDecimal} количество торгуемого актива</li>
      *                  <li><b>Сам объект</b>: не может быть null</li>
      *              </ul>
-     * @return {@code true} если операция прошла успешно
      * @throws InsufficientFundsException если недостаточно средств для покупки
      */
 
-    void createNewOrder(Order order);
+    void createNewOrder(OrderDTO orderDTO);
 
     /**
      * Изменяет существующий ордер на бирже.
@@ -62,7 +58,7 @@ public interface ExchangeConnector {
      * @throws NotFoundOrderException     если orderID не указан или ордер не найден
      * @throws InsufficientFundsException если недостаточно средств для изменения цены
      */
-    boolean changeOldOrder(ModifiedOrder modifiedOrder);
+    boolean changeOldOrder(ModifiedOrderDTO modifiedOrder);
 
     /**
      * Отменяет активный ордер

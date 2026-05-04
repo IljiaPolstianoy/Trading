@@ -4,7 +4,7 @@ package io.github.ijlijapol;
 import io.github.ijlijapol.bybit.ExchangeConnectorFactory;
 import io.github.ijlijapol.bybit.MarketDataFactory;
 import io.github.ijlijapol.bybit.model.Symbol;
-import io.github.ijlijapol.bybit.model.order.Order;
+import io.github.ijlijapol.bybit.model.order.OrderDTO;
 import io.github.ijlijapol.bybit.model.order.Side;
 import io.github.ijlijapol.bybit.model.order.TradeOrderType;
 import io.github.ijlijapol.bybit.model.request.LastCandleRequest;
@@ -19,6 +19,7 @@ import io.github.ijlijapol.exception.NotFoundPatternsException;
 import io.github.ijlijapol.exception.OrderPersistenceException;
 import io.github.ijlijapol.exception.WalletBalanceException;
 import io.github.ijlijapol.model.Constant;
+import io.github.ijlijapol.model.Order;
 import io.github.ijlijapol.model.PatternDto;
 import io.github.ijlijapol.repostiory.OrderRepository;
 import io.github.ijlijapol.repostiory.PatternRepository;
@@ -170,7 +171,7 @@ public class BybitRealTradingExecutor implements TradingExecutor {
     private void createOrder(final CandlesDTO candlesDTO) {
         log.info("Создания ордера.");
         final BigDecimal lastPrice = candlesDTO.getCandles().getLast().getClosePrice();
-        final Order order = Order.builder()
+        final OrderDTO orderDTO = OrderDTO.builder()
                 .symbol(Symbol.BTCUSDT)
                 .side(Side.BUY)
                 .orderType(TradeOrderType.MARKET)
@@ -178,14 +179,14 @@ public class BybitRealTradingExecutor implements TradingExecutor {
                 .amount(getBalance())
                 .build();
 
-        log.debug("Отправка order: {}, на биржу", order);
-        tradeClient.createNewOrder(order);
-        save(io.github.ijlijapol.model.Order.builder()
-                .symbol(order.getSymbol())
-                .side(order.getSide())
-                .orderType(order.getOrderType())
-                .price(order.getPrice())
-                .amount(order.getAmount())
+        log.debug("Отправка orderDTO: {}, на биржу", orderDTO);
+        tradeClient.createNewOrder(orderDTO);
+        save(Order.builder()
+                .symbol(orderDTO.getSymbol())
+                .side(orderDTO.getSide())
+                .orderType(orderDTO.getOrderType())
+                .price(orderDTO.getPrice())
+                .amount(orderDTO.getAmount())
                 .build());
 
         taskScheduler.schedule(
@@ -204,7 +205,7 @@ public class BybitRealTradingExecutor implements TradingExecutor {
      * @param order объект ордера для сохранения
      * @throws OrderPersistenceException если произошла ошибка при сохранении в базу данных
      */
-    private void save(final io.github.ijlijapol.model.Order order) {
+    private void save(final Order order) {
         log.debug("Сохранения ордера в базу данных");
         try {
             orderRepository.save(order);
@@ -287,7 +288,7 @@ public class BybitRealTradingExecutor implements TradingExecutor {
                 .timeFrame(TimeFrame.ONE_MINUTE)
                 .build();
         final CandleDTO candleDTO = loaderMarketData.loadLatestCandle(request);
-        final Order orderSell = Order.builder()
+        final OrderDTO orderDTOSell = OrderDTO.builder()
                 .symbol(Symbol.BTCUSDT)
                 .side(Side.SELL)
                 .orderType(TradeOrderType.MARKET)
@@ -295,14 +296,14 @@ public class BybitRealTradingExecutor implements TradingExecutor {
                 .amount(BigDecimal.ONE)
                 .build();
 
-        tradeClient.createNewOrder(orderSell);
+        tradeClient.createNewOrder(orderDTOSell);
 
-        save(io.github.ijlijapol.model.Order.builder()
-                .symbol(orderSell.getSymbol())
-                .side(orderSell.getSide())
-                .orderType(orderSell.getOrderType())
-                .price(orderSell.getPrice())
-                .amount(orderSell.getAmount())
+        save(Order.builder()
+                .symbol(orderDTOSell.getSymbol())
+                .side(orderDTOSell.getSide())
+                .orderType(orderDTOSell.getOrderType())
+                .price(orderDTOSell.getPrice())
+                .amount(orderDTOSell.getAmount())
                 .build());
     }
 }
