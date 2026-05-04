@@ -22,7 +22,6 @@ import io.github.ijlijapol.model.Constant;
 import io.github.ijlijapol.model.Order;
 import io.github.ijlijapol.model.PatternDto;
 import io.github.ijlijapol.repostiory.OrderRepository;
-import io.github.ijlijapol.repostiory.PatternRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -127,7 +126,7 @@ public class BybitRealTradingExecutor implements TradingExecutor {
         final CandlesDTO candlesDTO = getCandles();
 
         if (patternDtos.isEmpty()) {
-            log.error("Pattern is empty");
+            log.error("io.github.ijlijapol.Pattern is empty");
             throw new NotFoundPatternsException("Patterns not found");
         }
 
