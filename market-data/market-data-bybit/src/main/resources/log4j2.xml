@@ -22,7 +22,7 @@
                 <KeyValuePair key="environment" value="${ENV}"/>
             </JsonLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy />
+                <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
             <DefaultRolloverStrategy max="30"/>
@@ -36,7 +36,7 @@
             </JsonLayout>
             <ThresholdFilter level="ERROR"/>
             <Policies>
-                <TimeBasedTriggeringPolicy />
+                <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>
@@ -50,13 +50,13 @@
     <Loggers>
         <Logger name="io.github.ijlijapol" level="${APP_LOG_LEVEL}" additivity="false">
             <AppenderRef ref="Console">
-                    <Condition>
-                        <If condition='"${ENV}" == "dev"' />
-                    </Condition>
+                <Condition>
+                    <If condition='"${ENV}" == "dev"'/>
+                </Condition>
             </AppenderRef>
             <AppenderRef ref="AsyncJson">
                 <Condition>
-                    <If condition='"${ENV}" = "prod"' />
+                    <If condition='"${ENV}" = "prod"'/>
                 </Condition>
             </AppenderRef>
         </Logger>
@@ -64,12 +64,12 @@
         <Root level="${ROOT_LOG_LEVEL}">
             <AppenderRef ref="Console">
                 <Condition>
-                    <If condition='"${ENV}" == "dev"' />
+                    <If condition='"${ENV}" == "dev"'/>
                 </Condition>
             </AppenderRef>
             <AppenderRef ref="AsyncJson">
                 <Condition>
-                    <If condition='"${ENV}" = "prod"' />
+                    <If condition='"${ENV}" = "prod"'/>
                 </Condition>
             </AppenderRef>
         </Root>

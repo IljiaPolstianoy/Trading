@@ -1,0 +1,1372 @@
+{
+  "instant": {
+    "epochSecond": 1774234499,
+    "nanoOfSecond": 901000800
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Starting Trader using Java 25.0.2 with PID 11504 (D:\\Programming\\Java\\Projects\\Trading\\core\\test-trader\\target\\classes started by ilyap in D:\\Programming\\Java\\Projects\\Trading)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234499,
+    "nanoOfSecond": 908020600
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "No active profile set, falling back to 1 default profile: \"default\"",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234500,
+    "nanoOfSecond": 679112400
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat initialized with port 8080 (http)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234500,
+    "nanoOfSecond": 736275900
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
+  "message": "Root WebApplicationContext: initialization completed in 793 ms",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234501,
+    "nanoOfSecond": 51043500
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat started on port 8080 (http) with context path '/'",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234501,
+    "nanoOfSecond": 57748500
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Started Trader in 1.581 seconds (process running for 2.675)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234587,
+    "nanoOfSecond": 530801800
+  },
+  "thread": "SpringApplicationShutdownHook",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Commencing graceful shutdown. Waiting for active requests to complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 57,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234587,
+    "nanoOfSecond": 536784200
+  },
+  "thread": "tomcat-shutdown",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Graceful shutdown complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 91,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234779,
+    "nanoOfSecond": 188863200
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Starting Trader using Java 25.0.2 with PID 7472 (D:\\Programming\\Java\\Projects\\Trading\\core\\test-trader\\target\\classes started by ilyap in D:\\Programming\\Java\\Projects\\Trading)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234779,
+    "nanoOfSecond": 194880900
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "No active profile set, falling back to 1 default profile: \"default\"",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234779,
+    "nanoOfSecond": 809038300
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat initialized with port 8080 (http)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234779,
+    "nanoOfSecond": 859685400
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
+  "message": "Root WebApplicationContext: initialization completed in 636 ms",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234780,
+    "nanoOfSecond": 142098700
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat started on port 8080 (http) with context path '/'",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234780,
+    "nanoOfSecond": 148095200
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Started Trader in 1.364 seconds (process running for 2.546)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234801,
+    "nanoOfSecond": 598364200
+  },
+  "thread": "SpringApplicationShutdownHook",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Commencing graceful shutdown. Waiting for active requests to complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 51,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234801,
+    "nanoOfSecond": 611587300
+  },
+  "thread": "tomcat-shutdown",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Graceful shutdown complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 89,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234806,
+    "nanoOfSecond": 390668900
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Starting Trader using Java 25.0.2 with PID 8060 (D:\\Programming\\Java\\Projects\\Trading\\core\\test-trader\\target\\classes started by ilyap in D:\\Programming\\Java\\Projects\\Trading)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234806,
+    "nanoOfSecond": 396668300
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "No active profile set, falling back to 1 default profile: \"default\"",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234807,
+    "nanoOfSecond": 221659600
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat initialized with port 8080 (http)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234807,
+    "nanoOfSecond": 307628700
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
+  "message": "Root WebApplicationContext: initialization completed in 866 ms",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234807,
+    "nanoOfSecond": 623659100
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat started on port 8080 (http) with context path '/'",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234807,
+    "nanoOfSecond": 629705400
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Started Trader in 1.874 seconds (process running for 3.185)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234821,
+    "nanoOfSecond": 928850900
+  },
+  "thread": "SpringApplicationShutdownHook",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Commencing graceful shutdown. Waiting for active requests to complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 57,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234821,
+    "nanoOfSecond": 934136600
+  },
+  "thread": "tomcat-shutdown",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Graceful shutdown complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 88,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234830,
+    "nanoOfSecond": 568659200
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Starting Trader using Java 25.0.2 with PID 15816 (D:\\Programming\\Java\\Projects\\Trading\\core\\test-trader\\target\\classes started by ilyap in D:\\Programming\\Java\\Projects\\Trading)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234830,
+    "nanoOfSecond": 590276600
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "No active profile set, falling back to 1 default profile: \"default\"",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 371223900
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat initialized with port 8080 (http)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 384186800
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.coyote.http11.Http11NioProtocol",
+  "message": "Initializing ProtocolHandler [\"http-nio-8080\"]",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 385290200
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.catalina.core.StandardService",
+  "message": "Starting service [Tomcat]",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 385290200
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.catalina.core.StandardEngine",
+  "message": "Starting Servlet engine: [Apache Tomcat/10.1.44]",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 430148600
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
+  "message": "Initializing Spring embedded WebApplicationContext",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 430863000
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
+  "message": "Root WebApplicationContext: initialization completed in 790 ms",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 791632500
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.coyote.http11.Http11NioProtocol",
+  "message": "Starting ProtocolHandler [\"http-nio-8080\"]",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 806851500
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat started on port 8080 (http) with context path '/'",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234831,
+    "nanoOfSecond": 811888500
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Started Trader in 1.728 seconds (process running for 2.984)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234832,
+    "nanoOfSecond": 109622300
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.ByBitExchangeConnectorImpl",
+  "message": "🚀 Отправка ордера на Bybit: symbol=BTCUSDT, side=BUY, qty=1, price=1",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234833,
+    "nanoOfSecond": 547868900
+  },
+  "thread": "OkHttp https://api-demo.bybit.com/...",
+  "level": "ERROR",
+  "loggerName": "io.github.ijlijapol.response.CreateOrderCallback",
+  "message": "❌ Неожиданный формат ответа от Bybit: LinkedHashMap, ожидался GenericResponse. symbol=BTCUSDT",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "threadId": 81,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234833,
+    "nanoOfSecond": 550504600
+  },
+  "thread": "OkHttp https://api-demo.bybit.com/...",
+  "level": "ERROR",
+  "loggerName": "io.github.ijlijapol.response.OrderEventHandler",
+  "message": "❌ Сетевая ошибка: message=Неожиданный формат ответа: LinkedHashMap, order=BTCUSDT, side=BUY, qty=1, price=1",
+  "contextMap": {},
+  "endOfBatch": false,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "threadId": 81,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234833,
+    "nanoOfSecond": 551537000
+  },
+  "thread": "OkHttp https://api-demo.bybit.com/...",
+  "level": "ERROR",
+  "loggerName": "io.github.ijlijapol.response.OrderEventHandler",
+  "message": "❌ Ошибка при обработке failed-события: Ошибка отправки ордера на биржу ByBit",
+  "thrown": {
+    "commonElementCount": 0,
+    "localizedMessage": "Ошибка отправки ордера на биржу ByBit",
+    "message": "Ошибка отправки ордера на биржу ByBit",
+    "name": "io.github.ijlijapol.exception.ByBitOrderSendingException",
+    "extendedStackTrace": [
+      {
+        "classLoaderName": "app",
+        "class": "io.github.ijlijapol.response.OrderEventHandler",
+        "method": "handlerOrderFailedEvent",
+        "file": "OrderEventHandler.java",
+        "line": 66,
+        "exact": false,
+        "location": "classes/",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "jdk.internal.reflect.DirectMethodHandleAccessor",
+        "method": "invoke",
+        "file": "DirectMethodHandleAccessor.java",
+        "line": 104,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "java.lang.reflect.Method",
+        "method": "invoke",
+        "file": "Method.java",
+        "line": 565,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.ApplicationListenerMethodAdapter",
+        "method": "doInvoke",
+        "file": "ApplicationListenerMethodAdapter.java",
+        "line": 383,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.ApplicationListenerMethodAdapter",
+        "method": "processEvent",
+        "file": "ApplicationListenerMethodAdapter.java",
+        "line": 255,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.ApplicationListenerMethodAdapter",
+        "method": "onApplicationEvent",
+        "file": "ApplicationListenerMethodAdapter.java",
+        "line": 174,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.SimpleApplicationEventMulticaster",
+        "method": "doInvokeListener",
+        "file": "SimpleApplicationEventMulticaster.java",
+        "line": 185,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.SimpleApplicationEventMulticaster",
+        "method": "invokeListener",
+        "file": "SimpleApplicationEventMulticaster.java",
+        "line": 178,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.SimpleApplicationEventMulticaster",
+        "method": "multicastEvent",
+        "file": "SimpleApplicationEventMulticaster.java",
+        "line": 156,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.support.AbstractApplicationContext",
+        "method": "publishEvent",
+        "file": "AbstractApplicationContext.java",
+        "line": 454,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.support.AbstractApplicationContext",
+        "method": "publishEvent",
+        "file": "AbstractApplicationContext.java",
+        "line": 387,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "io.github.ijlijapol.response.CreateOrderCallback",
+        "method": "onResponse",
+        "file": "CreateOrderCallback.java",
+        "line": 29,
+        "exact": false,
+        "location": "classes/",
+        "version": "?"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "com.bybit.api.client.impl.BybitApiCallbackAdapter",
+        "method": "onResponse",
+        "file": "BybitApiCallbackAdapter.java",
+        "line": 25,
+        "exact": false,
+        "location": "bybit-java-api-1.4.0.jar",
+        "version": "?"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "retrofit2.OkHttpCall$1",
+        "method": "onResponse",
+        "file": "OkHttpCall.java",
+        "line": 129,
+        "exact": false,
+        "location": "retrofit-2.7.2.jar",
+        "version": "?"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "okhttp3.internal.connection.RealCall$AsyncCall",
+        "method": "run",
+        "file": "RealCall.kt",
+        "line": 519,
+        "exact": false,
+        "location": "okhttp-4.12.0.jar",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "java.util.concurrent.ThreadPoolExecutor",
+        "method": "runWorker",
+        "file": "ThreadPoolExecutor.java",
+        "line": 1090,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "java.util.concurrent.ThreadPoolExecutor$Worker",
+        "method": "run",
+        "file": "ThreadPoolExecutor.java",
+        "line": 614,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "java.lang.Thread",
+        "method": "run",
+        "file": "Thread.java",
+        "line": 1474,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      }
+    ]
+  },
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "threadId": 81,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234955,
+    "nanoOfSecond": 738556700
+  },
+  "thread": "SpringApplicationShutdownHook",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Commencing graceful shutdown. Waiting for active requests to complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 57,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234955,
+    "nanoOfSecond": 744048200
+  },
+  "thread": "tomcat-shutdown",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Graceful shutdown complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 91,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234985,
+    "nanoOfSecond": 250744300
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Starting Trader using Java 25.0.2 with PID 2776 (D:\\Programming\\Java\\Projects\\Trading\\core\\test-trader\\target\\classes started by ilyap in D:\\Programming\\Java\\Projects\\Trading)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234985,
+    "nanoOfSecond": 261195000
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "No active profile set, falling back to 1 default profile: \"default\"",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 320939000
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat initialized with port 8080 (http)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 344211700
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.coyote.http11.Http11NioProtocol",
+  "message": "Initializing ProtocolHandler [\"http-nio-8080\"]",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 346213000
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.catalina.core.StandardService",
+  "message": "Starting service [Tomcat]",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 347212800
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.catalina.core.StandardEngine",
+  "message": "Starting Servlet engine: [Apache Tomcat/10.1.44]",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 383835400
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
+  "message": "Initializing Spring embedded WebApplicationContext",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 383835400
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
+  "message": "Root WebApplicationContext: initialization completed in 1043 ms",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 814437600
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.apache.coyote.http11.Http11NioProtocol",
+  "message": "Starting ProtocolHandler [\"http-nio-8080\"]",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "java.util.logging.Logger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 828062300
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+  "message": "Tomcat started on port 8080 (http) with context path '/'",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234986,
+    "nanoOfSecond": 834451900
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.bybit.Trader",
+  "message": "Started Trader in 2.036 seconds (process running for 3.255)",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234987,
+    "nanoOfSecond": 194502800
+  },
+  "thread": "main",
+  "level": "INFO",
+  "loggerName": "io.github.ijlijapol.ByBitExchangeConnectorImpl",
+  "message": "🚀 Отправка ордера на Bybit: symbol=BTCUSDT, side=BUY, qty=1, price=1",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "threadId": 3,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234987,
+    "nanoOfSecond": 898747700
+  },
+  "thread": "OkHttp https://api-demo.bybit.com/...",
+  "level": "ERROR",
+  "loggerName": "io.github.ijlijapol.response.CreateOrderCallback",
+  "message": "❌ Неожиданный формат ответа от Bybit: LinkedHashMap, ожидался GenericResponse. symbol=BTCUSDT",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "threadId": 78,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234987,
+    "nanoOfSecond": 902280400
+  },
+  "thread": "OkHttp https://api-demo.bybit.com/...",
+  "level": "ERROR",
+  "loggerName": "io.github.ijlijapol.response.OrderEventHandler",
+  "message": "❌ Сетевая ошибка: message=Неожиданный формат ответа: LinkedHashMap, order=BTCUSDT, side=BUY, qty=1, price=1",
+  "contextMap": {},
+  "endOfBatch": false,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "threadId": 78,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774234987,
+    "nanoOfSecond": 902280400
+  },
+  "thread": "OkHttp https://api-demo.bybit.com/...",
+  "level": "ERROR",
+  "loggerName": "io.github.ijlijapol.response.OrderEventHandler",
+  "message": "❌ Ошибка при обработке failed-события: Ошибка отправки ордера на биржу ByBit",
+  "thrown": {
+    "commonElementCount": 0,
+    "localizedMessage": "Ошибка отправки ордера на биржу ByBit",
+    "message": "Ошибка отправки ордера на биржу ByBit",
+    "name": "io.github.ijlijapol.exception.ByBitOrderSendingException",
+    "extendedStackTrace": [
+      {
+        "classLoaderName": "app",
+        "class": "io.github.ijlijapol.response.OrderEventHandler",
+        "method": "handlerOrderFailedEvent",
+        "file": "OrderEventHandler.java",
+        "line": 66,
+        "exact": false,
+        "location": "classes/",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "jdk.internal.reflect.DirectMethodHandleAccessor",
+        "method": "invoke",
+        "file": "DirectMethodHandleAccessor.java",
+        "line": 104,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "java.lang.reflect.Method",
+        "method": "invoke",
+        "file": "Method.java",
+        "line": 565,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.ApplicationListenerMethodAdapter",
+        "method": "doInvoke",
+        "file": "ApplicationListenerMethodAdapter.java",
+        "line": 383,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.ApplicationListenerMethodAdapter",
+        "method": "processEvent",
+        "file": "ApplicationListenerMethodAdapter.java",
+        "line": 255,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.ApplicationListenerMethodAdapter",
+        "method": "onApplicationEvent",
+        "file": "ApplicationListenerMethodAdapter.java",
+        "line": 174,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.SimpleApplicationEventMulticaster",
+        "method": "doInvokeListener",
+        "file": "SimpleApplicationEventMulticaster.java",
+        "line": 185,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.SimpleApplicationEventMulticaster",
+        "method": "invokeListener",
+        "file": "SimpleApplicationEventMulticaster.java",
+        "line": 178,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.event.SimpleApplicationEventMulticaster",
+        "method": "multicastEvent",
+        "file": "SimpleApplicationEventMulticaster.java",
+        "line": 156,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.support.AbstractApplicationContext",
+        "method": "publishEvent",
+        "file": "AbstractApplicationContext.java",
+        "line": 454,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "org.springframework.context.support.AbstractApplicationContext",
+        "method": "publishEvent",
+        "file": "AbstractApplicationContext.java",
+        "line": 387,
+        "exact": false,
+        "location": "spring-context-6.2.10.jar",
+        "version": "6.2.10"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "io.github.ijlijapol.response.CreateOrderCallback",
+        "method": "onResponse",
+        "file": "CreateOrderCallback.java",
+        "line": 29,
+        "exact": false,
+        "location": "classes/",
+        "version": "?"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "com.bybit.api.client.impl.BybitApiCallbackAdapter",
+        "method": "onResponse",
+        "file": "BybitApiCallbackAdapter.java",
+        "line": 25,
+        "exact": false,
+        "location": "bybit-java-api-1.4.0.jar",
+        "version": "?"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "retrofit2.OkHttpCall$1",
+        "method": "onResponse",
+        "file": "OkHttpCall.java",
+        "line": 129,
+        "exact": false,
+        "location": "retrofit-2.7.2.jar",
+        "version": "?"
+      },
+      {
+        "classLoaderName": "app",
+        "class": "okhttp3.internal.connection.RealCall$AsyncCall",
+        "method": "run",
+        "file": "RealCall.kt",
+        "line": 519,
+        "exact": false,
+        "location": "okhttp-4.12.0.jar",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "java.util.concurrent.ThreadPoolExecutor",
+        "method": "runWorker",
+        "file": "ThreadPoolExecutor.java",
+        "line": 1090,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "java.util.concurrent.ThreadPoolExecutor$Worker",
+        "method": "run",
+        "file": "ThreadPoolExecutor.java",
+        "line": 614,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      },
+      {
+        "module": "java.base",
+        "moduleVersion": "25.0.2",
+        "class": "java.lang.Thread",
+        "method": "run",
+        "file": "Thread.java",
+        "line": 1474,
+        "exact": false,
+        "location": "?",
+        "version": "?"
+      }
+    ]
+  },
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "threadId": 78,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774235014,
+    "nanoOfSecond": 319494200
+  },
+  "thread": "SpringApplicationShutdownHook",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Commencing graceful shutdown. Waiting for active requests to complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 57,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
+{
+  "instant": {
+    "epochSecond": 1774235014,
+    "nanoOfSecond": 329538600
+  },
+  "thread": "tomcat-shutdown",
+  "level": "INFO",
+  "loggerName": "org.springframework.boot.web.embedded.tomcat.GracefulShutdown",
+  "message": "Graceful shutdown complete",
+  "contextMap": {},
+  "endOfBatch": true,
+  "loggerFqcn": "org.apache.commons.logging.LogAdapter$Log4jLog",
+  "threadId": 88,
+  "threadPriority": 5,
+  "application": "core-module",
+  "environment": "dev"
+}
