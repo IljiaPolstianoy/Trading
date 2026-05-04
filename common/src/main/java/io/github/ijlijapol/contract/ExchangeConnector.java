@@ -3,8 +3,8 @@ package io.github.ijlijapol.contract;
 import io.github.ijlijapol.bybit.exception.InsufficientFundsException;
 import io.github.ijlijapol.bybit.exception.NotFoundOrderException;
 import io.github.ijlijapol.bybit.model.Symbol;
-import io.github.ijlijapol.bybit.model.order.ModifiedOrder;
-import io.github.ijlijapol.bybit.model.order.Order;
+import io.github.ijlijapol.bybit.model.order.ModifiedOrderDTO;
+import io.github.ijlijapol.bybit.model.order.OrderDTO;
 import io.github.ijlijapol.bybit.model.order.Side;
 import io.github.ijlijapol.bybit.model.order.TradeOrderType;
 
@@ -16,24 +16,23 @@ public interface ExchangeConnector {
     /**
      * Создает и отправляет новый ордер на биржу.
      *
-     * @param order ордер для исполнения с параметрами:
-     *              <ul>
-     *                  <li><b>symbol</b>: {@link Symbol} торгуемая пара</li>
-     *                  <li><b>side</b>: {@link Side#BUY BUY} (покупка) или {@link Side#SELL SELL} (продажа)</li>
-     *                  <li><b>orderType</b>:
-     *                      {@link TradeOrderType#MARKET MARKET} (рыночный) или
-     *                      {@link TradeOrderType#LIMIT LIMIT} (лимитный)</li>
-     *                  <li><b>price</b>:
-     *                          <br>&mdash; для LIMIT ордеров: обязателен, должен быть > 0
-     *                          <br>&mdash; для MARKET ордеров: не используется (можно null)</li>
-     *                  <li><b>amount</b>: {@link BigDecimal} количество торгуемого актива</li>
-     *                  <li><b>Сам объект</b>: не может быть null</li>
-     *              </ul>
-     * @return {@code true} если операция прошла успешно
+     * @param orderDTO ордер для исполнения с параметрами:
+     *                 <ul>
+     *                     <li><b>symbol</b>: {@link Symbol} торгуемая пара</li>
+     *                     <li><b>side</b>: {@link Side#BUY BUY} (покупка) или {@link Side#SELL SELL} (продажа)</li>
+     *                     <li><b>orderType</b>:
+     *                         {@link TradeOrderType#MARKET MARKET} (рыночный) или
+     *                         {@link TradeOrderType#LIMIT LIMIT} (лимитный)</li>
+     *                     <li><b>price</b>:
+     *                             <br>&mdash; для LIMIT ордеров: обязателен, должен быть > 0
+     *                             <br>&mdash; для MARKET ордеров: не используется (можно null)</li>
+     *                     <li><b>amount</b>: {@link BigDecimal} количество торгуемого актива</li>
+     *                     <li><b>Сам объект</b>: не может быть null</li>
+     *                 </ul>
      * @throws InsufficientFundsException если недостаточно средств для покупки
      */
 
-    void createNewOrder(Order order);
+    void createNewOrder(OrderDTO orderDTO);
 
     /**
      * Изменяет существующий ордер на бирже.
@@ -62,7 +61,7 @@ public interface ExchangeConnector {
      * @throws NotFoundOrderException     если orderID не указан или ордер не найден
      * @throws InsufficientFundsException если недостаточно средств для изменения цены
      */
-    boolean changeOldOrder(ModifiedOrder modifiedOrder);
+    boolean changeOldOrder(ModifiedOrderDTO modifiedOrder);
 
     /**
      * Отменяет активный ордер

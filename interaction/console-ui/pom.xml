@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<!--suppress ALL -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -14,18 +15,14 @@
     <dependencies>
         <dependency>
             <groupId>io.github.ijlijapol</groupId>
-            <artifactId>test-trader</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.ijlijapol</groupId>
-            <artifactId>trader</artifactId>
+            <artifactId>core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.ijlijapol</groupId>
             <artifactId>analyzer</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

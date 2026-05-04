@@ -6,7 +6,7 @@ import com.bybit.api.client.restApi.BybitApiCallback;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import io.github.ijlijapol.bybit.model.order.Order;
+import io.github.ijlijapol.bybit.model.order.OrderDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class CreateOrderCallback implements BybitApiCallback<Object> {
 
     private final ApplicationEventPublisher eventPublisher;
-    private final Order originalOrder;
+    private final OrderDTO originalOrderDTO;
 
     @Override
     public void onResponse(Object response) {
@@ -44,15 +44,15 @@ public class CreateOrderCallback implements BybitApiCallback<Object> {
 
             log.info("✅ Ордер успешно отправлен: orderId={}, symbol={}, side={}, qty={}",
                     genericResponse.getResult().getOrderId(),
-                    originalOrder.getSymbol(),
-                    originalOrder.getSide(),
-                    originalOrder.getAmount()
+                    originalOrderDTO.getSymbol(),
+                    originalOrderDTO.getSide(),
+                    originalOrderDTO.getAmount()
             );
 
             eventPublisher.publishEvent(new OrderCreatedEvent(
-                    this,
-                    originalOrder,
-                    orderResponse,
+                            this,
+                            originalOrderDTO,
+                            orderResponse,
                             Instant.ofEpochMilli(genericResponse.getTime()).atOffset(ZoneOffset.UTC).toLocalDateTime()
                     )
             );
@@ -60,14 +60,14 @@ public class CreateOrderCallback implements BybitApiCallback<Object> {
             log.error("❌ API ошибка Bybit: code={}, message={}, symbol={}, side={}, qty={}",
                     genericResponse.getRetCode(),
                     genericResponse.getRetMsg(),
-                    originalOrder.getSymbol(),
-                    originalOrder.getSide(),
-                    originalOrder.getAmount()
+                    originalOrderDTO.getSymbol(),
+                    originalOrderDTO.getSide(),
+                    originalOrderDTO.getAmount()
             );
 
             eventPublisher.publishEvent(new OrderFailedEvent(
                     this,
-                    originalOrder,
+                    originalOrderDTO,
                     Instant.ofEpochMilli(genericResponse.getTime()).atOffset(ZoneOffset.UTC).toLocalDateTime(),
                     genericResponse.getRetMsg(),
                     genericResponse.getRetCode()
@@ -78,16 +78,16 @@ public class CreateOrderCallback implements BybitApiCallback<Object> {
     @Override
     public void onFailure(Throwable cause) {
         log.error("❌ Сетевая ошибка при отправке ордера: symbol={}, side={}, qty={}, error={}",
-                originalOrder.getSymbol(),
-                originalOrder.getSide(),
-                originalOrder.getAmount(),
+                originalOrderDTO.getSymbol(),
+                originalOrderDTO.getSide(),
+                originalOrderDTO.getAmount(),
                 cause.getMessage(),
                 cause
         );
 
         eventPublisher.publishEvent(new OrderFailedEvent(
                 this,
-                originalOrder,
+                originalOrderDTO,
                 cause
         ));
     }
@@ -110,10 +110,10 @@ public class CreateOrderCallback implements BybitApiCallback<Object> {
         } catch (Exception e) {
             final String responseType = response != null ? response.getClass().getSimpleName() : "null";
             log.error("❌ Неожиданный формат ответа от Bybit: {}, ожидался GenericResponse. symbol={}",
-                    responseType, originalOrder.getSymbol());
+                    responseType, originalOrderDTO.getSymbol());
             eventPublisher.publishEvent(new OrderFailedEvent(
                             this,
-                            originalOrder,
+                            originalOrderDTO,
                             "Неожиданный формат ответа: " + responseType
                     )
             );

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -25,6 +25,7 @@
         <module>market-data</module>
         <module>core</module>
         <module>exchange-connector</module>
+        <module>pattern-repository</module>
     </modules>
 
     <properties>
@@ -43,8 +44,8 @@
         <mockito-junit-jupiter.version>5.3.1</mockito-junit-jupiter.version>
         <exchange-connector-core.version>${project.version}</exchange-connector-core.version>
         <spring-boot.version>3.5.5</spring-boot.version>
-        <test-trader.version>${project.version}</test-trader.version>
-        <trader.version>${project.version}</trader.version>
+        <core.version>${project.version}</core.version>
+        <pattern-repository.version>${project.version}</pattern-repository.version>
     </properties>
 
     <dependencyManagement>
@@ -196,14 +197,14 @@
 
             <dependency>
                 <groupId>io.github.ijlijapol</groupId>
-                <artifactId>test-trader</artifactId>
-                <version>${test-trader.version}</version>
+                <artifactId>core</artifactId>
+                <version>${core.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.ijlijapol</groupId>
-                <artifactId>trader</artifactId>
-                <version>${trader.version}</version>
+                <artifactId>pattern-repository</artifactId>
+                <version>${pattern-repository.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

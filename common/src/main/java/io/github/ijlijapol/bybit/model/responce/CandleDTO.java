@@ -10,15 +10,11 @@ import java.time.LocalDateTime;
 @Data
 @Builder(toBuilder = true)
 public class CandleDTO implements Comparable<CandleDTO> {
-    private BigDecimal openPrice;
-
-    private BigDecimal closePrice;
-
-    private LocalDateTime startTime;
-
-    private boolean growing;
-
     public TimeFrame timeFrame;
+    private BigDecimal openPrice;
+    private BigDecimal closePrice;
+    private LocalDateTime startTime;
+    private boolean growing;
 
     @Override
     public int compareTo(CandleDTO o) {
