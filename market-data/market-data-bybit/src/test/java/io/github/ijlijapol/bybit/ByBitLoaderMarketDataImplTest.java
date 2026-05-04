@@ -35,13 +35,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ByBitLoaderMarketDataImplTest {
 
-    @Mock
-    private BybitApiMarketRestClient mockClient;
-
-    private ByBitLoaderMarketDataImpl loader;
-
     private final LocalDateTime FIXED_NOW = LocalDateTime.of(2025, 3, 11, 12, 0, 0);
     private final ZoneOffset UTC_OFFSET = ZoneOffset.UTC;
+    @Mock
+    private BybitApiMarketRestClient mockClient;
+    private ByBitLoaderMarketDataImpl loader;
 
     @BeforeEach
     void setUp() throws Exception {

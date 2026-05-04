@@ -1,8 +1,7 @@
 package io.github.ijlijapol;
 
-import io.github.ijlijapol.bybit.BybitTestTradingScheduler;
-import io.github.ijlijapol.bybit.BybitTradingScheduler;
 import io.github.ijlijapol.bybit.MarketPatternAnalyzer;
+import io.github.ijlijapol.model.TradeExecutor;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -41,18 +40,20 @@ public class StartConsoleUI {
 
             int choice = sc.nextInt();
 
+            final TradingScheduler scheduler = context.getBean(TradingScheduler.class);
+
             switch (choice) {
                 case 1:
                     MarketPatternAnalyzer marketPatternAnalyzer = context.getBean(MarketPatternAnalyzer.class);
                     marketPatternAnalyzer.analyzeMarketdata();
                     break;
                 case 2:
-                    BybitTestTradingScheduler bybitTestTradingScheduler = context.getBean(BybitTestTradingScheduler.class);
-                    bybitTestTradingScheduler.enableScheduler();
+                    scheduler.addTradeExecutor(TradeExecutor.BybitTestTradingExecutor);
+                    scheduler.enableScheduler();
                     break;
                 case 3:
-                    BybitTradingScheduler bybitTradingScheduler = context.getBean(BybitTradingScheduler.class);
-                    bybitTradingScheduler.enableScheduler();
+                    scheduler.addTradeExecutor(TradeExecutor.BybitRealTradingExecutor);
+                    scheduler.enableScheduler();
                     break;
                 case 4:
                     stopPreventSleep();

@@ -1,13 +1,21 @@
 package io.github.ijlijapol;
 
 import io.github.ijlijapol.exception.SchedulerStateException;
+import io.github.ijlijapol.exception.UnknowBinTradingExecutor;
+import io.github.ijlijapol.model.TradeExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Планировщик выполнения торговых задач на бирже Bybit.
@@ -40,20 +48,28 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 @Component
 @Slf4j
-public class BybitTradingScheduler {
+public class TradingScheduler {
 
-    private final ExecutorService taskExecutor = new ThreadPoolExecutor(
-            1,
-            2,
-            60, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<>(1),
-            new ThreadPoolExecutor.AbortPolicy()
-    );
-    private final AtomicBoolean schedulerEnabled = new AtomicBoolean(false);
-    private final ObjectProvider<BybitRealTradingExecutor> executorProvider;
+    private final ExecutorService taskExecutor;
+    private final AtomicBoolean schedulerEnabled;
+    private final Set<TradeExecutor> tradeExecutors;
+    private final Map<TradeExecutor, ObjectProvider<TradingExecutor>> provider;
 
-    public BybitTradingScheduler(ObjectProvider<BybitRealTradingExecutor> executorProvider) {
-        this.executorProvider = executorProvider;
+    public TradingScheduler(List<ObjectProvider<TradingExecutor>> executorProviders) {
+        this.taskExecutor = new ThreadPoolExecutor(
+                1,
+                2,
+                60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(1),
+                new ThreadPoolExecutor.AbortPolicy()
+        );
+        this.schedulerEnabled = new AtomicBoolean(false);
+        this.tradeExecutors = new HashSet<>();
+        this.provider = executorProviders.stream()
+                .collect((Collectors.toMap(
+                        provider -> extractType(provider.getClass()),
+                        Function.identity()
+                )));
     }
 
     @Scheduled(cron = "0 */15 * * * *")
@@ -87,25 +103,6 @@ public class BybitTradingScheduler {
         }
     }
 
-    private void submitTradingTaskAsync() {
-        try {
-            taskExecutor.execute(() -> {
-                try {
-                    final BybitRealTradingExecutor executor = executorProvider.getObject();
-                    executor.start();
-                } catch (Exception e) {
-                    log.error("Trading task execution failed", e);
-                    throw new RuntimeException("Trading task failed: " + e.getMessage(), e);
-                }
-            });
-        } catch (RejectedExecutionException e) {
-            log.warn("Trading task rejected - execution queue is full. " +
-                            "Active threads: {}/{}",
-                    ((ThreadPoolExecutor) taskExecutor).getActiveCount(),
-                    ((ThreadPoolExecutor) taskExecutor).getPoolSize());
-        }
-    }
-
     /**
      * Останавливает планировщик и завершает работу пула потоков.
      * <p>
@@ -125,5 +122,58 @@ public class BybitTradingScheduler {
             taskExecutor.shutdownNow();
             Thread.currentThread().interrupt();
         }
+    }
+
+    /**
+     * Добавляет торгового исполнителя в лист запуска
+     *
+     * @param tradeExecutor торговый исполнитель
+     */
+    public void addTradeExecutor(TradeExecutor tradeExecutor) {
+        log.debug("Добавлен торговый исполнитель: {}", tradeExecutor);
+        tradeExecutors.add(tradeExecutor);
+    }
+
+    /**
+     * Удаляет торгового исполнителя из лста запуска
+     *
+     * @param tradeExecutor торговый исполнитель
+     */
+    public void removeTradeExecutor(TradeExecutor tradeExecutor) {
+        log.debug("Remove trade executor: {}", tradeExecutor);
+        tradeExecutors.remove(tradeExecutor);
+    }
+
+    /**
+     * Запускает в асинхронном режиме каждого торгового исполнителя(имеющегося в листе запуска {@link #tradeExecutors}
+     */
+    private void submitTradingTaskAsync() {
+        for (TradeExecutor tradeExecutor : tradeExecutors) {
+            try {
+                taskExecutor.execute(() -> {
+                    try {
+                        final TradingExecutor executor = provider.get(tradeExecutor).getObject();
+                        executor.start();
+                        log.info("Trading executor {} started", executor.getClass().getName());
+                    } catch (Exception e) {
+                        log.error("Trading task execution failed.", e);
+                        throw new RuntimeException("Trading task failed: " + e.getMessage(), e);
+                    }
+                });
+            } catch (RejectedExecutionException e) {
+                log.warn("Trading task rejected - execution queue is full. " +
+                                "Active threads: {}/{}",
+                        ((ThreadPoolExecutor) taskExecutor).getActiveCount(),
+                        ((ThreadPoolExecutor) taskExecutor).getPoolSize());
+            }
+        }
+    }
+
+    private TradeExecutor extractType(final Class<?> clazz) {
+        return switch (clazz.getSimpleName()) {
+            case "BybitRealTradingExecutor" -> TradeExecutor.BybitRealTradingExecutor;
+            case "BybitTestTradingExecutor" -> TradeExecutor.BybitTestTradingExecutor;
+            default -> throw new UnknowBinTradingExecutor("Unexpected value: " + clazz.getSimpleName());
+        };
     }
 }
