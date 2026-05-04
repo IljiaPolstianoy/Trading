@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-    <component name="AmplicodePersistenceUnitSettings">
-        <persistence-units>
-            <persistence-unit moduleName="console-ui" name="Default">
-                <packages>
-                    <package value="io.github.ijlijapol"/>
-                </packages>
-            </persistence-unit>
-            <persistence-unit moduleName="analyzer" name="Default"/>
-            <persistence-unit moduleName="core" name="Default"/>
-            <persistence-unit moduleName="pattern-repository" name="Default"/>
-        </persistence-units>
-    </component>
+  <component name="AmplicodePersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit moduleName="console-ui" name="Default">
+        <packages>
+          <package value="io.github.ijlijapol" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="core" name="Default" />
+      <persistence-unit moduleName="pattern-repository" name="Default" />
+      <persistence-unit moduleName="analyzer" name="Default" />
+    </persistence-units>
+  </component>
 </project>
