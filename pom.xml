@@ -169,20 +169,6 @@
             </dependency>
 
             <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.5.6</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>1.5.6</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>42.7.7</version>
@@ -208,5 +194,31 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <!-- Формат имени тега: v1.0.0, v1.1.0 и т.д. -->
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <!-- Автоматически менять версию и в дочерних модулях, если проект многомодульный -->
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.16.2</version>
+                <configuration>
+                    <!-- Генерировать резервные копии pom.xml перед изменением -->
+                    <generateBackupPoms>true</generateBackupPoms>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
