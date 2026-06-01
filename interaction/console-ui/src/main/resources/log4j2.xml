@@ -56,7 +56,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="io.github.ijlijapol" level="${APP_LOG_LEVEL}" additivity="false">
+        <Logger name="io.github.ilijapol" level="${APP_LOG_LEVEL}" additivity="false">
             <AppenderRef ref="RoutingAppender"/>
         </Logger>
 

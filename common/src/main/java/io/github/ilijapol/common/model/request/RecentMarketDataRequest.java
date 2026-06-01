@@ -1,0 +1,15 @@
+package io.github.ilijapol.common.model.request;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder(toBuilder = true)
+@Getter
+@ToString
+public class RecentMarketDataRequest extends BaseDataRequest {
+
+    private final LastTime lastTime;
+}

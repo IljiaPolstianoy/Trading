@@ -4,7 +4,7 @@
         <persistence-units>
             <persistence-unit moduleName="console-ui" name="Default">
                 <packages>
-                    <package value="io.github.ijlijapol"/>
+                    <package value="io.github.ilijapol"/>
                 </packages>
             </persistence-unit>
             <persistence-unit moduleName="analyzer" name="Default"/>
