@@ -215,6 +215,7 @@
                     <!-- Автоматически менять версию и в дочерних модулях, если проект многомодульный -->
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <arguments>-DskipTests</arguments>
+                    <goals>install</goals>
                 </configuration>
             </plugin>
 
