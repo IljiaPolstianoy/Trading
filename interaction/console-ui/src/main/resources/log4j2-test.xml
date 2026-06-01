@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="APP_NAME">analyzer-module-test</Property>
+        <Property name="APP_LOG_LEVEL">${sys:log.level.app:-DEBUG}</Property>
+        <Property name="ROOT_LOG_LEVEL">${sys:log.level.root:-DEBUG}</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%style{%d{HH:mm:ss.SSS}}{dim} %highlight{%5p}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=cyan, TRACE=blue} %style{---}{dim} %style{[%15.15t]}{dim} %style{%-40.40c{1.}}{cyan} %style{:}{dim} %m%n"/>
+        </Console>
+
+        <RollingFile name="TestFile"
+                     fileName="logs/test-${APP_NAME}.json"
+                     filePattern="logs/test-${APP_NAME}-%d{yyyy-MM-dd}-%i.json.gz">
+            <JsonLayout compact="true" eventEol="true">
+                <KeyValuePair key="application" value="${APP_NAME}"/>
+                <KeyValuePair key="environment" value="test"/>
+            </JsonLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="io.github.ijlijapol" level="${APP_LOG_LEVEL}" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="TestFile"/>
+        </Logger>
+
+        <Root level="${ROOT_LOG_LEVEL}">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="TestFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
