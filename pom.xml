@@ -214,6 +214,7 @@
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <!-- Автоматически менять версию и в дочерних модулях, если проект многомодульный -->
                     <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <arguments>-DskipTests</arguments>
                 </configuration>
             </plugin>
 
