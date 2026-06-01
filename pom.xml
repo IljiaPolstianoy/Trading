@@ -221,4 +221,11 @@
         </plugins>
     </build>
 
+    <scm>
+        <connection>scm:git:https://github.com/IljiaPolstianoy/Trading.git</connection>
+        <developerConnection>scm:git:https://github.com/IljiaPolstianoy/Trading.git</developerConnection>
+        <url>https://github.com/IljiaPolstianoy/Trading.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
 </project>
