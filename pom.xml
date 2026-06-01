@@ -13,7 +13,7 @@
 
     <name>Trading</name>
 
-    <groupId>io.github.ijlijapol</groupId>
+    <groupId>io.github.ilijapol</groupId>
     <artifactId>trading</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -32,20 +32,16 @@
         <maven.compiler.release>25</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bybit-java-api.version>1.4.0</bybit-java-api.version>
-        <analyzer.version>${project.version}</analyzer.version>
         <lombok.version>1.18.42</lombok.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
-        <market-data-core.version>${project.version}</market-data-core.version>
         <slf4j-api.version>2.0.17</slf4j-api.version>
         <log4j-core.version>2.25.3</log4j-core.version>
         <log4j-slf4j2-impl.version>2.25.3</log4j-slf4j2-impl.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <mockito-core.version>5.3.1</mockito-core.version>
         <mockito-junit-jupiter.version>5.3.1</mockito-junit-jupiter.version>
-        <exchange-connector-core.version>${project.version}</exchange-connector-core.version>
         <spring-boot.version>3.5.5</spring-boot.version>
-        <core.version>${project.version}</core.version>
-        <pattern-repository.version>${project.version}</pattern-repository.version>
+        <revision>1.0-SNAPSHOT</revision>
     </properties>
 
     <dependencyManagement>
@@ -70,9 +66,9 @@
             </dependency>
 
             <dependency>
-                <groupId>io.github.ijlijapol</groupId>
+                <groupId>io.github.ilijapol</groupId>
                 <artifactId>common</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
@@ -115,15 +111,15 @@
             </dependency>
 
             <dependency>
-                <groupId>io.github.ijlijapol</groupId>
+                <groupId>io.github.ilijapol</groupId>
                 <artifactId>market-data-core</artifactId>
-                <version>${market-data-core.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.github.ijlijapol</groupId>
+                <groupId>io.github.ilijapol</groupId>
                 <artifactId>exchange-connector-core</artifactId>
-                <version>${exchange-connector-core.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- Spring Boot starters with logging excluded -->
             <dependency>
@@ -176,21 +172,33 @@
             </dependency>
 
             <dependency>
-                <groupId>io.github.ijlijapol</groupId>
+                <groupId>io.github.ilijapol</groupId>
                 <artifactId>analyzer</artifactId>
-                <version>${analyzer.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.github.ijlijapol</groupId>
+                <groupId>io.github.ilijapol</groupId>
                 <artifactId>core</artifactId>
-                <version>${core.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.github.ijlijapol</groupId>
+                <groupId>io.github.ilijapol</groupId>
                 <artifactId>pattern-repository</artifactId>
-                <version>${pattern-repository.version}</version>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ilijapol</groupId>
+                <artifactId>exchange-connector-bybit</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ilijapol</groupId>
+                <artifactId>market-data-bybit</artifactId>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -206,6 +214,8 @@
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <!-- Автоматически менять версию и в дочерних модулях, если проект многомодульный -->
                     <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <arguments>-DskipTests</arguments>
+                    <goals>install</goals>
                 </configuration>
             </plugin>
 
@@ -220,5 +230,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <scm>
+        <connection>scm:git:https://github.com/IljiaPolstianoy/Trading.git</connection>
+        <developerConnection>scm:git:https://github.com/IljiaPolstianoy/Trading.git</developerConnection>
+        <url>https://github.com/IljiaPolstianoy/Trading.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
 </project>
