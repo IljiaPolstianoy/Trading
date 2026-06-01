@@ -23,7 +23,6 @@
         <dependency>
             <groupId>io.github.ilijapol</groupId>
             <artifactId>market-data-bybit</artifactId>
-            <version>${market-data-bybit.version}</version>
         </dependency>
 
         <dependency>

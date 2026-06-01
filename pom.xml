@@ -188,6 +188,18 @@
                 <artifactId>pattern-repository</artifactId>
                 <version>${revision}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.ilijapol</groupId>
+                <artifactId>exchange-connector-bybit</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ilijapol</groupId>
+                <artifactId>market-data-bybit</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

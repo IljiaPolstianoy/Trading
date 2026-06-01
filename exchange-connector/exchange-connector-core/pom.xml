@@ -23,7 +23,6 @@
         <dependency>
             <groupId>io.github.ilijapol</groupId>
             <artifactId>exchange-connector-bybit</artifactId>
-            <version>${exchange-connector-bybit.version}</version>
         </dependency>
 
         <dependency>
