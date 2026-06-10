@@ -3,10 +3,10 @@ package io.github.ilijapol.common.contract;
 import io.github.ilijapol.common.exception.InsufficientFundsException;
 import io.github.ilijapol.common.exception.NotFoundOrderException;
 import io.github.ilijapol.common.model.Symbol;
-import io.github.ilijapol.common.model.order.ModifiedOrderDTO;
-import io.github.ilijapol.common.model.order.OrderDTO;
-import io.github.ilijapol.common.model.order.Side;
-import io.github.ilijapol.common.model.order.TradeOrderType;
+import io.github.ilijapol.common.model.ModifiedOrderDTO;
+import io.github.ilijapol.common.model.OrderDTO;
+import io.github.ilijapol.common.model.Side;
+import io.github.ilijapol.common.model.TradeOrderType;
 
 import java.math.BigDecimal;
 

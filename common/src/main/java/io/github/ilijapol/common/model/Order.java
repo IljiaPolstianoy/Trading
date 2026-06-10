@@ -1,6 +1,5 @@
-package io.github.ilijapol.common.model.order;
+package io.github.ilijapol.common.model;
 
-import io.github.ilijapol.common.model.Symbol;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @SuperBuilder(toBuilder = true)
 @ToString(callSuper = true)
-public class OrderDTO {
+public class Order {
 
     private Symbol symbol;
 

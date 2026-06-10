@@ -1,4 +1,4 @@
-package io.github.ilijapol.common.model.request;
+package io.github.ilijapol.common.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @Getter
 @ToString
-public class RecentMarketDataRequest extends BaseDataRequest {
-
-    private final LastTime lastTime;
+public class SelectQuantityCandleRequest extends BaseDataRequest {
+    private final int quantity;
 }

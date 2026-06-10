@@ -1,4 +1,4 @@
-package io.github.ilijapol.common.model.request;
+package io.github.ilijapol.common.model;
 
 public enum LastTime {
     DAY,

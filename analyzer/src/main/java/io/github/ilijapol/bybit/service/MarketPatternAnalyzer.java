@@ -1,13 +1,14 @@
-package io.github.ilijapol.bybit;
+package io.github.ilijapol.bybit.service;
 
 import io.github.ilijapol.Pattern;
 import io.github.ilijapol.PatternRepository;
+import io.github.ilijapol.bybit.MarketDataFactory;
 import io.github.ilijapol.common.model.Symbol;
-import io.github.ilijapol.common.model.request.LastTime;
-import io.github.ilijapol.common.model.request.RecentMarketDataRequest;
-import io.github.ilijapol.common.model.request.TimeFrame;
-import io.github.ilijapol.common.model.responce.CandleDTO;
-import io.github.ilijapol.common.model.responce.CandlesDTO;
+import io.github.ilijapol.common.model.LastTime;
+import io.github.ilijapol.common.model.RecentMarketDataRequest;
+import io.github.ilijapol.common.model.TimeFrame;
+import io.github.ilijapol.common.model.CandleDTO;
+import io.github.ilijapol.common.model.CandlesDTO;
 import io.github.ilijapol.common.contract.LoaderMarketData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

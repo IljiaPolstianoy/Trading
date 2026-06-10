@@ -1,8 +1,8 @@
 package io.github.ilijapol.model;
 
 import io.github.ilijapol.common.model.Symbol;
-import io.github.ilijapol.common.model.order.Side;
-import io.github.ilijapol.common.model.order.TradeOrderType;
+import io.github.ilijapol.common.model.Side;
+import io.github.ilijapol.common.model.TradeOrderType;
 import jakarta.persistence.*;
 import lombok.*;
 

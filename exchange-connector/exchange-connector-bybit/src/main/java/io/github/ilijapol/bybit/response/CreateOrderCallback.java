@@ -6,7 +6,7 @@ import com.bybit.api.client.restApi.BybitApiCallback;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import io.github.ilijapol.common.model.order.OrderDTO;
+import io.github.ilijapol.common.model.OrderDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

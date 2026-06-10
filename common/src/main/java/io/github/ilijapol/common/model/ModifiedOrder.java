@@ -1,4 +1,4 @@
-package io.github.ilijapol.common.model.order;
+package io.github.ilijapol.common.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
-public class ModifiedOrderDTO extends OrderDTO {
+public class ModifiedOrder extends Order {
 
     private String orderID;
 }

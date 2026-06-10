@@ -1,6 +1,5 @@
-package io.github.ilijapol.common.model.request;
+package io.github.ilijapol.common.model;
 
-import io.github.ilijapol.common.model.Symbol;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

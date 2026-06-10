@@ -9,9 +9,7 @@ import io.github.ilijapol.bybit.exception.ByBitException;
 import io.github.ilijapol.bybit.exception.UncorrectedRequestByBit;
 import io.github.ilijapol.bybit.mapper.MapperByBitData;
 import io.github.ilijapol.bybit.mapper.MapperTimeFrame;
-import io.github.ilijapol.common.model.request.*;
-import io.github.ilijapol.common.model.responce.CandleDTO;
-import io.github.ilijapol.common.model.responce.CandlesDTO;
+import io.github.ilijapol.common.model.*;
 import io.github.ilijapol.common.contract.LoaderMarketData;
 import lombok.extern.slf4j.Slf4j;
 

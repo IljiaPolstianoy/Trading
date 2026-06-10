@@ -1,4 +1,4 @@
-package io.github.ilijapol.common.model.responce;
+package io.github.ilijapol.common.model;
 
 import lombok.Builder;
 import lombok.Data;

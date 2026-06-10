@@ -1,4 +1,4 @@
-package io.github.ilijapol.common.model.request;
+package io.github.ilijapol.common.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

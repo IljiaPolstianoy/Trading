@@ -1,11 +1,14 @@
-package io.github.ilijapol.bybit;
+package io.github.ilijapol.bybit.entity;
 
+import io.github.ilijapol.common.model.Side;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -21,14 +24,13 @@ public class MarketPattern {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @OrderColumn(name = "position")
-    @CollectionTable(
-            name = "pattern_candle_directions",  // явно указываем имя таблицы
-            joinColumns = @JoinColumn(name = "pattern_id")
-    )
-    @Column(name = "candle_directions")
-    private List<Boolean> candleDirections;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Candle> candleDirections;
+
+    @Enumerated(EnumType.STRING)
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "side", nullable = false)
+    private Side side;
 
     @Override
     public final boolean equals(Object o) {

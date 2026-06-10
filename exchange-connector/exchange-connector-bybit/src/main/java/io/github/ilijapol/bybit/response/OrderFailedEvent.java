@@ -1,6 +1,6 @@
 package io.github.ilijapol.bybit.response;
 
-import io.github.ilijapol.common.model.order.OrderDTO;
+import io.github.ilijapol.common.model.OrderDTO;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

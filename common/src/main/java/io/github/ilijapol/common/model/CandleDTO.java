@@ -1,6 +1,5 @@
-package io.github.ilijapol.common.model.responce;
+package io.github.ilijapol.common.model;
 
-import io.github.ilijapol.common.model.request.TimeFrame;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,10 +10,12 @@ import java.time.LocalDateTime;
 @Builder(toBuilder = true)
 public class CandleDTO implements Comparable<CandleDTO> {
     public TimeFrame timeFrame;
+    private BigDecimal maxPrice;
+    private BigDecimal minPrice;
     private BigDecimal openPrice;
     private BigDecimal closePrice;
     private LocalDateTime startTime;
-    private boolean growing;
+    private DirectionCandle direction;
 
     @Override
     public int compareTo(CandleDTO o) {
