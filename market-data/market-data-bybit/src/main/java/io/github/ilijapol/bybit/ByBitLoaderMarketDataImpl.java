@@ -9,8 +9,8 @@ import io.github.ilijapol.bybit.exception.ByBitException;
 import io.github.ilijapol.bybit.exception.UncorrectedRequestByBit;
 import io.github.ilijapol.bybit.mapper.MapperByBitData;
 import io.github.ilijapol.bybit.mapper.MapperTimeFrame;
-import io.github.ilijapol.common.model.*;
 import io.github.ilijapol.common.contract.LoaderMarketData;
+import io.github.ilijapol.common.model.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -67,7 +67,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
         log.debug("Первый запрос ByBit: start={}, end={}, limit=1000", startPeriod, endDate);
         final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         log.debug("Получено {} записей от ByBit", marketKlineEntries.size());
-        final TreeSet<CandleDTO> candleDTOList = new TreeSet<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
+        final TreeSet<CandleDTO> candleDTOList = new TreeSet<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries, recentMarketDataRequest.getTimeFrame()));
 
         while (marketKlineEntries.size() == 1000) {
 
@@ -79,7 +79,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             byBitRequest.setStartTime(newStartTime);
 
             marketKlineEntries.addAll(MapperByBitData.convertFromResponse(sendRequest(byBitRequest)));
-            candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
+            candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries, recentMarketDataRequest.getTimeFrame()));
             log.debug("Добавлено еще {} записей всего сейчас {}", marketKlineEntries.size(), candleDTOList.size());
         }
 
@@ -137,7 +137,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
         log.debug("Первый запрос ByBit: start={}, end={}, limit=1000", startPeriod, endDate);
         final List<MarketKlineEntry> marketKlineEntries = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
         log.debug("Получено {} записей от ByBit", marketKlineEntries.size());
-        final TreeSet<CandleDTO> candleDTOList = new TreeSet<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
+        final TreeSet<CandleDTO> candleDTOList = new TreeSet<>(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries, marketDataForPeriodBetweenRequest.getTimeFrame()));
 
         while (marketKlineEntries.size() == 1000) {
 
@@ -149,7 +149,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
             byBitRequest.setStartTime(newStartTime);
 
             marketKlineEntries.addAll(MapperByBitData.convertFromResponse(sendRequest(byBitRequest)));
-            candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries));
+            candleDTOList.addAll(MapperByBitData.convertFromMarketKlineEntry(marketKlineEntries, marketDataForPeriodBetweenRequest.getTimeFrame()));
             log.debug("Добавлено еще {} записей всего сейчас {}", marketKlineEntries.size(), candleDTOList.size());
         }
 
@@ -196,7 +196,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
         log.debug("Запрос последней свечи: start={}, end={}, limit=1", startTime, endDate);
         final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
-        TreeSet<CandleDTO> candleDTOList = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry);
+        TreeSet<CandleDTO> candleDTOList = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry, lastDataRequest.getTimeFrame());
         final CandleDTO candleDTO = candleDTOList.getFirst();
         log.debug("Получена свеча: open={}, close={}", candleDTO.getOpenPrice(), candleDTO.getClosePrice());
         return candleDTO;
@@ -236,7 +236,7 @@ public class ByBitLoaderMarketDataImpl implements LoaderMarketData {
 
         log.debug("Запрос последних свечей: limit={}", selectQuantityCandleRequest.getQuantity());
         final List<MarketKlineEntry> marketKlineEntry = MapperByBitData.convertFromResponse(sendRequest(byBitRequest));
-        TreeSet<CandleDTO> candleDTOSet = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry);
+        TreeSet<CandleDTO> candleDTOSet = MapperByBitData.convertFromMarketKlineEntry(marketKlineEntry, selectQuantityCandleRequest.getTimeFrame());
         log.info("Получено всего свечей {}.", candleDTOSet.size());
         log.debug("Полученные свечи: {}", candleDTOSet);
 

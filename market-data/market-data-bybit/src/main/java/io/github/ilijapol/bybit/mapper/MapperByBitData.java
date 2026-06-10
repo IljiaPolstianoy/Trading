@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import io.github.ilijapol.common.model.CandleDTO;
+import io.github.ilijapol.common.model.DirectionCandle;
+import io.github.ilijapol.common.model.TimeFrame;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -29,20 +31,36 @@ public class MapperByBitData {
         return genericResponse.getResult().getMarketKlineEntries();
     }
 
-    public static TreeSet<CandleDTO> convertFromMarketKlineEntry(final List<MarketKlineEntry> marketKlineEntryList) {
+    public static TreeSet<CandleDTO> convertFromMarketKlineEntry(
+            final List<MarketKlineEntry> marketKlineEntryList,
+            final TimeFrame timeFrame
+            ) {
         return marketKlineEntryList.stream()
                 .map(marketKlineEntry -> {
                     final LocalDateTime startTime = LocalDateTime.ofInstant(
                             Instant.ofEpochMilli(marketKlineEntry.getStartTime()),
                             ZoneId.of("UTC")
                     );
-                    final BigDecimal openPrice = new BigDecimal(marketKlineEntry.getOpenPrice());
-                    final BigDecimal closePrice = new BigDecimal(marketKlineEntry.getClosePrice());
+                    final CreateDirectionCandle createDirectionCandle = (String openPriceInput, String closePriceInput) -> {
+                        final BigDecimal openPrice = new BigDecimal(openPriceInput);
+                        final BigDecimal closePrice = new BigDecimal(closePriceInput);
+                        if (openPrice.compareTo(closePrice) > 0) {
+                            return DirectionCandle.BEARICH;
+                        } else if (openPrice.compareTo(closePrice) < 0) {
+                            return DirectionCandle.BULLISH;
+                        } else {
+                            return DirectionCandle.DOJI;
+                        }
+                    };
                     return CandleDTO.builder()
-                            .openPrice(openPrice)
-                            .closePrice(closePrice)
+                            .timeFrame(timeFrame)
+                            .maxPrice(new BigDecimal(marketKlineEntry.getHighPrice()))
+                            .minPrice(new BigDecimal(marketKlineEntry.getLowPrice()))
+                            .openPrice(new BigDecimal(marketKlineEntry.getOpenPrice()))
+                            .closePrice(new BigDecimal(marketKlineEntry.getClosePrice()))
+                            .volume(new BigDecimal(marketKlineEntry.getVolume()))
                             .startTime(startTime)
-                            .growing(openPrice.compareTo(closePrice) < 0)
+                            .direction(createDirectionCandle.createDirectionCandle(marketKlineEntry.getOpenPrice(), marketKlineEntry.getClosePrice()))
                             .build();
                 })
                 .collect(Collectors.toCollection(TreeSet::new));
