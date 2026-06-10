@@ -1,4 +1,4 @@
-package io.github.ilijapol.bybit.entity;
+package io.github.ilijapol.entity;
 
 import io.github.ilijapol.common.model.Side;
 import jakarta.persistence.*;

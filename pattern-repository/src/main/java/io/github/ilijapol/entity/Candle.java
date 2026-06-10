@@ -1,4 +1,4 @@
-package io.github.ilijapol.bybit.entity;
+package io.github.ilijapol.entity;
 
 import io.github.ilijapol.common.model.DirectionCandle;
 import io.github.ilijapol.common.model.TimeFrame;

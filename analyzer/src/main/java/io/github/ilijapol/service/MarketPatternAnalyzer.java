@@ -1,4 +1,4 @@
-package io.github.ilijapol.bybit.service;
+package io.github.ilijapol.service;
 
 import io.github.ilijapol.Pattern;
 import io.github.ilijapol.PatternRepository;
