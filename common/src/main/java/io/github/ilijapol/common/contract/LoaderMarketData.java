@@ -1,11 +1,6 @@
 package io.github.ilijapol.common.contract;
 
-import io.github.ilijapol.common.model.LastCandleRequest;
-import io.github.ilijapol.common.model.MarketDataForPeriodBetweenRequest;
-import io.github.ilijapol.common.model.RecentMarketDataRequest;
-import io.github.ilijapol.common.model.SelectQuantityCandleRequest;
-import io.github.ilijapol.common.model.CandleDTO;
-import io.github.ilijapol.common.model.CandlesDTO;
+import io.github.ilijapol.common.model.*;
 
 /**
  * Контракт для загрузки рыночных данных (свечей) из источника данных.

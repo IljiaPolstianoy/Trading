@@ -1,7 +1,9 @@
 package io.github.ilijapol.common.model;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.TreeSet;

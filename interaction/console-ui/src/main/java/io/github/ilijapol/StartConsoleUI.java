@@ -1,8 +1,8 @@
 package io.github.ilijapol;
 
-import io.github.ilijapol.service.v1.MarketPatternAnalyzer;
 import io.github.ilijapol.model.TradeExecutor;
 import io.github.ilijapol.service.TradingScheduler;
+import io.github.ilijapol.service.v1.MarketPatternAnalyzer;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

@@ -17,18 +17,28 @@ public enum TimeFrame {
         this.seconds = seconds;
     }
 
-    public int getSeconds() { return seconds; }
-
     public static TimeFrame parse(String input) {
         switch (input) {
-            case "1m": return ONE_MINUTE;
-            case "5m": return FIVE_MINUTES;
-            case "15m": return FIFTEEN_MINUTES;
-            case "30m": return THIRTY_MINUTES;
-            case "1h": return ONE_HOUR;
-            case "4h": return FOUR_HOURS;
-            case "1d": return ONE_DAY;
-            default: throw new IllegalArgumentException("Unknown time frame: " + input);
+            case "1m":
+                return ONE_MINUTE;
+            case "5m":
+                return FIVE_MINUTES;
+            case "15m":
+                return FIFTEEN_MINUTES;
+            case "30m":
+                return THIRTY_MINUTES;
+            case "1h":
+                return ONE_HOUR;
+            case "4h":
+                return FOUR_HOURS;
+            case "1d":
+                return ONE_DAY;
+            default:
+                throw new IllegalArgumentException("Unknown time frame: " + input);
         }
+    }
+
+    public int getSeconds() {
+        return seconds;
     }
 }

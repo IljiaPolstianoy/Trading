@@ -2,11 +2,7 @@ package io.github.ilijapol.common.contract;
 
 import io.github.ilijapol.common.exception.InsufficientFundsException;
 import io.github.ilijapol.common.exception.NotFoundOrderException;
-import io.github.ilijapol.common.model.Symbol;
-import io.github.ilijapol.common.model.ModifiedOrderDTO;
-import io.github.ilijapol.common.model.OrderDTO;
-import io.github.ilijapol.common.model.Side;
-import io.github.ilijapol.common.model.TradeOrderType;
+import io.github.ilijapol.common.model.*;
 
 import java.math.BigDecimal;
 

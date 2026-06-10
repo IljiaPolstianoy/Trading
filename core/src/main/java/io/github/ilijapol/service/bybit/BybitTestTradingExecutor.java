@@ -2,15 +2,8 @@ package io.github.ilijapol.service.bybit;
 
 import io.github.ilijapol.PatternRepository;
 import io.github.ilijapol.bybit.MarketDataFactory;
-import io.github.ilijapol.common.model.Symbol;
-import io.github.ilijapol.common.model.Side;
-import io.github.ilijapol.common.model.TradeOrderType;
-import io.github.ilijapol.common.model.LastCandleRequest;
-import io.github.ilijapol.common.model.SelectQuantityCandleRequest;
-import io.github.ilijapol.common.model.TimeFrame;
-import io.github.ilijapol.common.model.CandleDTO;
-import io.github.ilijapol.common.model.CandlesDTO;
 import io.github.ilijapol.common.contract.LoaderMarketData;
+import io.github.ilijapol.common.model.*;
 import io.github.ilijapol.exception.NotFoundPatternsException;
 import io.github.ilijapol.exception.TestOrderPersistenceException;
 import io.github.ilijapol.model.PatternDto;

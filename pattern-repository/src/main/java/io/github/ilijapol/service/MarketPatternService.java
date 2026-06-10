@@ -5,5 +5,6 @@ import io.github.ilijapol.entity.MarketPattern;
 
 public interface MarketPatternService {
     MarketPattern save(MarketPatternDto marketPatternDto);
+
     void delete(Integer id);
 }

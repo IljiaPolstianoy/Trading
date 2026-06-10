@@ -6,12 +6,12 @@ import com.bybit.api.client.domain.trade.Side;
 import com.bybit.api.client.domain.trade.request.TradeOrderRequest;
 import com.bybit.api.client.restApi.BybitApiAsyncTradeRestClient;
 import com.bybit.api.client.service.BybitApiClientFactory;
-import io.github.ilijapol.common.model.Symbol;
-import io.github.ilijapol.common.model.ModifiedOrderDTO;
-import io.github.ilijapol.common.model.OrderDTO;
-import io.github.ilijapol.common.model.TradeOrderType;
 import io.github.ilijapol.bybit.response.CreateOrderCallback;
 import io.github.ilijapol.common.contract.ExchangeConnector;
+import io.github.ilijapol.common.model.ModifiedOrderDTO;
+import io.github.ilijapol.common.model.OrderDTO;
+import io.github.ilijapol.common.model.Symbol;
+import io.github.ilijapol.common.model.TradeOrderType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 

@@ -34,7 +34,7 @@ public class MapperByBitData {
     public static TreeSet<CandleDTO> convertFromMarketKlineEntry(
             final List<MarketKlineEntry> marketKlineEntryList,
             final TimeFrame timeFrame
-            ) {
+    ) {
         return marketKlineEntryList.stream()
                 .map(marketKlineEntry -> {
                     final LocalDateTime startTime = LocalDateTime.ofInstant(
