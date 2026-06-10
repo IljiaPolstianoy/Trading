@@ -1,19 +1,15 @@
-package io.github.ilijapol.service;
+package io.github.ilijapol.service.v1;
 
-import io.github.ilijapol.Pattern;
-import io.github.ilijapol.PatternRepository;
 import io.github.ilijapol.bybit.MarketDataFactory;
-import io.github.ilijapol.common.model.Symbol;
-import io.github.ilijapol.common.model.LastTime;
-import io.github.ilijapol.common.model.RecentMarketDataRequest;
-import io.github.ilijapol.common.model.TimeFrame;
-import io.github.ilijapol.common.model.CandleDTO;
-import io.github.ilijapol.common.model.CandlesDTO;
 import io.github.ilijapol.common.contract.LoaderMarketData;
+import io.github.ilijapol.common.model.*;
+import io.github.ilijapol.service.MarketPatternService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Component
@@ -22,7 +18,7 @@ import java.util.*;
 public class MarketPatternAnalyzer {
 
     private final LoaderMarketData loaderMarketData = MarketDataFactory.getByBitStockMarket();
-    private final PatternRepository patternRepository;
+    private final MarketPatternService patternService;
 
     public boolean analyzeMarketdata() {
         log.info("Начало анализа рыночных данных за последние пять лет");
@@ -30,9 +26,9 @@ public class MarketPatternAnalyzer {
         final CandlesDTO candlesDTO = getCandlesDTO();
         final List<List<Boolean>> potentialPatterns = getPotentialPatterns(candlesDTO.getCandles());
         final Map<List<Boolean>, Integer> sortedPotentialPatterns = sortPatterns(potentialPatterns);
-        final Pattern pattern = getActualPattern(sortedPotentialPatterns);
+        final MarketPatternDto pattern = getActualPattern(sortedPotentialPatterns);
 
-        patternRepository.save(pattern);
+        patternService.save(pattern);
         return true;
     }
 
@@ -75,7 +71,7 @@ public class MarketPatternAnalyzer {
 
         for (int i = 1; i <= 3; i++) {
             if (iteratorCandleDTO.hasNext()) {
-                pattern.add(iteratorCandleDTO.next().isGrowing());
+                pattern.add(converterBooleanToDirection(iteratorCandleDTO.next().getDirection()));
             } else {
                 return Optional.empty();
             }
@@ -100,7 +96,7 @@ public class MarketPatternAnalyzer {
         return sortedPotentialPatterns;
     }
 
-    private Pattern getActualPattern(final Map<List<Boolean>, Integer> sortedPotentialPatterns) {
+    private MarketPatternDto getActualPattern(final Map<List<Boolean>, Integer> sortedPotentialPatterns) {
         log.debug("Получение актуального паттерна.");
 
         List<Boolean> actualPattern = new ArrayList<>();
@@ -115,7 +111,61 @@ public class MarketPatternAnalyzer {
             }
         }
 
+        final CandlesDTO candlesDTO = CandlesDTO.builder()
+                .candles(new TreeSet<>())
+                .build();
+
         log.info("Найден актуальный паттерн: {}", actualPattern);
-        return Pattern.builder().candleDirections(actualPattern).build();
+        return MarketPatternDto.builder().candlesDTO(converterActualPatternToCandlesDTO(actualPattern)).build();
+    }
+
+
+    /**
+     * Метод помогает преобразовать новую версию Candle в старый формат для сохранения совместимости кода
+     *
+     * @param directionCandle направление свечи (бычья или медвежья)
+     * @return направление свечи в виде boolean (true для бычьей, false для медвежьей)
+     */
+    private boolean converterBooleanToDirection(final DirectionCandle directionCandle) {
+        log.trace("Конвертация DirectionCandle в boolean. DirectionCandle: {}", directionCandle);
+        if (directionCandle == DirectionCandle.BULLISH) {
+            return true;
+        } else if (directionCandle == DirectionCandle.BEARICH) {
+            return false;
+        } else {
+            throw new IllegalArgumentException("Unknown direction candle: " + directionCandle);
+        }
+    }
+
+    /**
+     * Метод помогает преобразовать актуальный паттерн в формат CandlesDTO для сохранения совместимости кода.
+     * Метод добавляет недостающие поля в новый CandlesDTO.
+     * {@code Важно!} Метод добавляет ложные данные для совместимости.
+     *
+     * @param actualPattern Старый паттерн в виде boolean
+     * @return {@link CandlesDTO} с заполненными(ложными данными)ормат: {Метод}{Версия}{Характеристика} полями для совместимости кода
+     */
+    private CandlesDTO converterActualPatternToCandlesDTO(final List<Boolean> actualPattern) {
+        log.trace("Конвертация актуального паттерна в CandlesDTO. Актуальный паттерн: {}", actualPattern);
+
+        TreeSet<CandleDTO> candles = new TreeSet<>();
+        for (Boolean direction : actualPattern) {
+            candles.add(CandleDTO.builder()
+                    .timeFrame(TimeFrame.FIFTEEN_MINUTES)
+                    .maxPrice(BigDecimal.ZERO)
+                    .minPrice(BigDecimal.ZERO)
+                    .openPrice(BigDecimal.ZERO)
+                    .closePrice(BigDecimal.ZERO)
+                    .volume(BigDecimal.ZERO)
+                    .startTime(LocalDateTime.now())
+                    .direction(direction ? DirectionCandle.BULLISH : DirectionCandle.BEARICH)
+                    .build());
+        }
+
+        return CandlesDTO.builder()
+                .startPeriodTime(LocalDateTime.now())
+                .endPeriodTime(LocalDateTime.now())
+                .candles(candles)
+                .build();
     }
 }

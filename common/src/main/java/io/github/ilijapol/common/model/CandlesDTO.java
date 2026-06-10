@@ -1,18 +1,22 @@
 package io.github.ilijapol.common.model;
 
-import lombok.Builder;
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.TreeSet;
 
-@Data
 @Builder(toBuilder = true)
+@Getter
+@ToString
 public class CandlesDTO {
 
+    @NonNull
     private LocalDateTime startPeriodTime;
 
+    @NonNull
     private LocalDateTime endPeriodTime;
 
+    @NonNull
     private TreeSet<CandleDTO> candles;
 }

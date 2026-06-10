@@ -3,9 +3,7 @@ package io.github.ilijapol.entity;
 import io.github.ilijapol.common.model.DirectionCandle;
 import io.github.ilijapol.common.model.TimeFrame;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
@@ -17,6 +15,9 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "candle")
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Candle implements Comparable<Candle> {
 
     @Id

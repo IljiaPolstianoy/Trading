@@ -8,7 +8,7 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
-import java.util.Set;
+import java.util.TreeSet;
 
 @Builder
 @AllArgsConstructor
@@ -25,7 +25,7 @@ public class MarketPattern {
     private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Candle> candleDirections;
+    private TreeSet<Candle> candles;
 
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
