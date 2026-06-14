@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.TreeSet;
 
 @Service
@@ -17,6 +18,11 @@ import java.util.TreeSet;
 public class MarketPatternServiceImpl implements MarketPatternService {
 
     private final MarketPatternRepository patternRepository;
+
+    @Override
+    public List<MarketPattern> findAll() {
+        return patternRepository.findAll();
+    }
 
     @Override
     public MarketPattern save(final MarketPatternDto marketPatternDto) {

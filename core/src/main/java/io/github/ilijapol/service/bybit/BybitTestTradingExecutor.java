@@ -1,9 +1,10 @@
 package io.github.ilijapol.service.bybit;
 
-import io.github.ilijapol.PatternRepository;
+import io.github.ilijapol.MarketPatternRepository;
 import io.github.ilijapol.bybit.MarketDataFactory;
 import io.github.ilijapol.common.contract.LoaderMarketData;
 import io.github.ilijapol.common.model.*;
+import io.github.ilijapol.entity.Candle;
 import io.github.ilijapol.exception.NotFoundPatternsException;
 import io.github.ilijapol.exception.TestOrderPersistenceException;
 import io.github.ilijapol.model.PatternDto;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * Исполнитель тестовых торговых операций на бирже Bybit.
@@ -45,7 +48,7 @@ import java.util.List;
  * @author ilijapol
  * @version 1.0
  * @see TestOrderRepository
- * @see PatternRepository
+ * @see io.github.ilijapol.MarketPatternRepository
  * @see LoaderMarketData
  * @see NotFoundPatternsException
  * @see TestOrderPersistenceException
@@ -57,7 +60,7 @@ public class BybitTestTradingExecutor implements TradingExecutor {
 
     private final LoaderMarketData loaderMarketData;
     private final TestOrderRepository testOrderRepository;
-    private final PatternRepository patternTestRepository;
+    private final MarketPatternRepository patternTestRepository;
     private final TaskScheduler taskScheduler;
 
     /**
@@ -76,7 +79,7 @@ public class BybitTestTradingExecutor implements TradingExecutor {
      */
     public BybitTestTradingExecutor(
             final TestOrderRepository testOrderRepository,
-            final PatternRepository patternTestRepository
+            final MarketPatternRepository patternTestRepository
     ) {
         this.loaderMarketData = MarketDataFactory.getByBitStockMarket();
         this.testOrderRepository = testOrderRepository;
@@ -205,7 +208,7 @@ public class BybitTestTradingExecutor implements TradingExecutor {
         return patternTestRepository.findAll().stream()
                 .map(testPattern ->
                         PatternDto.builder()
-                                .candleDirections(testPattern.getCandleDirections())
+                                .candleDirections(getTreeSetCandlesDTO(testPattern.getCandles()))
                                 .build()
                 )
                 .toList();
@@ -225,8 +228,8 @@ public class BybitTestTradingExecutor implements TradingExecutor {
      */
     private boolean isMatchWithPattern(final PatternDto patternDTO, final CandlesDTO candlesDTO) {
         log.debug("Проверка полученных свечей с всеми паттернами");
-        final List<Boolean> candleDirections = candlesDTO.getCandles().stream()
-                .map(CandleDTO::isGrowing)
+        final List<DirectionCandle> candleDirections = candlesDTO.getCandles().stream()
+                .map(CandleDTO::getDirection)
                 .toList();
 
         return patternDTO.getCandleDirections().equals(candleDirections);
@@ -252,5 +255,20 @@ public class BybitTestTradingExecutor implements TradingExecutor {
                 .build();
 
         save(testOrderSell);
+    }
+
+    private TreeSet<CandleDTO> getTreeSetCandlesDTO(TreeSet<Candle> candles) {
+        return candles.stream()
+                .map(candle -> CandleDTO.builder()
+                        .timeFrame(candle.getTimeFrame())
+                        .maxPrice(candle.getMaxPrice())
+                        .minPrice(candle.getMinPrice())
+                        .openPrice(candle.getOpenPrice())
+                        .closePrice(candle.getClosePrice())
+                        .volume(candle.getVolume())
+                        .startTime(candle.getStartTime())
+                        .direction(candle.getDirection())
+                        .build())
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }

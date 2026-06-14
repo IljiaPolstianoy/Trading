@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "candle")
 @Builder(toBuilder = true)
-@NoArgsConstructor
 @AllArgsConstructor
 public class Candle implements Comparable<Candle> {
 
@@ -26,7 +25,7 @@ public class Candle implements Comparable<Candle> {
 
     @Column(name = "time_frame", nullable = false)
     @Enumerated(EnumType.STRING)
-    @JdbcType((PostgreSQLEnumJdbcType.class))
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     private TimeFrame timeFrame;
 
     @Column(name = "max_price", nullable = false)
@@ -48,7 +47,7 @@ public class Candle implements Comparable<Candle> {
     private LocalDateTime startTime;
 
     @Enumerated(EnumType.STRING)
-    @JdbcType((PostgreSQLEnumJdbcType.class))
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     @Column(name = "direction", nullable = false)
     private DirectionCandle direction;
 

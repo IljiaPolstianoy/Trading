@@ -1,13 +1,13 @@
 package io.github.ilijapol.service.bybit;
 
 
-import io.github.ilijapol.PatternRepository;
 import io.github.ilijapol.bybit.ExchangeConnectorFactory;
 import io.github.ilijapol.bybit.MarketDataFactory;
 import io.github.ilijapol.common.contract.ApiClientConnector;
 import io.github.ilijapol.common.contract.ExchangeConnector;
 import io.github.ilijapol.common.contract.LoaderMarketData;
 import io.github.ilijapol.common.model.*;
+import io.github.ilijapol.entity.Candle;
 import io.github.ilijapol.exception.NotFoundPatternsException;
 import io.github.ilijapol.exception.OrderPersistenceException;
 import io.github.ilijapol.exception.WalletBalanceException;
@@ -15,6 +15,7 @@ import io.github.ilijapol.model.Constant;
 import io.github.ilijapol.model.Order;
 import io.github.ilijapol.model.PatternDto;
 import io.github.ilijapol.repostiory.OrderRepository;
+import io.github.ilijapol.service.MarketPatternService;
 import io.github.ilijapol.service.TradingExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -26,6 +27,8 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * Исполнитель торговых операций на бирже Bybit.
@@ -51,7 +54,7 @@ import java.util.List;
  * @author ilijapol
  * @version 1.0
  * @see OrderRepository
- * @see PatternRepository
+ * @see MarketPatternService
  * @see LoaderMarketData
  * @see NotFoundPatternsException
  * @see OrderPersistenceException
@@ -63,7 +66,7 @@ public class BybitRealTradingExecutor implements TradingExecutor {
 
     private final LoaderMarketData loaderMarketData;
     private final OrderRepository orderRepository;
-    private final PatternRepository patternRepository;
+    private final MarketPatternService patternService;
     private final ExchangeConnector tradeClient;
     private final ApiClientConnector walletClient;
     private final TaskScheduler taskScheduler;
@@ -80,17 +83,17 @@ public class BybitRealTradingExecutor implements TradingExecutor {
      * </p>
      *
      * @param orderRepository          репозиторий для сохранения тестовых ордеров
-     * @param patternRepository        репозиторий для получения паттернов торговли
+     * @param patternService           сервис для получения паттернов торговли
      * @param exchangeConnectorFactory фабрика клиентов биржи Bybit
      */
     public BybitRealTradingExecutor(
             final OrderRepository orderRepository,
-            final PatternRepository patternRepository,
+            final MarketPatternService patternService,
             final ExchangeConnectorFactory exchangeConnectorFactory
     ) {
         this.loaderMarketData = MarketDataFactory.getByBitStockMarket();
         this.orderRepository = orderRepository;
-        this.patternRepository = patternRepository;
+        this.patternService = patternService;
         this.tradeClient = exchangeConnectorFactory.getExchangeConnectorByBit(Constant.API_KEY, Constant.API_SECRET);
         this.walletClient = exchangeConnectorFactory.getApiClientConnectorByBit(Constant.API_KEY, Constant.API_SECRET);
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
@@ -221,10 +224,10 @@ public class BybitRealTradingExecutor implements TradingExecutor {
      */
     private List<PatternDto> getPattern() {
         log.debug("Получения всех паттернов из БД");
-        return patternRepository.findAll().stream()
+        return patternService.findAll().stream()
                 .map(pattern ->
                         PatternDto.builder()
-                                .candleDirections(pattern.getCandleDirections())
+                                .candleDirections(getTreeSetCandlesDTO(pattern.getCandles()))
                                 .build()
                 )
                 .toList();
@@ -244,8 +247,8 @@ public class BybitRealTradingExecutor implements TradingExecutor {
      */
     private boolean isMatchWithPattern(final PatternDto patternDto, final CandlesDTO candlesDTO) {
         log.debug("Проверка полученных свечей с всеми паттернами");
-        final List<Boolean> candleDirections = candlesDTO.getCandles().stream()
-                .map(CandleDTO::isGrowing)
+        final List<DirectionCandle> candleDirections = candlesDTO.getCandles().stream()
+                .map(CandleDTO::getDirection)
                 .toList();
 
         return patternDto.getCandleDirections().equals(candleDirections);
@@ -298,5 +301,20 @@ public class BybitRealTradingExecutor implements TradingExecutor {
                 .price(orderDTOSell.getPrice())
                 .amount(orderDTOSell.getAmount())
                 .build());
+    }
+
+    private TreeSet<CandleDTO> getTreeSetCandlesDTO(TreeSet<Candle> candles) {
+        return candles.stream()
+                .map(candle -> CandleDTO.builder()
+                        .timeFrame(candle.getTimeFrame())
+                        .maxPrice(candle.getMaxPrice())
+                        .minPrice(candle.getMinPrice())
+                        .openPrice(candle.getOpenPrice())
+                        .closePrice(candle.getClosePrice())
+                        .volume(candle.getVolume())
+                        .startTime(candle.getStartTime())
+                        .direction(candle.getDirection())
+                        .build())
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }
